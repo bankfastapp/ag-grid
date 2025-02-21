@@ -163,7 +163,7 @@ export const SystemJs = ({
             <script src={systemJsVersion} />
             <script src={systemJsPath} />
 
-            {usesMathRandom ? <SeedRandom /> : null}
+            {usesMathRandom && <SeedRandom />}
 
             <script
                 dangerouslySetInnerHTML={{
