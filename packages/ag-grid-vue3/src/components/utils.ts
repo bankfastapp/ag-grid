@@ -190,7 +190,7 @@ import type {
 
 import type { GridOptions, Module } from 'ag-grid-community';
 import type { AgChartTheme, AgChartThemeOverrides } from 'ag-charts-types';
-import { isProxy, isReactive, isRef, toRaw } from 'vue';
+import {isProxy, isReactive, isRef, toRaw} from 'vue';
 
 export interface Properties {
     [propertyName: string]: any;
@@ -204,6 +204,7 @@ export interface Props<TData> {
      * See [Providing Modules To Individual Grids](https://www.ag-grid.com/vue-data-grid/modules/#providing-modules-to-individual-grids) for more information.
      */
     modules?: Module[] | undefined;
+
 // @START_PROPS@
     /** Specifies the status bar components to use in the status bar.
          */
@@ -2046,23 +2047,22 @@ function isInputClass(input: any) {
         input.constructor.toString().substring(0, 5) === 'class';
 }
 
+// necessary for grid change detection to work - everything in vue is proxied
 export function deepToRaw<T extends Record<string, any>>(sourceObj: T): T {
     const objectIterator = (input: any): any => {
+        if(isInputClass(input)) {
+            return toRaw(input);
+        }
         if (Array.isArray(input)) {
             return input.map((item) => objectIterator(item));
         }
         if (isRef(input) || isReactive(input) || isProxy(input)) {
             return objectIterator(toRaw(input));
         }
-        if (input && typeof input === 'object' && Object.keys(input).length > 0) {
-            return Object.keys(input).reduce((acc, key) => {
-                // don't convert classes to "raw" object
-                acc[key as keyof typeof acc] = isInputClass(input[key]) ? input[key] : objectIterator(input[key]);
-                return acc;
-            }, {} as T);
-        }
         return input;
     };
 
     return objectIterator(sourceObj);
 }
+
+// export const convertToRaw = (value: any) => (value ? (Object.isFrozen(value) ? value : markRaw(toRaw(value))) : value);

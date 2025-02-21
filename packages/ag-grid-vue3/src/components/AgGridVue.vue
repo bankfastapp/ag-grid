@@ -108,7 +108,7 @@ import { VueFrameworkOverrides } from '@/components/VueFrameworkOverrides';
 import type { Props } from '@/components/utils';
 import { debounce, deepToRaw, getProps } from '@/components/utils';
 import type { Ref } from 'vue';
-import { getCurrentInstance, markRaw, onMounted, onUnmounted, ref, toRaw, toRefs, useTemplateRef, watch } from 'vue';
+import { useAttrs, getCurrentInstance, markRaw, onMounted, onUnmounted, ref, toRaw, toRefs, useTemplateRef, watch } from 'vue';
 
 import type { AgEventType, ColDef, GridApi, GridOptions, IRowNode } from 'ag-grid-community';
 import {
@@ -143,7 +143,11 @@ _ALL_GRID_OPTIONS
         watch(
             () => propsAsRefs[propertyName],
             (oldValue: any, newValue: any) => {
+              if((propertyName === "rowData" && !emittingRowData.value) ||
+                  propertyName !== "rowData") {
                 processChanges(propertyName, oldValue, newValue);
+              }
+              emittingRowData.value = false;
             },
             { deep: true }
         );
@@ -153,6 +157,7 @@ _ALL_GRID_OPTIONS
 const ROW_DATA_EVENTS: Set<string> = new Set(['rowDataUpdated', 'cellValueChanged', 'rowValueChanged']);
 const rowDataModel = defineModel<TData[]>();
 const rowDataUpdating: Ref<boolean> = ref(false);
+const emittingRowData: Ref<boolean> = ref(false);
 const emits = defineEmits<{
     'update:modelValue': [event: TData[]];
 }>();
@@ -160,20 +165,28 @@ watch(
     rowDataModel,
     (newValue: any, oldValue: any) => {
         if (gridCreated.value) {
-            rowDataUpdating.value = true;
-            processChanges('rowData', deepToRaw(newValue), deepToRaw(oldValue));
+            if(!emittingRowData.value) {
+              rowDataUpdating.value = true;
+              processChanges('rowData', deepToRaw(newValue), deepToRaw(oldValue));
+            }
+            emittingRowData.value = false
         }
     },
     { deep: true }
 );
 
 const emitRowModel = debounce(() => {
-    emits('update:modelValue', deepToRaw<TData[]>(getRowData()));
-}, 20);
+    emittingRowData.value = true;
+    emits('update:modelValue', getRowData());
+}, 10);
+
+const thisInstance = getCurrentInstance();
 
 const updateModelIfUsed = (eventType: string) => {
     if (gridReadyFired.value && ROW_DATA_EVENTS.has(eventType)) {
-        emitRowModel();
+        if (thisInstance?.vnode?.props?.["onUpdate:modelValue"]) {
+          emitRowModel();
+        }
     }
 };
 // v-model code end
@@ -190,7 +203,7 @@ const getRowDataBasedOnBindings = () => {
 
 const getRowData = (): TData[] => {
     const rowData: any[] = [];
-    api?.value!.forEachNode((rowNode: IRowNode) => {
+    api?.value!.forEachLeafNode((rowNode: IRowNode) => {
         rowData.push(rowNode.data);
     });
     return rowData;
