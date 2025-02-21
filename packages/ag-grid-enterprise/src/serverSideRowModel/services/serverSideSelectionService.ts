@@ -102,7 +102,7 @@ export class ServerSideSelectionService extends BaseSelectionService implements 
             });
         }
 
-        this.shotgunResetNodeSelectionState();
+        this.shotgunResetNodeSelectionState(source);
         this.dispatchSelectionChanged(source);
 
         return updatedRows;
