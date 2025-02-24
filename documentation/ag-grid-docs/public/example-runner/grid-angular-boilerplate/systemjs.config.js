@@ -78,6 +78,10 @@
                 main: './fesm2022/ag-grid-angular.mjs',
                 defaultExtension: 'mjs',
             },
+            'ag-charts-core': {
+                defaultExtension: 'js',
+                format: 'cjs',
+            },
             'ag-charts-community': {
                 defaultExtension: 'js',
                 format: 'cjs',
