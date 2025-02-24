@@ -51,6 +51,7 @@ export const PUBLISHED_URLS = {
 // also need to update plugins/ag-grid-generate-example-files/src/executors/generate/generator/constants.ts if this value is changed
 export const integratedChartsUsesChartsEnterprise = false;
 export const PUBLISHED_UMD_URLS = {
+    'ag-charts-core': `${NPM_CDN}/ag-charts-core@${agChartsVersion}/dist/umd/ag-charts-core.min.js`,
     'ag-grid-community': `${NPM_CDN}/ag-grid-community@${agGridVersion}/dist/ag-grid-community.min.js`,
     'ag-grid-enterprise': `${NPM_CDN}/ag-grid-enterprise@${agGridVersion}/dist/ag-grid-enterprise.min.js`,
     'ag-charts-community': `${NPM_CDN}/ag-charts-community@${agChartsVersion}/dist/umd/ag-charts-community.min.js`,
