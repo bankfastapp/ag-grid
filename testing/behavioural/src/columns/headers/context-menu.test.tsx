@@ -12,7 +12,7 @@ Object.defineProperty(HTMLElement.prototype, 'offsetParent', {
     },
 });
 
-describe.only('React Jsdom Context menu ', () => {
+describe('React Jsdom Context menu ', () => {
     it.each([true, false])('should trigger context menu action', async (isAsync) => {
         const cellValue = 'cell value';
         const contextOption = 'context option';
