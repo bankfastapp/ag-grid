@@ -60,6 +60,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         this.rowGroupColsSvc = beans.rowGroupColsSvc;
         this.selectionSvc = beans.selectionSvc;
         this.groupHideOpenParentsSvc = beans.groupHideOpenParentsSvc;
+        this.rowDragSvc = beans.rowDragSvc;
     }
 
     private params: GroupCellRendererParams;
