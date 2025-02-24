@@ -352,11 +352,11 @@ export function _getGroupTotalRowCallback(
 }
 
 export function _isGroupMultiAutoColumn(gos: GridOptionsService) {
-    if (gos.exists('groupDisplayType')) {
-        return gos.get('groupDisplayType') === 'multipleColumns';
+    const isHideOpenParents = !!gos.get('groupHideOpenParents');
+    if (isHideOpenParents) {
+        return true;
     }
-    // if we are doing hideOpenParents we also show multiple columns, otherwise hideOpenParents would not work
-    return gos.get('groupHideOpenParents');
+    return gos.get('groupDisplayType') === 'multipleColumns';
 }
 
 export function _isGroupUseEntireRow(gos: GridOptionsService, pivotMode: boolean): boolean {
