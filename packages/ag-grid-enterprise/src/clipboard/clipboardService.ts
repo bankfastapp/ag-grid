@@ -191,7 +191,7 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         // Method 2 - if modern API fails, the old school hack
         let defaultPrevented = false;
         const handlePasteEvent = (e: ClipboardEvent) => {
-            const currentPastOperationTime = new Date().getTime();
+            const currentPastOperationTime = Date.now();
             if (currentPastOperationTime - this.lastPasteOperationTime < 50) {
                 defaultPrevented = true;
                 e.preventDefault();

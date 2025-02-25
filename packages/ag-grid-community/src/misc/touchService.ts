@@ -52,7 +52,7 @@ export class TouchService extends BeanStub implements NamedBean {
                 return false;
             }
 
-            const nowMillis = new Date().getTime();
+            const nowMillis = Date.now();
             const res = nowMillis - ctrl.lastIPadMouseClickEvent < 200;
             ctrl.lastIPadMouseClickEvent = nowMillis;
 

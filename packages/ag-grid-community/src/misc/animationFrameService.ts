@@ -130,8 +130,8 @@ export class AnimationFrameService extends BeanStub implements NamedBean {
 
         const destroyTasks = this.destroyTasks;
 
-        const frameStart = new Date().getTime();
-        let duration = new Date().getTime() - frameStart;
+        const frameStart = Date.now();
+        let duration = 0;
 
         // 16ms is 60 fps
         const noMaxMillis = millis <= 0;
@@ -161,7 +161,7 @@ export class AnimationFrameService extends BeanStub implements NamedBean {
                 }
             }
 
-            duration = new Date().getTime() - frameStart;
+            duration = Date.now() - frameStart;
         }
 
         if (p1Tasks.length || p2Tasks.length || destroyTasks.length) {
