@@ -88,7 +88,7 @@ const GridExample = () => {
         <div style={containerStyle}>
             <div className="example-wrapper">
                 <div className="example-header">
-                    <div class="example-controls">
+                    <div className="example-controls">
                         <span>Find:</span>
                         <input type="text" defaultValue="e" onInput={onInput} onKeyDown={onKeyDown} />
                         <button onClick={previous}>Previous</button>

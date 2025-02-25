@@ -14,7 +14,7 @@ import {
 } from 'ag-grid-community';
 import { FindModule } from 'ag-grid-enterprise';
 
-import { FindRenderer } from './findRenderer.component';
+import { FindRenderer } from './find-renderer.component';
 import './styles.css';
 
 ModuleRegistry.registerModules([FindModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
