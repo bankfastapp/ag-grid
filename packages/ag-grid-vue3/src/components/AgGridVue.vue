@@ -108,7 +108,7 @@ import { VueFrameworkOverrides } from '@/components/VueFrameworkOverrides';
 import type { Props } from '@/components/utils';
 import { debounce, deepToRaw, getProps } from '@/components/utils';
 import type { Ref } from 'vue';
-import { useAttrs, getCurrentInstance, markRaw, onMounted, onUnmounted, ref, toRaw, toRefs, useTemplateRef, watch } from 'vue';
+import { getCurrentInstance, markRaw, onMounted, onUnmounted, ref, toRaw, toRefs, useTemplateRef, watch } from 'vue';
 
 import type { AgEventType, ColDef, GridApi, GridOptions, IRowNode } from 'ag-grid-community';
 import {
