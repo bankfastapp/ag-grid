@@ -544,6 +544,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
             rowNodes: [...rowNodes],
             columns: columns ? [...columns] : undefined,
             force: true,
+            suppressFlash: true,
         });
     }
 
