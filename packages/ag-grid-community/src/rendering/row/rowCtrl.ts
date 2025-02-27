@@ -855,10 +855,6 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         this.allRowGuis.forEach((gui) => gui.rowComp.addOrRemoveCssClass('ag-row-dragging', dragging));
     }
 
-    public verifyCells(): void {
-        this.onDisplayedColumnsChanged();
-    }
-
     private onDisplayedColumnsChanged(): void {
         // we skip animations for onDisplayedColumnChanged, as otherwise the client could remove columns and
         // then set data, and any old valueGetter's (ie from cols that were removed) would still get called.
