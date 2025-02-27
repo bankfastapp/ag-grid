@@ -18,11 +18,7 @@ function Section({ index, feature }) {
 
     return hasLink ? (
         <a key={index} className={styles.card} href={urlWithPrefix({ framework, url: feature.link })}>
-            <h4 className={styles.title}>
-                {feature.title}
-
-                <Icon name="chevronRight"></Icon>
-            </h4>
+            <h4 className={styles.title}>{feature.title}</h4>
             <p className={styles.description}>{feature.description}</p>
         </a>
     ) : (
