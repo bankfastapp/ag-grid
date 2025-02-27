@@ -255,7 +255,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
     }
 
     // updates all the matches
-    private refresh(maintainActive: boolean): void {
+    public refresh(maintainActive: boolean): void {
         const rowNodesToRefresh = new Set([...this.topNodes, ...this.centerNodes, ...this.bottomNodes]);
         this.topNodes = [];
         this.centerNodes = [];
