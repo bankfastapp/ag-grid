@@ -114,6 +114,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
                 refreshAndWipeActive();
             }
         });
+        this.addManagedPropertyListeners(['groupSuppressBlankHeader', 'showOpenedGroup'], refreshAndKeepActive);
         this.addManagedEventListeners({
             modelUpdated: refreshAndKeepActive,
             displayedColumnsChanged: refreshAndKeepActive,
