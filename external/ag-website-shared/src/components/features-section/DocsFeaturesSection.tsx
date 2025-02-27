@@ -3,7 +3,6 @@ import { useFrameworkFromStore } from '@utils/hooks/useFrameworkFromStore';
 import { urlWithPrefix } from '@utils/urlWithPrefix';
 import type { FunctionComponent } from 'react';
 
-import { Icon } from '../icon/Icon';
 import data from './DocsFeaturesSection.json';
 import styles from './features.module.scss';
 
