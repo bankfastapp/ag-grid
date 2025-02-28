@@ -448,7 +448,11 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         // out the list which sets scroll to zero. so the user could be just
         // reordering the list - we want to prevent the resetting of the scroll.
         // this is relevant for vertical display only (as horizontal has no scroll)
-        const scrollTop = this.ePillDropList.scrollTop;
+        let scrollTop = 0;
+
+        if (!this.horizontal) {
+            scrollTop = this.ePillDropList.scrollTop;
+        }
         const resizeEnabled = this.resizeEnabled;
         const focusedIndex = this.getFocusedItem();
 
@@ -466,7 +470,7 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         this.addEmptyMessageToGui();
         this.addItemsToGui();
 
-        if (!this.horizontal) {
+        if (scrollTop !== 0) {
             this.ePillDropList.scrollTop = scrollTop;
         }
 
