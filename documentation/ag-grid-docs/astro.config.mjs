@@ -150,6 +150,9 @@ export default defineConfig({
         plugins: [mkcert(), svgr(), agHotModuleReload()],
         server: {
             https: !['0', 'false'].includes(PUBLIC_HTTPS_SERVER),
+            cors: {
+                origin: ['https://run.plnkr.co'],
+            },
         },
         css: {
             preprocessorOptions: {
