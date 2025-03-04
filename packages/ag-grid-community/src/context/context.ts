@@ -124,9 +124,7 @@ export type DynamicBeanName =
     | 'headerFilterCellCtrl'
     | 'headerGroupCellCtrl'
     | 'rangeHandle'
-    | 'tooltipFeature'
-    | 'groupStrategy'
-    | 'treeParentIdStrategy';
+    | 'tooltipFeature';
 
 export type UserComponentName =
     | 'agDragAndDropImage'
