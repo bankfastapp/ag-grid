@@ -1,7 +1,7 @@
 import type { ExcelOOXMLTemplate } from 'ag-grid-community';
 
 import type { ExcelDataTable } from '../../assets/excelInterfaces';
-import { getExcelColumnName, satanizeTableName } from '../../assets/excelUtils';
+import { getExcelColumnName, sanitizeTableName } from '../../assets/excelUtils';
 
 const tableFactory: ExcelOOXMLTemplate = {
     getTemplate(dataTable: ExcelDataTable, idx: number) {
@@ -76,7 +76,7 @@ const tableFactory: ExcelOOXMLTemplate = {
                         properties: {
                             rawMap: {
                                 id: (idx + 1).toString(),
-                                name: satanizeTableName(col),
+                                name: sanitizeTableName(col),
                                 dataCellStyle: 'Normal',
                             },
                         },

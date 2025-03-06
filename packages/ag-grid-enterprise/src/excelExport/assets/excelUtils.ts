@@ -135,7 +135,7 @@ export const getExcelColumnName = (colIdx: number): string => {
     return getExcelColumnName(pos) + fromCharCode(startCode + tableIdx - 1);
 };
 
-export const satanizeTableName = (name: string): string => {
+export const sanitizeTableName = (name: string): string => {
     return name.replaceAll('\n', '_x000a_');
 };
 
