@@ -1156,7 +1156,7 @@ export interface Props<TData> {
          */
     suppressScrollWhenPopupsAreOpen?: boolean | undefined,
     /** When `true`, the grid will not use animation frames when drawing rows while scrolling. Use this if and only if the grid is working fast enough on all users machines and you want to avoid the temporarily empty rows.
-         * Please note it is not recommended to set suppressAnimationFrame to `true` in most use cases as this can seriously degrade the user experience as all cells are rendered synchronously blocking the UI thread from scrolling.
+         *     **Note:** It is not recommended to set suppressAnimationFrame to `true` in most use cases as this can seriously degrade the user experience as all cells are rendered synchronously blocking the UI thread from scrolling.
          * @default false
          * @initial
          */
