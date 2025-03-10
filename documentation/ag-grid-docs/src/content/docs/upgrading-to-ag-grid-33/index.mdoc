@@ -35,9 +35,9 @@ If you are using the UMD bundle, you do not need to make any changes as all modu
 
 npm packages: `@ag-grid-community/**` / `@ag-grid-enterprise/**`
 
-In previous versions separate npm packages were required to achieve "tree shaking" of grid features. The improvements made in version {% migrationVersion() %} means that separate npm packages are no longer required to achieve tree shaking.
+In previous versions separate npm packages were required to achieve tree shaking of grid features to reduce the bundle size. The improvements made in version {% migrationVersion() %} remove the need for separate npm packages to achieve tree shaking.
 
-As a result all feature modules have been collapsed into either _ag-grid-community_ or _ag-grid-enterprise_ and all _@ag-grid-community/**_ and _@ag-grid-enterprise/**_ npm packages immediately deprecated as of version 32. 
+As a result all feature modules have been collapsed into either _ag-grid-community_ or _ag-grid-enterprise_ and all _@ag-grid-community/**_ and _@ag-grid-enterprise/**_ npm packages are removed as of version 33.0.
 
 The changes can be summarised as follows:
 
