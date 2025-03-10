@@ -189,7 +189,9 @@ export class AgPrimaryColsList extends Component<AgPrimaryColsListEvent> {
             return -1;
         }
 
-        const isSuppressMovableColumns = this.gos.get('suppressMovableColumns');
+        const { gos, params } = this;
+
+        const isSuppressMovableColumns = gos.get('suppressMovableColumns') || params.suppressColumnMove;
 
         if (
             isSuppressMovableColumns ||
