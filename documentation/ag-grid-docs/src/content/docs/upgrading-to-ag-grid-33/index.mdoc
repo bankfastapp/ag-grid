@@ -22,12 +22,13 @@ Therefore we are launching Long-Term Support (LTS) versions of AG Grid (v32-lts)
 
 ## Changes to Modules / Packages
 
-Version {% migrationVersion() %} introduces a major change in how feature modules are setup to allow for smaller bundle sizes. Previously there were two separate ways to include AG Grid in your project - via AG Grid Modules or AG Grid Packages. These have now been unified to simplify configuration whilst also introducing finer grained modules for improved optimisation of bundle size. 
+Version {% migrationVersion() %} introduces a major change in how feature modules are set up to reduce the bundle size. Previously there were two separate ways to include AG Grid in your project - via AG Grid Modules or AG Grid Packages. These have now been unified to simplify configuration whilst also introducing more fine-grained modules to reduce bundle size.
+ 
 
-To take full advantage of the new modules you may find the [Module Selector](./modules/) useful to work out which modules you require for a given set of features.
+To take full advantage of the new modules, use the [Module Selector](./modules/) to work out which modules you require for the AG Grid features you need.
 
 {% if isFramework("javascript") %}
-If you are using the UMD bundle, then you do not need to make any changes as all modules are automatically registered. Otherwise, see the steps below.
+If you are using the UMD bundle, you do not need to make any changes as all modules are automatically registered. Otherwise, see the steps below.
 {% /if %}
 
 ## Migrating from Modules
