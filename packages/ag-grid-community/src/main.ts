@@ -277,6 +277,7 @@ export {
     FindDetailCellRendererParams,
     FindDetailGridCellRendererParams,
     FindFullWidthCellRendererParams,
+    FindGroupRowRendererParams,
 } from './interfaces/iFind';
 
 // gridPanel
@@ -677,7 +678,9 @@ export {
     _isUsingNewRowSelectionAPI,
     _isUsingNewCellSelectionAPI,
     _isGroupRowsSticky,
+    _getGroupingApproach,
 } from './gridOptionsUtils';
+export type { GroupingApproach } from './gridOptionsUtils';
 export { LocalEventService } from './localEventService';
 export type { EventService } from './eventService';
 export type { RowNodeSorter } from './sort/rowNodeSorter';
@@ -737,6 +740,8 @@ export {
     _isSameRow,
     _getRowNode,
     _getCellByPosition,
+    _getRowAbove,
+    _getRowBelow,
 } from './entities/positionUtils';
 export { RowPosition } from './interfaces/iRowPosition';
 export { HeaderPosition } from './interfaces/iHeaderPosition';
@@ -804,6 +809,7 @@ export {
     SortDirection,
     NestedFieldPaths,
     GetFindTextParams,
+    GetFindTextFunc,
 } from './entities/colDef';
 export {
     DataTypeDefinition,
@@ -906,7 +912,12 @@ export {
     MouseShowContextMenuParams,
     TouchShowContextMenuParam,
 } from './interfaces/iContextMenu';
-export { IRowNodeStage, StageExecuteParams } from './interfaces/iRowNodeStage';
+export {
+    IRowNodeStage,
+    IRowGroupingStrategy,
+    RowGroupingRowNode,
+    StageExecuteParams,
+} from './interfaces/iRowNodeStage';
 export { IDateParams, IDate, IDateComp, BaseDate, BaseDateParams } from './interfaces/dateComponent';
 export { IAfterGuiAttachedParams, ContainerType } from './interfaces/iAfterGuiAttachedParams';
 export { IComponent } from './interfaces/iComponent';
@@ -940,7 +951,6 @@ export {
     _getShouldDisplayTooltip,
     _isShowTooltipWhenTruncated,
 } from './tooltip/tooltipFeature';
-export { IAggregationStage } from './interfaces/iAggregationStage';
 export { IFooterService } from './interfaces/iFooterService';
 export {
     MenuItemLeafDef,

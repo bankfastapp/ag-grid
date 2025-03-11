@@ -74,6 +74,8 @@ export class GridBodyScrollFeature extends BeanStub {
     private scrollTimer: number = 0;
     private needsRefreshedScrollPosition: boolean = true;
 
+    private lastIsHorizontalScrollShowing: boolean | undefined;
+
     private readonly resetLastHScrollDebounced: () => void;
     private readonly resetLastVScrollDebounced: () => void;
 
@@ -102,15 +104,24 @@ export class GridBodyScrollFeature extends BeanStub {
 
     public postConstruct(): void {
         this.enableRtl = this.gos.get('enableRtl');
-        const requireUpdatedScrollPosition = this.requireUpdatedScrollPosition.bind(this);
+
+        const invalidateHorizontalScroll = () => {
+            this.lastIsHorizontalScrollShowing = undefined;
+        };
 
         this.addManagedEventListeners({
             displayedColumnsWidthChanged: this.onDisplayedColumnsWidthChanged.bind(this),
-            gridSizeChanged: requireUpdatedScrollPosition,
+            columnEverythingChanged: invalidateHorizontalScroll,
+            gridSizeChanged: () => {
+                this.requireUpdatedScrollPosition();
+                invalidateHorizontalScroll();
+            },
+            toolPanelVisibleChanged: invalidateHorizontalScroll,
+            sideBarUpdated: invalidateHorizontalScroll,
         });
 
         this.addManagedElementListeners(this.eBodyViewport, {
-            scroll: requireUpdatedScrollPosition,
+            scroll: () => this.requireUpdatedScrollPosition(),
         });
 
         this.ctrlsSvc.whenReady(this, (p) => {
@@ -263,10 +274,10 @@ export class GridBodyScrollFeature extends BeanStub {
         // the `scrollGridIfNeeded` will recalculate the rows to be rendered by the grid
         // so it should only be called after `eBodyViewport` has been scrolled to the correct
         // position, otherwise the `first` and `last` row could be miscalculated.
-        if (!animationFrameSvc || this.gos.get('suppressAnimationFrame')) {
-            this.scrollGridIfNeeded(true);
-        } else {
+        if (animationFrameSvc?.active) {
             animationFrameSvc.schedule();
+        } else {
+            this.scrollGridIfNeeded(true);
         }
 
         this.resetLastVScrollDebounced();
@@ -458,7 +469,10 @@ export class GridBodyScrollFeature extends BeanStub {
     }
 
     public isHorizontalScrollShowing(): boolean {
-        return this.centerRowsCtrl.isHorizontalScrollShowing();
+        if (this.lastIsHorizontalScrollShowing === undefined) {
+            this.lastIsHorizontalScrollShowing = this.centerRowsCtrl.isHorizontalScrollShowing();
+        }
+        return this.lastIsHorizontalScrollShowing;
     }
 
     // called by the headerRootComp and moveColumnController
@@ -526,21 +540,8 @@ export class GridBodyScrollFeature extends BeanStub {
             return;
         }
 
-        const isPaging = this.gos.get('pagination');
-        const paginationPanelEnabled = isPaging && !this.gos.get('suppressPaginationPanel');
-
-        const {
-            frameworkOverrides,
-            pagination,
-            pageBounds,
-            rowContainerHeight: heightScaler,
-            rowRenderer,
-        } = this.beans;
+        const { frameworkOverrides, pageBounds, rowContainerHeight: heightScaler, rowRenderer } = this.beans;
         frameworkOverrides.wrapIncoming(() => {
-            if (!paginationPanelEnabled) {
-                pagination?.goToPageWithIndex(index);
-            }
-
             const gridBodyCtrl = this.ctrlsSvc.getGridBodyCtrl();
 
             const rowNode = rowModel.getRow(index);

@@ -1,12 +1,16 @@
 import type {
+    AgColumn,
     ColDef,
     Column,
     FindCellValueParams,
     FindDetailCellRendererParams,
     FindFullWidthCellRendererParams,
+    FindGroupRowRendererParams,
     FindMatch,
     FindPart,
+    GetFindTextFunc,
     GridApi,
+    ICellRendererParams,
     IClientSideRowModel,
     IFindService,
     IRowNode,
@@ -16,6 +20,7 @@ import type {
 } from 'ag-grid-community';
 import {
     BeanStub,
+    _addGridCommonParams,
     _debounce,
     _escapeString,
     _isClientSideRowModel,
@@ -32,9 +37,32 @@ import {
     _isRemovedSingleChildrenGroup,
     _shouldRowBeRendered,
 } from '../rowHierarchy/flattenUtils';
+import { _getGroupValue } from '../rowHierarchy/rowHierarchyUtils';
 
 function defaultCaseFormat(value?: string | null): string | undefined {
     return value?.toLocaleLowerCase();
+}
+
+function getMatchesForValue(
+    findSearchValue: string,
+    caseFormat: (value?: string | null) => string | undefined,
+    valueToFind: string | null
+): number {
+    const finalValue = caseFormat(_escapeString(valueToFind, true));
+    let numMatches = 0;
+    if (finalValue?.length) {
+        // there can be multiple matches per cell, so find them all
+        let index = -1;
+        while (true) {
+            index = finalValue.indexOf(findSearchValue, index + 1);
+            if (index != -1) {
+                numMatches++;
+            } else {
+                break;
+            }
+        }
+    }
+    return numMatches;
 }
 
 /**
@@ -223,12 +251,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
 
     // footer text is created in the group cell renderer rather the value service, so need to have specific handling for footers
     public setupGroupCol(colDef: ColDef): void {
-        colDef.getFindText = (params) => {
-            if (params.node.footer) {
-                return this.beans.footerSvc?.getTotalValue(params.value);
-            }
-            return params.getValueFormatted() ?? params.value;
-        };
+        colDef.getFindText = this.createGroupFindText();
     }
 
     // when a detail grid is created, we need to sync the matches
@@ -237,23 +260,66 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         if (!_isClientSideRowModel(gos)) {
             return;
         }
+        // we check this each time as it's reactive
+        const isSearchDetail = () => gos.get('findOptions')?.searchDetail;
+
+        const compareMatchesAndRefresh = (newNumMatches: number) => {
+            const nodeMatch = this.centerMatches.get(node)?.[0];
+            const oldNumMatches = nodeMatch?.[1] ?? 0;
+            if (newNumMatches !== oldNumMatches) {
+                this.refreshDebounced();
+            }
+        };
+
         // don't need to remove the listener as this will happen automatically when the detail grid is destroyed
         api.addEventListener('findChanged', (event) => {
-            if (api.isDestroyed() || !this.isAlive()) return;
-            // we check this here as it is reactive
-            if (gos.get('findOptions')?.searchDetail) {
-                const newNumMatches = event.totalMatches;
-                const nodeMatch = this.centerMatches.get(node)?.[0];
-                const oldNumMatches = nodeMatch?.[1] ?? 0;
-                if (newNumMatches !== oldNumMatches) {
-                    this.refreshDebounced();
-                }
+            if (api.isDestroyed() || !this.isAlive() || !this.active || !isSearchDetail()) {
+                return;
             }
+            compareMatchesAndRefresh(event.totalMatches);
         });
 
-        if (gos.get('findOptions')?.searchDetail) {
+        api.addEventListener('gridPreDestroyed', () => {
+            if (!this.isAlive() || !this.active || !isSearchDetail()) {
+                return;
+            }
+            const masterNode = node.parent;
+            const findSearchValue = this.findSearchValue;
+            if (!masterNode || !findSearchValue) {
+                return;
+            }
+
+            const numMatches =
+                (gos.get('detailCellRendererParams') as FindDetailCellRendererParams)?.getFindMatches?.({
+                    node: masterNode,
+                    data: masterNode.data,
+                    findSearchValue: gos.get('findSearchValue')!,
+                    updateMatches: this.refreshDebounced,
+                    getMatchesForValue: (value) => getMatchesForValue(findSearchValue, this.caseFormat, value),
+                }) ?? 0;
+            compareMatchesAndRefresh(numMatches);
+        });
+
+        if (isSearchDetail()) {
             api.setGridOption('findSearchValue', gos.get('findSearchValue'));
         }
+    }
+
+    public getDisplayValue(params: ICellRendererParams): string | undefined {
+        const { node, valueFormatted, value, column } = params;
+        const beans = this.beans;
+        if (node.footer) {
+            return beans.footerSvc?.getTotalValue(valueFormatted ?? value);
+        }
+        if (valueFormatted != null) {
+            return valueFormatted;
+        }
+        if (column?.getColDef().cellRenderer === 'agGroupCellRenderer' || (!column && node.group)) {
+            // inner renderer in a group column or group row - get the group value
+            const displayedNode = (column ? beans.valueSvc.getDisplayedNode(node, column as AgColumn) : node) ?? node;
+            return _getGroupValue(column, node as RowNode, displayedNode as RowNode, beans) ?? value;
+        }
+        return value;
     }
 
     // updates all the matches
@@ -327,6 +393,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         const isFullWidthCellFunc = gos.getCallback('isFullWidthRow');
         const detailCellRendererParams = gos.get('detailCellRendererParams');
         const fullWidthCellRendererParams = gos.get('fullWidthCellRendererParams');
+        const groupRowRendererParams = gos.get('groupRowRendererParams');
         const flattenDetails = _getFlattenDetails(gos);
         const pivotMode = colModel.isPivotMode();
 
@@ -349,23 +416,6 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
             }
             rowMatches.push([column, numMatches]);
             containerNumMatches += numMatches;
-        };
-        const getMatchesForValue = (valueToFind: string | null) => {
-            const finalValue = caseFormat(_escapeString(valueToFind, true));
-            let numMatches = 0;
-            if (finalValue?.length) {
-                // there can be multiple matches per cell, so find them all
-                let index = -1;
-                while (true) {
-                    index = finalValue.indexOf(findSearchValue, index + 1);
-                    if (index != -1) {
-                        numMatches++;
-                    } else {
-                        break;
-                    }
-                }
-            }
-            return numMatches;
         };
         const findMatchesForRow = (node: RowNode) => {
             if (checkCurrentPage) {
@@ -403,7 +453,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
                             data,
                             findSearchValue: providedFindSearchValue!,
                             updateMatches: this.refreshDebounced,
-                            getMatchesForValue,
+                            getMatchesForValue: (value) => getMatchesForValue(findSearchValue, caseFormat, value),
                         }) ?? 0;
                     addMatches(node, null, numMatches);
                 }
@@ -411,7 +461,26 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
             }
             if (node.group && !node.footer && _isGroupUseEntireRow(gos, pivotMode)) {
                 // full width group
-                const numMatches = getMatchesForValue(node.key);
+                const { groupValue, rowGroupColumn } = node;
+                let valueToFind: string | null;
+                if (rowGroupColumn) {
+                    const getFindText =
+                        (groupRowRendererParams as FindGroupRowRendererParams)?.getFindText ??
+                        this.createGroupFindText();
+                    valueToFind = getFindText(
+                        _addGridCommonParams(gos, {
+                            value: groupValue,
+                            node,
+                            data,
+                            column: null,
+                            colDef: null,
+                            getValueFormatted: () => valueSvc.formatValue(rowGroupColumn, node, groupValue),
+                        })
+                    );
+                } else {
+                    valueToFind = groupValue;
+                }
+                const numMatches = getMatchesForValue(findSearchValue, caseFormat, valueToFind);
                 addMatches(node, null, numMatches);
                 return;
             }
@@ -434,7 +503,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
                 const getFindText = colDef.getFindText;
                 if (getFindText) {
                     valueToFind = getFindText(
-                        gos.addGridCommonParams({
+                        _addGridCommonParams(gos, {
                             value,
                             node,
                             data,
@@ -447,7 +516,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
                     const valueFormatted = valueSvc.formatValue(column, node, value);
                     valueToFind = valueFormatted ?? value;
                 }
-                const numMatches = getMatchesForValue(valueToFind);
+                const numMatches = getMatchesForValue(findSearchValue, caseFormat, valueToFind);
                 addMatches(node, column, numMatches);
             }
             if (node.master && checkMasterDetail) {
@@ -471,7 +540,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
                             data,
                             findSearchValue: providedFindSearchValue!,
                             updateMatches: this.refreshDebounced,
-                            getMatchesForValue,
+                            getMatchesForValue: (value) => getMatchesForValue(findSearchValue, caseFormat, value),
                         }) ?? 0;
                     // if detail node doesn't exist yet, stick under dummy node
                     addMatches(
@@ -852,6 +921,27 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         return activeMatch != null && activeMatch.node === node && activeMatch.column === column
             ? activeMatch.numInMatch
             : 0;
+    }
+
+    private createGroupFindText(): GetFindTextFunc {
+        const beans = this.beans;
+        return (params) => {
+            const { node, column, value } = params;
+            const displayedNode = (column ? beans.valueSvc.getDisplayedNode(node, column as AgColumn) : node) ?? node;
+            const rowGroupColumn = displayedNode.rowGroupColumn;
+            const formatColumn =
+                rowGroupColumn && column?.isRowGroupDisplayed(rowGroupColumn.getId()) ? rowGroupColumn : column;
+            const valueFormatted = formatColumn
+                ? beans.valueSvc.formatValue(formatColumn as AgColumn, displayedNode, value)
+                : undefined;
+            if (node.footer) {
+                return beans.footerSvc?.getTotalValue(valueFormatted ?? value);
+            }
+            if (valueFormatted != null) {
+                return valueFormatted;
+            }
+            return _getGroupValue(column, node as RowNode, displayedNode as RowNode, beans) ?? value;
+        };
     }
 
     public override destroy(): void {

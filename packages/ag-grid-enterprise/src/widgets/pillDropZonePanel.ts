@@ -82,7 +82,6 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         this.addElementClasses(this.getGui());
         this.ePillDropList = document.createElement('div');
         this.addElementClasses(this.ePillDropList, 'list');
-        _setAriaRole(this.ePillDropList, 'listbox');
         this.registerCSS(pillDropZonePanelCSS);
     }
 
@@ -448,7 +447,11 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         // out the list which sets scroll to zero. so the user could be just
         // reordering the list - we want to prevent the resetting of the scroll.
         // this is relevant for vertical display only (as horizontal has no scroll)
-        const scrollTop = this.ePillDropList.scrollTop;
+        let scrollTop = 0;
+
+        if (!this.horizontal) {
+            scrollTop = this.ePillDropList.scrollTop;
+        }
         const resizeEnabled = this.resizeEnabled;
         const focusedIndex = this.getFocusedItem();
 
@@ -466,7 +469,7 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         this.addEmptyMessageToGui();
         this.addItemsToGui();
 
-        if (!this.horizontal) {
+        if (scrollTop !== 0) {
             this.ePillDropList.scrollTop = scrollTop;
         }
 
@@ -568,11 +571,17 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
     }
 
     private addAriaLabelsToComponents(): void {
-        this.childPillComponents.forEach((comp, idx) => {
+        const { childPillComponents, ePillDropList } = this;
+        const len = childPillComponents.length;
+
+        _setAriaRole(ePillDropList, len === 0 ? 'presentation' : 'listbox');
+
+        for (let i = 0; i < len; i++) {
+            const comp = childPillComponents[i];
             const eGui = comp.getGui();
-            _setAriaPosInSet(eGui, idx + 1);
-            _setAriaSetSize(eGui, this.childPillComponents.length);
-        });
+            _setAriaPosInSet(eGui, i + 1);
+            _setAriaSetSize(eGui, len);
+        }
     }
 
     private createItemComponent(item: TItem, ghost: boolean): TPill {
