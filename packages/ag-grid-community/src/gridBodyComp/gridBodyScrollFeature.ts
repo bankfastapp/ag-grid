@@ -112,6 +112,10 @@ export class GridBodyScrollFeature extends BeanStub {
         this.addManagedEventListeners({
             displayedColumnsWidthChanged: this.onDisplayedColumnsWidthChanged.bind(this),
             gridSizeChanged: invalidateVerticalScroll,
+            // We only invalidate horizontal scrolling when the viewport switches
+            // between scrollable and non-scrollable, avoiding unnecessary
+            // invalidation on every gridSizeChanged event. If more properties
+            // require invalidation, read/write DOM cycles may be needed.
             scrollGapChanged: invalidateHorizontalScroll,
         });
 
