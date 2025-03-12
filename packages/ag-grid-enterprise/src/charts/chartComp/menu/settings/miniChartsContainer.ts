@@ -1,4 +1,4 @@
-import { AgFillType } from 'ag-charts-types';
+import type { AgFillType } from 'ag-charts-types';
 
 import type { BeanCollection, ChartGroupsDef, ChartType } from 'ag-grid-community';
 import { Component, KeyCode, _setAriaLabel, _warn } from 'ag-grid-community';
