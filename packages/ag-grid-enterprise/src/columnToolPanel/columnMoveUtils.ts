@@ -59,10 +59,7 @@ export const isMoveBlocked = (gos: GridOptionsService, beans: BeanCollection, cu
         return true;
     }
 
-    const hasNotMovable = currentColumns.find((col) => {
-        const colDef = col.getColDef();
-        return !!colDef.suppressMovable || !!colDef.lockPosition;
-    });
+    const hasNotMovable = currentColumns.find(({ colDef }) => !!colDef.suppressMovable || !!colDef.lockPosition);
 
     return !!hasNotMovable;
 };
