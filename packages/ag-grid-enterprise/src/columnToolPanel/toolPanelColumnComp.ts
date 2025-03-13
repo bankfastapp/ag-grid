@@ -31,7 +31,7 @@ export class ToolPanelColumnComp extends Component {
     private tooltipFeature?: TooltipFeature;
 
     constructor(
-        modelItem: ColumnModelItem,
+        public modelItem: ColumnModelItem,
         private readonly allowDragging: boolean,
         private readonly groupsExist: boolean,
         private readonly focusWrapper: HTMLElement
