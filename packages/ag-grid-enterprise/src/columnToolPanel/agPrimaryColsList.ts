@@ -181,16 +181,15 @@ export class AgPrimaryColsList extends Component<AgPrimaryColsListEvent> {
         const diff = isUp ? -1 : 1;
         let movePadding = 0;
 
-        if (group) {
-            if (!isUp && expanded) {
-                movePadding = modelItem.children.length;
-            }
-        } else if (isUp) {
-            const leafCols = column.getParent()?.getLeafColumns();
-            if (leafCols && leafCols.length && column === leafCols[0]) {
+        if (isUp) {
+            const children = item.columnDepth > 0 && column.getParent()?.getChildren();
+            if (children && children.length && column === children[0]) {
                 movePadding = -1;
             }
+        } else if (group) {
+            movePadding = expanded ? modelItem.children.length : 0;
         }
+
         const nextItem = Math.min(Math.max(currentIndex + movePadding + diff, 0), this.displayedColsList.length - 1);
 
         this.skipRefocus = true;
