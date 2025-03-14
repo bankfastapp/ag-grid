@@ -111,15 +111,85 @@ function createCrossFilterThemeOverrides(
         },
     };
 
+    const common = {
+        tooltip: {
+            delay: 500,
+        },
+        legend,
+        listeners: {
+            click: (e: any) => chartProxyParams.crossFilterCallback(e, true),
+        },
+    };
+
+    if (seriesType === 'pie' || seriesType === 'donut') {
+        return {
+            [seriesType]: {
+                series: {
+                    fills: {
+                        $if: [
+                            { $isEven: [{ $value: '$index' }] },
+                            { $palette: 'fills' },
+                            {
+                                $map: [
+                                    { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
+                                    { $path: '../$previousIndex/fills' },
+                                ],
+                            },
+                        ],
+                    } as any,
+                    strokes: {
+                        $if: [
+                            { $isEven: [{ $value: '$index' }] },
+                            { $palette: 'strokes' },
+                            {
+                                $map: [
+                                    { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
+                                    { $path: '../$previousIndex/strokes' },
+                                ],
+                            },
+                        ],
+                    } as any,
+                },
+                ...common,
+            },
+        };
+    }
+
     return {
         [seriesType]: {
-            tooltip: {
-                delay: 500,
+            series: {
+                fill: {
+                    $if: [
+                        { $isEven: [{ $value: '$index' }] },
+                        { $palette: 'fill' },
+                        {
+                            $mix: [
+                                {
+                                    $path: ['../$prevIndex/fill', { $palette: 'fill' }],
+                                },
+                                { $ref: 'backgroundColor' },
+                                0.7,
+                            ],
+                        },
+                    ],
+                } as any,
+                stroke: {
+                    $if: [
+                        { $isEven: [{ $value: '$index' }] },
+                        { $palette: 'stroke' },
+                        {
+                            $mix: [
+                                {
+                                    $path: ['../$prevIndex/fill', { $palette: 'stroke' }],
+                                },
+                                { $ref: 'backgroundColor' },
+                                0.7,
+                            ],
+                        },
+                    ],
+                } as any,
             },
-            legend,
-            listeners: {
-                click: (e: any) => chartProxyParams.crossFilterCallback(e, true),
-            },
+            ...common,
         },
     };
 }
