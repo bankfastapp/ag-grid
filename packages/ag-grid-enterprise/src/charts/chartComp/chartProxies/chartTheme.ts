@@ -128,25 +128,25 @@ function createCrossFilterThemeOverrides(
                     fills: {
                         $if: [
                             { $isEven: [{ $value: '$index' }] },
-                            { $palette: 'fills' },
                             {
                                 $map: [
                                     { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
                                     { $path: ['../$prevIndex/fills', { $palette: 'fills' }] },
                                 ],
                             },
+                            { $palette: 'fills' },
                         ],
                     },
                     strokes: {
                         $if: [
                             { $isEven: [{ $value: '$index' }] },
-                            { $palette: 'strokes' },
                             {
                                 $map: [
                                     { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
                                     { $path: ['../$prevIndex/strokes', { $palette: 'strokes' }] },
                                 ],
                             },
+                            { $palette: 'strokes' },
                         ],
                     },
                 },

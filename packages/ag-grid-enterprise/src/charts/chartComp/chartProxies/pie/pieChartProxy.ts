@@ -114,7 +114,7 @@ export class PieChartProxy extends ChartProxy<AgPolarChartOptions, 'pie' | 'donu
             showInLegend: false,
         };
 
-        return [primaryOptions, filteredOutOptions] as (AgPieSeriesOptions | AgDonutSeriesOptions)[];
+        return [filteredOutOptions, primaryOptions] as (AgPieSeriesOptions | AgDonutSeriesOptions)[];
     }
 
     private getFields(params: UpdateParams): FieldDefinition[] {
