@@ -132,11 +132,11 @@ function createCrossFilterThemeOverrides(
                             {
                                 $map: [
                                     { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
-                                    { $path: '../$previousIndex/fills' },
+                                    { $path: ['../$prevIndex/fills', { $palette: 'fills' }] },
                                 ],
                             },
                         ],
-                    } as any,
+                    },
                     strokes: {
                         $if: [
                             { $isEven: [{ $value: '$index' }] },
@@ -144,35 +144,39 @@ function createCrossFilterThemeOverrides(
                             {
                                 $map: [
                                     { $mix: [{ $value: '$1' }, { $ref: 'backgroundColor' }, 0.7] },
-                                    { $path: '../$previousIndex/strokes' },
+                                    { $path: ['../$prevIndex/strokes', { $palette: 'strokes' }] },
                                 ],
                             },
                         ],
-                    } as any,
+                    },
                 },
                 ...common,
             },
         };
     }
 
+    const fill: { fill?: object } = {};
+    if (seriesType !== 'line') {
+        fill.fill = {
+            $if: [
+                { $isEven: [{ $value: '$index' }] },
+                { $palette: 'fill' },
+                {
+                    $mix: [
+                        {
+                            $path: ['../$prevIndex/fill', { $palette: 'fill' }],
+                        },
+                        { $ref: 'backgroundColor' },
+                        0.7,
+                    ],
+                },
+            ],
+        };
+    }
+
     return {
         [seriesType]: {
             series: {
-                fill: {
-                    $if: [
-                        { $isEven: [{ $value: '$index' }] },
-                        { $palette: 'fill' },
-                        {
-                            $mix: [
-                                {
-                                    $path: ['../$prevIndex/fill', { $palette: 'fill' }],
-                                },
-                                { $ref: 'backgroundColor' },
-                                0.7,
-                            ],
-                        },
-                    ],
-                } as any,
                 stroke: {
                     $if: [
                         { $isEven: [{ $value: '$index' }] },
@@ -187,7 +191,8 @@ function createCrossFilterThemeOverrides(
                             ],
                         },
                     ],
-                } as any,
+                },
+                ...fill,
             },
             ...common,
         },
