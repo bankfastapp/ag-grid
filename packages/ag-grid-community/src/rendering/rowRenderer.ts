@@ -807,6 +807,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
             cellFocused = this.beans.focusSvc?.getFocusCellToUseAfterRefresh() || null;
         }
 
+        let rowRedrawn = false;
         for (const rowCtrl of this.getRowCtrls(rowNodes)) {
             if (!rowCtrl.isFullWidth()) {
                 continue;
@@ -814,11 +815,14 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
             const refreshed = rowCtrl.refreshFullWidth();
             if (!refreshed) {
+                rowRedrawn = true;
                 this.redrawRow(rowCtrl.rowNode, true);
             }
         }
 
-        this.dispatchDisplayedRowsChanged(false);
+        if (rowRedrawn) {
+            this.dispatchDisplayedRowsChanged(false);
+        }
 
         if (cellFocused) {
             this.restoreFocusedCell(cellFocused);
