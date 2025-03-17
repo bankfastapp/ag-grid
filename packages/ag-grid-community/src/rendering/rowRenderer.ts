@@ -217,8 +217,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
             return false;
         }
 
-        if (!column) {
-            // full width rows may not have a column assigned.
+        if (rowCtrl.isFullWidth() || !column) {
             return true;
         }
 
