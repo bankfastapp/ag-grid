@@ -152,7 +152,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
             this.addManagedPropertyListener('showOpenedGroup', () => {
                 const columns = showRowGroupCols.getShowRowGroupCols();
                 if (columns.length) {
-                    this.refreshCells({ columns });
+                    this.refreshCells({ columns, force: true });
                 }
             });
         }
