@@ -194,7 +194,7 @@ jobs:
         if: matrix.shard == 0
         id: pack-verify
         run: |
-          yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t pack:verify
+          yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t pack:verify --prod
       - name: andrew checker
         if: matrix.shard == 0
         id: andrew
@@ -327,8 +327,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/latest' }}
         run: |
           yarn nx generate-doc-references
-          yarn nx generate-examples
-          yarn nx run-many --t build --exclude ag-grid-docs --exclude all
+          yarn nx generate-examples -c staging
+          yarn nx run-many --t build -c staging --exclude ag-grid-docs --exclude all
       - name: validate base url
         if: ${{ github.ref == 'refs/heads/latest' }}
         run: node scripts/deployments/sanityCheckBaseUrl.js staging
