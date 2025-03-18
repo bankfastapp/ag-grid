@@ -101,6 +101,7 @@ jobs:
           fi
 
       - name: nx lint
+        id: lint
         run: |
           yarn nx lint
 
