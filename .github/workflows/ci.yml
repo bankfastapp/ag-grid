@@ -389,9 +389,9 @@ jobs:
             WORKFLOW_STATUS="failure"
           elif [ "${{ needs.e2e.result }}" == "failure" ] ; then
             WORKFLOW_STATUS="failure"
-          elif [ "${{ needs.fw_pkg_test.result }}" == "failure" ] ; then
+          elif [ "${{ needs.docs.result }}" == "failure" ] ; then
             WORKFLOW_STATUS="failure"
-          elif [ "${{ needs.sonarqube.result }}" == "failure" ] ; then
+          elif [ "${{ needs.bundle_size.result }}" == "failure" ] ; then
             WORKFLOW_STATUS="partial"
           fi
           echo "workflowStatus=${WORKFLOW_STATUS}" >> $GITHUB_OUTPUT
