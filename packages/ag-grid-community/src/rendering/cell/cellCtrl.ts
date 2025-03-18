@@ -692,7 +692,9 @@ export class CellCtrl extends BeanStub {
     }
 
     public isCellFocused(): boolean {
-        return (this.hasBeenFocused ||= this.checkCellFocused());
+        const isFocused = this.checkCellFocused();
+        this.hasBeenFocused ||= isFocused;
+        return isFocused;
     }
 
     public setupFocus() {
