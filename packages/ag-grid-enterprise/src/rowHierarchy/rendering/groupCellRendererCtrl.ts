@@ -186,7 +186,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         // if no formatted value and node key is '', then we replace this group with (Blanks)
         // this does not propagate down for [showOpenedGroup]
         const formattedValue = this.getFormattedValue() ?? _getGroupValue(column, node, displayedNode, beans);
-        const innerCompDetails = this.getInnerCompDetails();
+        const innerCompDetails = this.getInnerCompDetails(formattedValue);
         this.comp.setInnerRenderer(innerCompDetails, formattedValue ?? value ?? null);
     }
 
@@ -232,7 +232,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
             footerValue = footerSvc?.getTotalValue(valueFormatted ?? value);
         }
 
-        const innerCompDetails = this.getInnerCompDetails();
+        const innerCompDetails = this.getInnerCompDetails(valueFormatted);
         this.comp.setInnerRenderer(innerCompDetails, footerValue ?? '');
     }
 
@@ -339,9 +339,12 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
      * 5. Inner renderer of the grouped column
      * 6. agFindCellRenderer for find results
      */
-    private getInnerCompDetails(): UserCompDetails | undefined {
+    private getInnerCompDetails(formattedValue: any): UserCompDetails | undefined {
         const { userCompFactory, findSvc } = this.beans;
-        const params = this.params;
+        const params: GroupCellRendererParams = {
+            ...this.params,
+            valueFormatted: formattedValue,
+        };
 
         // full width rows do not inherit the child group column renderer
         if (params.fullWidth) {
