@@ -13,8 +13,8 @@ const GroupCellRendererElement: ElementParams = {
     tag: 'span',
     cls: 'ag-cell-wrapper',
     children: [
-        { tag: 'span', ref: 'eExpanded', cls: 'ag-group-expanded' },
-        { tag: 'span', ref: 'eContracted', cls: 'ag-group-contracted' },
+        { tag: 'span', ref: 'eExpanded', cls: 'ag-group-expanded ag-hidden' },
+        { tag: 'span', ref: 'eContracted', cls: 'ag-group-contracted ag-hidden' },
         { tag: 'span', ref: 'eCheckbox', cls: 'ag-group-checkbox ag-invisible' },
         { tag: 'span', ref: 'eValue', cls: 'ag-group-value' },
         { tag: 'span', ref: 'eChildCount', cls: 'ag-group-child-count' },

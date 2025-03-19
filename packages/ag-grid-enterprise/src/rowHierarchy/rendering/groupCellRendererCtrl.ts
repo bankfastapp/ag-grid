@@ -102,6 +102,10 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         this.setupCheckbox();
         this.addFooterValue();
         this.setupIndent();
+
+        if (!isGrandTotal) {
+            this.comp.addOrRemoveCssClass('ag-row-group-leaf-indent', true);
+        }
     }
 
     private initFullWidthCell(): void {
