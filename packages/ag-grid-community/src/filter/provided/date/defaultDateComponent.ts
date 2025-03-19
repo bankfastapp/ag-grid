@@ -1,4 +1,3 @@
-import { _getActiveDomElement } from '../../../gridOptionsUtils';
 import type { IDateComp, IDateParams } from '../../../interfaces/dateComponent';
 import type { IAfterGuiAttachedParams } from '../../../interfaces/iAfterGuiAttachedParams';
 import { _isBrowserSafari } from '../../../utils/browser';
@@ -53,10 +52,7 @@ export class DefaultDateComponent extends Component implements IDateComp {
         });
     }
 
-    private handleInput(isChange: boolean, e: InputEvent): void {
-        if (e.target !== _getActiveDomElement(this.beans)) {
-            return;
-        }
+    private handleInput(isChange: boolean): void {
         if (this.eDateInput.isDisabled()) {
             return;
         }
