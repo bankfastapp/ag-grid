@@ -15,10 +15,13 @@ export function getCellValue<TValue = any>(beans: BeanCollection, params: GetCel
         return null;
     }
 
+    const value = beans.valueSvc.getValueForDisplay(column, rowNode);
+
     if (useFormatter) {
-        const [value, formattedValue] = beans.valueSvc.getValueForDisplay(column, rowNode, true);
+        const formattedValue = beans.valueSvc.formatValue(column, rowNode, value);
+        // Match the logic in the default cell renderer insertValueWithoutCellRenderer if no formatter is used
         return formattedValue ?? _escapeString(value, true);
     }
 
-    return beans.valueSvc.getValueForDisplay(column, rowNode);
+    return value;
 }
