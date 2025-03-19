@@ -199,7 +199,8 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         const { value, valueFormatted, column } = this.params;
         const { rowGroupColumn } = this.displayedNode;
 
-        if (!rowGroupColumn) {
+        // full width rows and non-grouped cols use formatted value
+        if (!rowGroupColumn || !column) {
             return valueFormatted;
         }
 
