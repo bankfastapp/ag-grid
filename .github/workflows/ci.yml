@@ -194,7 +194,7 @@ jobs:
         run: |
           ./scripts/andrewChecker.sh
       - name: Persist test results
-        if: always()
+        if: always() && matrix.shard != 0
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{matrix.shard}}
@@ -236,7 +236,7 @@ jobs:
         run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test:e2e --configuration=ci --exclude 'tag:module-size' --exclude all
 
       - name: Persist test results
-        if: always()
+        if: always() && matrix.shard != 0
         uses: actions/upload-artifact@v4
         with:
           name: test-results-e2e-shard-${{matrix.shard}}
@@ -282,7 +282,7 @@ jobs:
         run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }}  -t test:e2e --configuration=ci --exclude '!tag:module-size' --exclude 'tag:non-sharding' --exclude all --shard=${{ matrix.shard }}/$((${{ strategy.job-total }} - 1))
 
       - name: Persist test results
-        if: always()
+        if: always() && matrix.shard != 0
         uses: actions/upload-artifact@v4
         with:
           name: test-results-bundle-shard-${{matrix.shard}}
@@ -333,19 +333,27 @@ jobs:
       - name: docs build and link checker
         run: CHECK_LINKS=true CHECK_REDIRECTS=true yarn nx run ag-grid-docs:build -c staging
 
-      - name: Deploy to Staging
-        if: ${{ github.ref == 'refs/heads/latest' }}
-        env:
-          SSH_PRIVATE_KEY: |
-            ${{ secrets.STAGING_SSH_KEY }}
-          SSH_HOST: ${{ secrets.STAGING_HOST }}
-          SSH_USER: ubuntu
-          SSH_KEY_LOCATION: ${{ github.workspace }}/staging.pem
-          WWW_ROOT_DIR: ${{ vars.WWW_ROOT_DIR }}
-        run: |
-          echo "$SSH_PRIVATE_KEY" > $SSH_KEY_LOCATION
-          chmod 400 $SSH_KEY_LOCATION
-          ./scripts/deployments/createAndDeployDocsToTCGH.sh
+#      - name: Deploy to Staging
+#        if: ${{ github.ref == 'refs/heads/latest' }}
+#        env:
+#          SSH_PRIVATE_KEY: |
+#            ${{ secrets.STAGING_SSH_KEY }}
+#          SSH_HOST: ${{ secrets.STAGING_HOST }}
+#          SSH_USER: ubuntu
+#          SSH_KEY_LOCATION: ${{ github.workspace }}/staging.pem
+#          WWW_ROOT_DIR: ${{ vars.WWW_ROOT_DIR }}
+#        run: |
+#          echo "$SSH_PRIVATE_KEY" > $SSH_KEY_LOCATION
+#          chmod 400 $SSH_KEY_LOCATION
+#          ./scripts/deployments/createAndDeployDocsToTCGH.sh
+
+#      - name: Persist test results
+#        if: always()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: test-results-docs
+#          path: |
+#            reports/
 
   report:
     runs-on: ubuntu-24.04
