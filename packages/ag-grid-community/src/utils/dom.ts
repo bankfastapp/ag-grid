@@ -544,16 +544,26 @@ export type ElementParams = {
     attrs?: Attributes;
 
     /**
-     * Child elements to add to the element. Can be a string for text nodes or an array of ElementParams for nested elements.
-     * Nulls are allowed to allow for optional children.
-     * If a string is passed it will be set via `element.textContent = string` to be safe.
+     * A single string can be passed to the children property and this will call `element.textContent = children` on the element.
+     *
+     * Otherwise an array of children is passed.
+     * A child element can be an ElementParams / string / null/undefined.
+     *  - If an ElementParams is passed it will be created and appended to the parent element. It will be wrapped with whitespace to mimic the previous behaviour of multi line strings.
+     *  - If a string is passed it will be appended as a text node.
+     *  - If null or undefined is passed it will be ignored.
      */
-    children?: (ElementParams | null | undefined)[] | string;
+    children?: (ElementParams | string | null | undefined)[] | string;
 };
 
 /** AG Grid attribute used to automatically assign DOM Elements to class properties */
 export const DataRefAttribute = 'data-ref';
 
+let whitespaceNode: Node | null;
+function getWhitespaceNode() {
+    // Cloning is slightly faster than creating a new node each time
+    whitespaceNode ??= document.createTextNode(' ');
+    return whitespaceNode.cloneNode();
+}
 export function _createElement<T extends HTMLElement = HTMLElement>(params: ElementParams): T {
     const { attrs, children, cls, ref, role, tag } = params;
     const element = document.createElement(tag);
@@ -578,9 +588,23 @@ export function _createElement<T extends HTMLElement = HTMLElement>(params: Elem
         if (typeof children === 'string') {
             element.textContent = children;
         } else {
+            let addFirstWhitespace = true;
             for (const child of children) {
                 if (child) {
-                    element.appendChild(_createElement(child));
+                    if (typeof child === 'string') {
+                        element.appendChild(document.createTextNode(child));
+                        addFirstWhitespace = false;
+                    } else {
+                        // NOTE: To match the previous behaviour of when component templates where defined on multi line strings we need
+                        // to add a whitespace node before and after each child element.
+                        // Ideally we would not do this but this reduces the chance of breaking changes.
+                        if (addFirstWhitespace) {
+                            element.appendChild(getWhitespaceNode());
+                            addFirstWhitespace = false;
+                        }
+                        element.append(_createElement(child));
+                        element.appendChild(getWhitespaceNode());
+                    }
                 }
             }
         }
