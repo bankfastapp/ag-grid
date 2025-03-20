@@ -434,15 +434,10 @@ const CellComp = ({
                         setRenderDetails(undefined);
                     }
                 } else {
-                    // if leaving editor & cell is focused, ensure the cell remains
-                    // focused after the editor is destroyed
+                    // if leaving editor & editor is focused, move focus to the cell
                     const recoverFocus = cellCtrl.hasBrowserFocus();
                     if (recoverFocus) {
-                        if (cellCtrl.isCellFocused()) {
-                            compProxy.getFocusableElement().focus({ preventScroll: true });
-                        } else {
-                            beans.focusSvc.needsFocusRestored = true;
-                        }
+                        compProxy.getFocusableElement().focus({ preventScroll: true });
                     }
                     // stop editing
                     setEditDetails((editDetails) => {
