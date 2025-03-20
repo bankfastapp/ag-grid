@@ -66,7 +66,7 @@ function outputJunitReport(validationResults: any) {
     });
 
     if (isCI) {
-        testSuites.writeJunitReport(path.resolve('../../reports/ag-grid-docs-links.xml'));
+        testSuites.writeJunitReport(path.resolve('../../reports/ag-grid-docs-links.xml'), true);
     }
 }
 
