@@ -52,7 +52,7 @@ const filePathsString = (filePaths: Set<string>, options: Options): string => {
     return [...new Set(pageNames)].join(', ');
 };
 
-function outputJunitReport(validationResults: {}) {
+function outputJunitReport(validationResults: any) {
     const testSuites = new TestSuites('Link Checker Tests');
     Object.keys(validationResults).forEach((link) => {
         const testSuite = new TestSuite(link);
