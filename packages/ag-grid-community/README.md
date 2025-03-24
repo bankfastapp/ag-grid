@@ -234,7 +234,12 @@ const gridOptions = {
         { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
     ],
     // Column Definitions: Defines the columns to be displayed.
-    columnDefs: [{ field: 'make' }, { field: 'model' }, { field: 'price' }, { field: 'electric' }],
+    columnDefs: [
+        { field: 'make' },
+        { field: 'model' },
+        { field: 'price' },
+        { field: 'electric' },
+    ],
 };
 ```
 
