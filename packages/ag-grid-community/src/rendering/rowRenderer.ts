@@ -218,18 +218,28 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     private isCellRendered(rowIndex: number, column?: AgColumn): boolean {
-        const rowCtrl = this.rowCtrlsByRowIndex[rowIndex!];
-        if (!rowCtrl) {
-            return false;
-        }
+        const allRowCtrls = this.getAllRowCtrls();
+        for (const rowCtrl of allRowCtrls) {
+            if (rowCtrl.rowNode.rowPinned || rowCtrl.rowNode.rowIndex !== rowIndex) {
+                // cannot return early if index is different; as the grid holds multiple row ctrls for the same row
+                continue;
+            }
 
-        if (rowCtrl.isFullWidth() || !column) {
-            return true;
-        }
+            if (rowCtrl.isFullWidth() || !column) {
+                return true;
+            }
 
-        return !!rowCtrl.getCellCtrl(column, false);
+            if (rowCtrl.getCellCtrl(column)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    /**
+     * Notifies all row and cell controls of any change in focused cell.
+     * @param event cell focused event
+     */
     private onCellFocusChanged(event?: CellFocusedEvent) {
         // if the focused cell has not been rendered, need to render cell so focus can be captured.
         if (event && event.rowIndex != null && !event.rowPinned) {
