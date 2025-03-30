@@ -71,7 +71,7 @@ jobs:
       bundle_test_count: ${{ steps.matrix.outputs.bundle_test_count }}
       bundle_test_matrix: ${{ steps.matrix.outputs.bundle_test_matrix }}
       build_type: ${{ steps.setup.outputs.type }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         id: checkout
