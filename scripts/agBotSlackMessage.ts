@@ -9,26 +9,36 @@ const args = yargs(hideBin(process.argv))
         'Usage: $0 --auth-token [auth-token] -grid-channel [grid-channel] --charts-channel [charts-channel] --website-status-channel [website-status-channel] --slack-bot-oauth-token [slack-bot-oauth-token] --debug-channel [debug-channel] --run-context [run-context]'
     )
     .options({
-        'auth-token': {
-            demandOption: true,
-        },
-        'grid-channel': {
-            demandOption: true,
-        },
-        'charts-channel': {
-            demandOption: true,
-        },
-        'website-status-channel': {
-            demandOption: true,
-        },
-        'debug-channel': {
-            demandOption: true,
-        },
         'run-context': {
             demandOption: true,
         },
     })
     .parse();
+// const args = yargs(hideBin(process.argv))
+//     .usage(
+//         'Usage: $0 --auth-token [auth-token] -grid-channel [grid-channel] --charts-channel [charts-channel] --website-status-channel [website-status-channel] --slack-bot-oauth-token [slack-bot-oauth-token] --debug-channel [debug-channel] --run-context [run-context]'
+//     )
+//     .options({
+//         'auth-token': {
+//             demandOption: true,
+//         },
+//         'grid-channel': {
+//             demandOption: true,
+//         },
+//         'charts-channel': {
+//             demandOption: true,
+//         },
+//         'website-status-channel': {
+//             demandOption: true,
+//         },
+//         'debug-channel': {
+//             demandOption: true,
+//         },
+//         'run-context': {
+//             demandOption: true,
+//         },
+//     })
+//     .parse();
 
 const SLACK_BOT_OAUTH_TOKEN = args.authToken;
 const GRID_TEAM_CITY_CHANNEL = args.gridChannel;
@@ -54,6 +64,7 @@ type RunContext = {
     currentSha: string;
     lastSuccessfulSha: string;
     status: 'success' | 'failure';
+    changedState: boolean;
     project: AgProject;
     reportUrl: number;
     jobStatuses: { [key: string]: JobStatus };
@@ -374,7 +385,19 @@ function findUserByEmail(testEmail: string): GH_MAPPING | undefined {
 }
 
 function getGitChanges(currentSha: string, lastSuccessfulSha: string): GitChange[] {
-    const rawChanges = execSync(`git log ${currentSha}...${lastSuccessfulSha} --format="%ae||%an||%h||%s"`, {
+    const firstAfterSuccess = execSync(
+        `git log  --reverse --ancestry-path --pretty=%H ${lastSuccessfulSha}..HEAD | head -1`,
+        {
+            stdio: 'pipe',
+            encoding: 'utf-8',
+        }
+    );
+
+    const gitCommand = firstAfterSuccess
+        ? `git log ${currentSha} --format="%ae||%an||%h||%s" | head -1`
+        : `git log ${currentSha}...${firstAfterSuccess} --format="%ae||%an||%h||%s" | head -1`;
+
+    const rawChanges = execSync(`${gitCommand}`, {
         stdio: 'pipe',
         encoding: 'utf-8',
     });
@@ -624,17 +647,6 @@ async function notifySlackDebug(changes: GitChange[], runContext: RunContext, ch
     }
 }
 
-async function notifyBuildFailure(
-    changes: GitChange[],
-    runContext: RunContext,
-    channel: string,
-    userDisplayType: UserDisplayType
-) {
-    if (runContext.status === 'failure') {
-        await sendFailureSlackMessage(changes, runContext, channel, userDisplayType);
-    }
-}
-
 async function notifyStagingDeploy(
     runContext: RunContext,
     changes: GitChange[],
@@ -669,25 +681,24 @@ async function notifyStagingDeploy(
 
 async function processChanges(runContext: RunContext, userDisplayType: UserDisplayType) {
     try {
-        const { project, currentSha, lastSuccessfulSha, status } = runContext;
+        const { project, currentSha, lastSuccessfulSha, status, changedState } = runContext;
         const changes = getGitChanges(currentSha, lastSuccessfulSha);
 
         // Notify slack debugging
         await notifySlackDebug(changes, runContext, SLACK_DEBUG_CHANNEL);
 
-        // Notify slack of build failures
-        let buildStatusChannel = GRID_TEAM_CITY_CHANNEL;
-        if (project === 'AgCharts') {
-            buildStatusChannel = CHARTS_TEAM_CITY_CHANNEL;
-        }
+        if (changedState) {
+            // Notify slack of build failures
+            let buildStatusChannel = GRID_TEAM_CITY_CHANNEL;
+            if (project === 'AgCharts') {
+                buildStatusChannel = CHARTS_TEAM_CITY_CHANNEL;
+            }
 
-        // we'll update slack regardless of whether state has changed
-        // the calling context (ie in the CI github action) will detemine if this needs to be called, typically
-        // on a build state change (ie success to failure or vice versa)
-        if (status === 'failure') {
-            await sendFailureSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
-        } else if (status === 'success') {
-            await sendSuccessSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
+            if (status === 'failure') {
+                await sendFailureSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
+            } else if (status === 'success') {
+                await sendSuccessSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
+            }
         }
 
         // Notify user when deployment to staging is done
@@ -706,5 +717,9 @@ async function processChanges(runContext: RunContext, userDisplayType: UserDispl
         ? 'success'
         : 'failure';
 
-    await processChanges(runContext, 'slack');
+    // temporary - to facilitate testing while this new implementation is being tested
+    console.log(runContext);
+    // await processChanges(runContext, 'slack');
+
+    getGitChanges(runContext.currentSha, runContext.lastSuccessfulSha);
 })();
