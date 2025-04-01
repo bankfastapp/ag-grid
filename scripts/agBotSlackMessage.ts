@@ -9,7 +9,7 @@ const args = yargs(hideBin(process.argv))
         'Usage: $0 --auth-token [auth-token] -grid-channel [grid-channel] --charts-channel [charts-channel] --website-status-channel [website-status-channel] --slack-bot-oauth-token [slack-bot-oauth-token] --debug-channel [debug-channel] --run-context [run-context]'
     )
     .options({
-        "auth-token": {
+        'auth-token': {
             demandOption: true,
         },
         'grid-channel': {
@@ -645,9 +645,7 @@ async function notifyStagingDeploy(
 
     let slackMessage;
 
-    console.log('deployToStaging', deployToStaging);
     if (deployToStaging) {
-        console.log('sending docs status update!!!');
         const { changesText } = getChangesData(currentSha, lastSuccessfulSha, project, changes, userDisplayType);
         const webUrl = `https://github.com/ag-grid/ag-grid/actions/runs/${runId}`;
         const stagingUrl = getStagingUrl(project);
@@ -703,12 +701,10 @@ async function processChanges(runContext: RunContext, userDisplayType: UserDispl
 }
 
 (async () => {
-    console.log('Starting');
     const runContext: RunContext = JSON.parse(args.runContext);
     runContext.status = Object.values(runContext.jobStatuses).every((status) => status === 'success')
         ? 'success'
         : 'failure';
 
-    console.log('runContext', runContext);
     await processChanges(runContext, 'slack');
 })();
