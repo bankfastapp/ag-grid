@@ -383,7 +383,7 @@ function getGitChanges(currentSha: string, lastSuccessfulSha: string): GitChange
         }
     );
 
-    const gitCommand = firstAfterSuccess
+    const gitCommand = (firstAfterSuccess.length === 0 || firstAfterSuccess === currentSha)
         ? `git log ${currentSha} --format="%ae||%an||%h||%s" | head -1`
         : `git log ${currentSha}...${firstAfterSuccess} --format="%ae||%an||%h||%s" | head -1`;
 
