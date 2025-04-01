@@ -12,7 +12,7 @@ const args = yargs(hideBin(process.argv))
         'auth-token': {
             demandOption: true,
         },
-        "grid-channel": {
+        'grid-channel': {
             demandOption: true,
         },
         'charts-channel': {
@@ -453,8 +453,8 @@ function getChangesData(
 function getJobStatusSummary(runContext: RunContext) {
     const getStatus = (status: JobStatus) => `${status === 'success' ? '✅' : status === 'failure' ? '❌' : '➖'}`;
     return `${Object.entries(runContext.jobStatuses)
-        .map(([job, status]) => `${job}: ${getStatus(status)}`)
-        .join(' ')}`;
+        .map(([job, status]) => `${job}: ${getStatus(status)}|`)
+        .join('|')}`;
 }
 
 function buildFailureSlackMessageBlocks(
@@ -644,6 +644,7 @@ async function notifyStagingDeploy(
 
     let slackMessage;
 
+    console.log('deployToStaging', deployToStaging);
     if (deployToStaging) {
         const { changesText } = getChangesData(currentSha, lastSuccessfulSha, project, changes, userDisplayType);
         const webUrl = `https://github.com/ag-grid/ag-grid/actions/runs/${runId}`;
