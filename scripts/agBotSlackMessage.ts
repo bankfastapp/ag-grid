@@ -31,9 +31,9 @@ const args = yargs(hideBin(process.argv))
     .parse();
 
 const SLACK_BOT_OAUTH_TOKEN = args.authToken;
-const GRID_TEAM_CITY_CHANNEL = args.debugChannel; //args.gridChannel;
-const CHARTS_TEAM_CITY_CHANNEL = args.debugChannel; //args.chartsChannel;
-const WEBSITE_STATUS_CHANNEL = args.debugChannel; //args.websiteStatusChannel;
+const GRID_TEAM_CITY_CHANNEL = args.gridChannel;
+const CHARTS_TEAM_CITY_CHANNEL = args.chartsChannel;
+const WEBSITE_STATUS_CHANNEL = args.websiteStatusChannel;
 const SLACK_DEBUG_CHANNEL = args.debugChannel;
 
 type GH_MAPPING = {
