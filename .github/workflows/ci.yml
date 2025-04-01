@@ -334,6 +334,7 @@ jobs:
         run: CHECK_LINKS=true CHECK_REDIRECTS=true yarn nx run ag-grid-docs:build -c staging
 
       - name: Deploy to Staging
+        id: deploy_to_staging
         if: ${{ github.ref == 'refs/heads/latest' }}
         env:
           SSH_PRIVATE_KEY: |
@@ -452,27 +453,27 @@ jobs:
           ref: latest-success
           description: Latest commit to pass GitHub Actions workflow on latest branch.
 
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        if: always() && job.status != 'cancelled' && github.ref == 'refs/heads/latest' && steps.lastJobStatus.outputs.changedState == 'true'
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ steps.lastJobStatus.outputs.workflowStatus != 'failure' && 'success' || 'failure' }}
-          SLACK_ICON: https://avatars.slack-edge.com/2020-11-25/1527503386626_319578f21381f9641cd8_192.png
-          SLACK_USERNAME: ag-grid CI
-          SLACK_FOOTER: ''
-          SLACK_MESSAGE: >
-            Build: ${{ needs.build_lint.outputs.build == 'success' && '✅' || needs.build_lint.outputs.build == 'failure' && '❌' || 'NA' }}
-            Lint: ${{ needs.build_lint.outputs.lint == 'success' && '✅' || needs.build_lint.outputs.lint == 'failure' && '❌' || 'NA' }}
-            Format: ${{ needs.build_lint.outputs.format == 'success' && '✅' || needs.build_lint.outputs.format == 'failure' && '❌' || 'NA' }}
-            Test: ${{ needs.test.result == 'success' && '✅' || needs.test.result == 'failure' && '❌' || 'NA' }}
-            E2E: ${{ needs.e2e.result == 'success' && '✅' || needs.e2e.result == 'failure' && '❌' || 'NA' }}
-            Docs: ${{ needs.docs.result == 'success' && '✅' || needs.docs.result == 'failure' && '❌' || 'NA' }}
-            Bundle: ${{ needs.bundle_size.result == 'success' && '✅' || needs.bundle_size.result == 'failure' && '❌' || 'NA' }}
-            
-            *Changes:*
-
-            ${{ env.GIT_LOG }}
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        if: always() && job.status != 'cancelled' && github.ref == 'refs/heads/latest' && steps.lastJobStatus.outputs.changedState == 'true'
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          SLACK_COLOR: ${{ steps.lastJobStatus.outputs.workflowStatus != 'failure' && 'success' || 'failure' }}
+#          SLACK_ICON: https://avatars.slack-edge.com/2020-11-25/1527503386626_319578f21381f9641cd8_192.png
+#          SLACK_USERNAME: ag-grid CI
+#          SLACK_FOOTER: ''
+#          SLACK_MESSAGE: >
+#            Build: ${{ needs.build_lint.outputs.build == 'success' && '✅' || needs.build_lint.outputs.build == 'failure' && '❌' || 'NA' }}
+#            Lint: ${{ needs.build_lint.outputs.lint == 'success' && '✅' || needs.build_lint.outputs.lint == 'failure' && '❌' || 'NA' }}
+#            Format: ${{ needs.build_lint.outputs.format == 'success' && '✅' || needs.build_lint.outputs.format == 'failure' && '❌' || 'NA' }}
+#            Test: ${{ needs.test.result == 'success' && '✅' || needs.test.result == 'failure' && '❌' || 'NA' }}
+#            E2E: ${{ needs.e2e.result == 'success' && '✅' || needs.e2e.result == 'failure' && '❌' || 'NA' }}
+#            Docs: ${{ needs.docs.result == 'success' && '✅' || needs.docs.result == 'failure' && '❌' || 'NA' }}
+#            Bundle: ${{ needs.bundle_size.result == 'success' && '✅' || needs.bundle_size.result == 'failure' && '❌' || 'NA' }}
+#
+#            *Changes:*
+#
+#            ${{ env.GIT_LOG }}
 
       - name: Find matching workflow
         if: always() && job.status != 'cancelled' && github.ref == 'refs/heads/latest' && steps.lastJobStatus.outputs.changedState == 'true'
@@ -494,13 +495,13 @@ jobs:
           RUN_CONTEXT: >
             {
               "workflow": "${{ github.workflow }}",
-              "branch": "${{ env.BRANCH_NAME }}",
+              "ref": "${{ github.ref }}",
               "currentSha": "${{ github.sha }}",
               "lastSuccessfulSha": "${{ steps.find_latest_sha.outputs.sha }}",
               "runId": "${{ github.run_id }}",
               "project": "AgGrid",
               "reportUrl": "${{ steps.testReport.outputs.url_html }}",
-              "deployToStaging": "${{ needs.docs.result == 'success' }}",
+              "deployToStaging": "${{ needs.docs.deploy_to_staging.result == 'success' }}",
               "jobStatuses": 
                 { 
                     "Build": "${{ needs.build_lint.outputs.build }}",

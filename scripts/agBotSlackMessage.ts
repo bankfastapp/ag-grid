@@ -12,7 +12,7 @@ const args = yargs(hideBin(process.argv))
         'auth-token': {
             demandOption: true,
         },
-        'grid-channel': {
+        "grid-channel": {
             demandOption: true,
         },
         'charts-channel': {
@@ -50,7 +50,7 @@ type JobStatus = 'success' | 'failure' | 'n/a';
 type RunContext = {
     runId: number;
     workflow: string;
-    branch: string;
+    ref: string;
     currentSha: string;
     lastSuccessfulSha: string;
     status: 'success' | 'failure';
@@ -317,7 +317,7 @@ function getStagingUrl(project: AgProject) {
 }
 
 function getBranchLink(runContext: RunContext) {
-    const branchName = runContext.branch;
+    const branchName = runContext.ref;
     const baseUrl = getGithubBaseUrl(runContext.project);
 
     if (branchName === undefined) {
