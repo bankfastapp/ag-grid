@@ -453,8 +453,8 @@ function getChangesData(
 function getJobStatusSummary(runContext: RunContext) {
     const getStatus = (status: JobStatus) => `${status === 'success' ? '✅' : status === 'failure' ? '❌' : '➖'}`;
     return `${Object.entries(runContext.jobStatuses)
-        .map(([job, status]) => `${job}: ${getStatus(status)}|`)
-        .join('|')}`;
+        .map(([job, status]) => `${job}: ${getStatus(status)}`)
+        .join(' | ')}`;
 }
 
 function buildFailureSlackMessageBlocks(
@@ -466,6 +466,8 @@ function buildFailureSlackMessageBlocks(
     const branchDetails = branchLink ? ` (on ${branchLink})` : '';
     const { currentSha, lastSuccessfulSha, runId, project, workflow, reportUrl } = runContext;
     const { changesText } = getChangesData(currentSha, lastSuccessfulSha, project, changes, userDisplayType);
+
+    console.log('reportUrl', reportUrl);
 
     const emoji = getEmoji(project);
     const webUrl = `https://github.com/ag-grid/ag-grid/actions/runs/${runId}`;
@@ -669,17 +671,25 @@ async function notifyStagingDeploy(
 
 async function processChanges(runContext: RunContext, userDisplayType: UserDisplayType) {
     try {
-        const { project, currentSha, lastSuccessfulSha } = runContext;
+        const { project, currentSha, lastSuccessfulSha, status } = runContext;
         const changes = getGitChanges(currentSha, lastSuccessfulSha);
 
         // Notify slack debugging
         await notifySlackDebug(changes, runContext, SLACK_DEBUG_CHANNEL);
 
         // Notify slack of build failures
-        if (project === 'AgGrid') {
-            await notifyBuildFailure(changes, runContext, GRID_TEAM_CITY_CHANNEL, 'slack');
-        } else if (project === 'AgCharts') {
-            await notifyBuildFailure(changes, runContext, CHARTS_TEAM_CITY_CHANNEL, 'slack');
+        let buildStatusChannel = GRID_TEAM_CITY_CHANNEL;
+        if (project === "AgCharts") {
+            buildStatusChannel = CHARTS_TEAM_CITY_CHANNEL;
+        }
+
+        // we'll update slack regardless of whether state has changed
+        // the calling context (ie in the CI github action) will detemine if this needs to be called, typically
+        // on a build state change (ie success to failure or vice versa)
+        if (status === 'failure') {
+            await sendFailureSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
+        } else if (status === 'success') {
+            await sendSuccessSlackMessage(changes, runContext, buildStatusChannel, userDisplayType);
         }
 
         // Notify user when deployment to staging is done

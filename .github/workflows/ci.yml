@@ -492,6 +492,7 @@ jobs:
           WEBSITE_STATUS_CHANNEL: ${{ secrets.WEBSITE_STATUS_CHANNEL }}
           SLACK_BOT_OAUTH_TOKEN: ${{ secrets.SLACK_BOT_OAUTH_TOKEN }}
           SLACK_DEBUG_CHANNEL: ${{ secrets.SLACK_DEBUG_CHANNEL }}
+          TEST: ${{ toJson(needs.docs.deploy_to_staging) }}
           RUN_CONTEXT: >
             {
               "workflow": "${{ github.workflow }}",
@@ -514,6 +515,7 @@ jobs:
                 }
             }
         run: |
+          echo "$TEST"
           npx ts-node ./scripts/agBotSlackMessage.ts --auth-token "$SLACK_BOT_OAUTH_TOKEN" \
             --grid-channel "$GRID_TEAM_CITY_CHANNEL" \
             --charts-channel "$CHARTS_TEAM_CITY_CHANNEL" \
