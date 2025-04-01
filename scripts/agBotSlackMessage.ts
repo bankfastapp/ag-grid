@@ -281,15 +281,15 @@ interface User {
 type UserDisplayType = 'slack' | 'name' | 'debug';
 
 function sendSlackMessage({ isEphemeral, data }: { isEphemeral?: boolean; data: object }) {
-    const url = isEphemeral ? SLACK_POST_EPHEMERAL_URL : SLACK_POST_MESSAGE_URL;
-    return fetch(url, {
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            Authorization: `Bearer ${SLACK_BOT_OAUTH_TOKEN}`,
-        },
-        method: 'POST',
-        body: JSON.stringify(data),
-    });
+    // const url = isEphemeral ? SLACK_POST_EPHEMERAL_URL : SLACK_POST_MESSAGE_URL;
+    // return fetch(url, {
+    //     headers: {
+    //         'Content-Type': 'application/json; charset=utf-8',
+    //         Authorization: `Bearer ${SLACK_BOT_OAUTH_TOKEN}`,
+    //     },
+    //     method: 'POST',
+    //     body: JSON.stringify(data),
+    // });
 }
 
 function getGithubBaseUrl(project: AgProject) {
@@ -467,8 +467,7 @@ function buildFailureSlackMessageBlocks(
     const { currentSha, lastSuccessfulSha, runId, project, workflow, reportUrl } = runContext;
     const { changesText } = getChangesData(currentSha, lastSuccessfulSha, project, changes, userDisplayType);
 
-    console.log('reportUrl', reportUrl);
-
+    const testReportUrl = reportUrl ? `(<${reportUrl}|Test Results>)` : '';
     const emoji = getEmoji(project);
     const webUrl = `https://github.com/ag-grid/ag-grid/actions/runs/${runId}`;
     return [
@@ -476,7 +475,7 @@ function buildFailureSlackMessageBlocks(
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `:x: ${emoji} ${project} / <${webUrl} | ${workflow} #${runId}>${branchDetails} *failed* (<${reportUrl}|Test Results>)
+                text: `:x: ${emoji} ${project} / <${webUrl} | ${workflow} #${runId}>${branchDetails} *failed* ${testReportUrl}
 ${getJobStatusSummary(runContext)}`,
             },
         },
@@ -648,6 +647,7 @@ async function notifyStagingDeploy(
 
     console.log('deployToStaging', deployToStaging);
     if (deployToStaging) {
+        console.log('sending docs status update!!!');
         const { changesText } = getChangesData(currentSha, lastSuccessfulSha, project, changes, userDisplayType);
         const webUrl = `https://github.com/ag-grid/ag-grid/actions/runs/${runId}`;
         const stagingUrl = getStagingUrl(project);
@@ -679,7 +679,7 @@ async function processChanges(runContext: RunContext, userDisplayType: UserDispl
 
         // Notify slack of build failures
         let buildStatusChannel = GRID_TEAM_CITY_CHANNEL;
-        if (project === "AgCharts") {
+        if (project === 'AgCharts') {
             buildStatusChannel = CHARTS_TEAM_CITY_CHANNEL;
         }
 
