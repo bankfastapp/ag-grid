@@ -31,9 +31,9 @@ const args = yargs(hideBin(process.argv))
     .parse();
 
 const SLACK_BOT_OAUTH_TOKEN = args.authToken;
-const GRID_TEAM_CITY_CHANNEL = args.gridChannel;
-const CHARTS_TEAM_CITY_CHANNEL = args.chartsChannel;
-const WEBSITE_STATUS_CHANNEL = args.websiteStatusChannel;
+const GRID_TEAM_CITY_CHANNEL = args.debugChannel; //args.gridChannel;
+const CHARTS_TEAM_CITY_CHANNEL = args.debugChannel; //args.chartsChannel;
+const WEBSITE_STATUS_CHANNEL = args.debugChannel; //args.websiteStatusChannel;
 const SLACK_DEBUG_CHANNEL = args.debugChannel;
 
 type GH_MAPPING = {
@@ -281,15 +281,15 @@ interface User {
 type UserDisplayType = 'slack' | 'name' | 'debug';
 
 function sendSlackMessage({ isEphemeral, data }: { isEphemeral?: boolean; data: object }) {
-    // const url = isEphemeral ? SLACK_POST_EPHEMERAL_URL : SLACK_POST_MESSAGE_URL;
-    // return fetch(url, {
-    //     headers: {
-    //         'Content-Type': 'application/json; charset=utf-8',
-    //         Authorization: `Bearer ${SLACK_BOT_OAUTH_TOKEN}`,
-    //     },
-    //     method: 'POST',
-    //     body: JSON.stringify(data),
-    // });
+    const url = isEphemeral ? SLACK_POST_EPHEMERAL_URL : SLACK_POST_MESSAGE_URL;
+    return fetch(url, {
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${SLACK_BOT_OAUTH_TOKEN}`,
+        },
+        method: 'POST',
+        body: JSON.stringify(data),
+    });
 }
 
 function getGithubBaseUrl(project: AgProject) {
