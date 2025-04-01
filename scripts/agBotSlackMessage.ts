@@ -9,36 +9,26 @@ const args = yargs(hideBin(process.argv))
         'Usage: $0 --auth-token [auth-token] -grid-channel [grid-channel] --charts-channel [charts-channel] --website-status-channel [website-status-channel] --slack-bot-oauth-token [slack-bot-oauth-token] --debug-channel [debug-channel] --run-context [run-context]'
     )
     .options({
+        'auth-token': {
+            demandOption: true,
+        },
+        'grid-channel': {
+            demandOption: true,
+        },
+        'charts-channel': {
+            demandOption: true,
+        },
+        'website-status-channel': {
+            demandOption: true,
+        },
+        'debug-channel': {
+            demandOption: true,
+        },
         'run-context': {
             demandOption: true,
         },
     })
     .parse();
-// const args = yargs(hideBin(process.argv))
-//     .usage(
-//         'Usage: $0 --auth-token [auth-token] -grid-channel [grid-channel] --charts-channel [charts-channel] --website-status-channel [website-status-channel] --slack-bot-oauth-token [slack-bot-oauth-token] --debug-channel [debug-channel] --run-context [run-context]'
-//     )
-//     .options({
-//         'auth-token': {
-//             demandOption: true,
-//         },
-//         'grid-channel': {
-//             demandOption: true,
-//         },
-//         'charts-channel': {
-//             demandOption: true,
-//         },
-//         'website-status-channel': {
-//             demandOption: true,
-//         },
-//         'debug-channel': {
-//             demandOption: true,
-//         },
-//         'run-context': {
-//             demandOption: true,
-//         },
-//     })
-//     .parse();
 
 const SLACK_BOT_OAUTH_TOKEN = args.authToken;
 const GRID_TEAM_CITY_CHANNEL = args.gridChannel;
@@ -719,7 +709,5 @@ async function processChanges(runContext: RunContext, userDisplayType: UserDispl
 
     // temporary - to facilitate testing while this new implementation is being tested
     console.log(runContext);
-    // await processChanges(runContext, 'slack');
-
-    getGitChanges(runContext.currentSha, runContext.lastSuccessfulSha);
+    await processChanges(runContext, 'slack');
 })();
