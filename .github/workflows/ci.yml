@@ -482,7 +482,7 @@ jobs:
               "project": "AgGrid",
               "reportUrl": "${{ steps.testReport.outputs.url_html }}",
               "deployToStaging": ${{ needs.docs.outputs.docs_deployed == 'success' }},
-              "changedState": ${{ steps.lastJobStatus.outputs.changedState == 'true' }}
+              "changedState": ${{ steps.lastJobStatus.outputs.changedState == 'true' }},
               "jobStatuses":
                 {
                     "Build": "${{ needs.build_lint.outputs.build }}",
