@@ -3,9 +3,9 @@ import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid 
 import { ContextMenuModule, ManualPinnedRowModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    ManualPinnedRowModule,
     ClientSideRowModelModule,
     ContextMenuModule,
+    ManualPinnedRowModule,
     ValidationModule /* Development Only */,
 ]);
 
@@ -20,6 +20,9 @@ const gridOptions: GridOptions<IOlympicData> = {
     columnDefs: columnDefs,
     rowData: null,
     enableRowPinning: true,
+    isRowPinned: (rowNode) => {
+        return rowNode.data?.country == null ? 'top' : null;
+    },
 };
 
 // setup the grid after the page has finished loading

@@ -9,7 +9,12 @@ ModuleRegistry.registerModules([
     ValidationModule /* Development Only */,
 ]);
 
-const columnDefs: ColDef[] = [{ field: 'athlete' }, { field: 'country' }, { field: 'sport' }];
+const columnDefs: ColDef[] = [
+    { field: 'athlete' },
+    { field: 'country' },
+    { field: 'sport', filter: true, floatingFilter: true },
+    { field: 'gold' },
+];
 
 let gridApi: GridApi<IOlympicData>;
 
@@ -20,6 +25,7 @@ const gridOptions: GridOptions<IOlympicData> = {
     columnDefs: columnDefs,
     rowData: null,
     enableRowPinning: true,
+    isRowPinned: (node) => (!node.data?.country ? 'top' : null),
 };
 
 // setup the grid after the page has finished loading
@@ -29,5 +35,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetch('https://www.ag-grid.com/example-assets/small-olympic-winners.json')
         .then((response) => response.json())
-        .then((data: IOlympicData[]) => gridApi!.setGridOption('rowData', data));
+        .then((data: IOlympicData[]) => {
+            gridApi!.setGridOption('rowData', data);
+            filterSwimming();
+            sortGold();
+        });
 });
+
+function filterSwimming() {
+    gridApi.setColumnFilterModel('sport', { values: ['Swimming'] }).then(() => gridApi.onFilterChanged());
+}
+
+function sortGold() {
+    gridApi.applyColumnState({ state: [{ colId: 'gold', sort: 'desc' }] });
+}

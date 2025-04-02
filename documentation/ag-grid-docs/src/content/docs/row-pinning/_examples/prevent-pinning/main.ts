@@ -20,6 +20,9 @@ const gridOptions: GridOptions<IOlympicData> = {
     columnDefs: columnDefs,
     rowData: null,
     enableRowPinning: true,
+    isRowPinnable: (rowNode) => {
+        return rowNode.data?.sport != 'Swimming';
+    },
 };
 
 // setup the grid after the page has finished loading
