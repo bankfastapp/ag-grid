@@ -418,8 +418,8 @@ function getChangesData(
     const baseGithubUrl = getGithubBaseUrl(project);
     const githubUrl =
         gitChanges.length > 1
-            ? `${baseGithubUrl}/compare/${lastChangeSha}~1...${firstChangeSha}`
-            : `${baseGithubUrl}/commit/${firstChangeSha}`;
+            ? `${baseGithubUrl}/compare/${lastChangeSha}...${firstChangeSha}`
+            : `${baseGithubUrl}/commit/${currentSha}`;
 
     const changesLimit = MANY_CHANGES_LIMIT;
     const tooManyChanges = gitChanges.length > changesLimit;
@@ -429,7 +429,6 @@ function getChangesData(
     const allOtherUsers = allUsers.slice(changesLimit);
     const uniqueUsers: string[] = [...new Set(allUsers)] as string[];
 
-    uniqueUsers.push('seanlandsman');
     // Only show the name if there are too many changes, display setting is `slack` and there is more than 1 user with changes
     const userDisplayType =
         tooManyChanges && userDisplayTypeSetting === 'slack' && uniqueUsers.length > 1
