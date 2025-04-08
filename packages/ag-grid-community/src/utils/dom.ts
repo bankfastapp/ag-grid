@@ -209,6 +209,9 @@ export function _getElementRectWithOffset(el: HTMLElement): {
     };
 }
 
+// In Right-to-Left (RTL) contexts, Firefox and Safari use negative scrollLeft values,
+// while Chrome and Edge use positive values (similar to Left-to-Right), leading to
+// inconsistent scrollbar behavior across browsers.
 export function _isRtlNegativeScroll(): boolean {
     if (typeof rtlNegativeScroll === 'boolean') {
         return rtlNegativeScroll;
@@ -247,6 +250,9 @@ export function _getScrollLeft(element: HTMLElement, rtl: boolean): number {
         // Absolute value - for FF that reports RTL scrolls in negative numbers
         scrollLeft = Math.abs(scrollLeft);
 
+        // even though chrome is always meant to have positive scroll
+        // it is known to flip-flop this behavior across major versions
+        // so we keep this check just in case.
         if (_isBrowserChrome() && !_isRtlNegativeScroll()) {
             scrollLeft = element.scrollWidth - element.getBoundingClientRect().width - scrollLeft;
         }
