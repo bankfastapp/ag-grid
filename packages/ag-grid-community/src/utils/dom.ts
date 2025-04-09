@@ -218,26 +218,26 @@ export function _isRtlNegativeScroll(): boolean {
     }
 
     const template = document.createElement('div');
-    template.style.direction = 'rtl';
-    template.style.width = '10px';
-    template.style.height = '5px';
-    template.style.position = 'fixed';
-    template.style.top = '0px';
-    template.style.overflow = 'hidden';
+    const templateStyle = template.style;
+    templateStyle.direction = 'rtl';
+    templateStyle.width = '10px';
+    templateStyle.height = '10px';
+    templateStyle.position = 'fixed';
+    templateStyle.top = '0px';
+    templateStyle.left = '0px';
+    templateStyle.overflow = 'hidden';
     template.dir = 'rtl';
 
-    const spanElement: ElementParams = { tag: 'span', attrs: { style: 'display: inline-block; width: 1px' } };
     const child = _createElement({
         tag: 'div',
-        attrs: { style: 'width: 20px' },
-        children: [spanElement, spanElement],
+        attrs: { style: 'position: absolute; right: 20px; width: 10px; height: 10px;' },
     });
-    template.appendChild(child);
 
+    template.appendChild(child);
     document.body.appendChild(template);
 
-    template.scrollLeft = 1;
-    rtlNegativeScroll = Math.floor(template.scrollLeft) === 0;
+    template.querySelector('div')?.scrollIntoView();
+    rtlNegativeScroll = template.scrollLeft < 0;
     document.body.removeChild(template);
 
     return rtlNegativeScroll;
