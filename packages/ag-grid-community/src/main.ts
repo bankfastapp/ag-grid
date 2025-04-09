@@ -1067,6 +1067,7 @@ export { RowSpanningAccumulator, GridSerializingParams, RowAccumulator } from '.
 
 // modules
 export {
+    AgModuleName,
     Module,
     ModuleValidationResult,
     _ModuleWithApi,
