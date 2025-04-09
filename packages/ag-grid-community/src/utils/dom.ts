@@ -236,7 +236,7 @@ export function _isRtlNegativeScroll(): boolean {
     template.appendChild(child);
     document.body.appendChild(template);
 
-    template.querySelector('div')?.scrollIntoView();
+    template.scrollLeft = -20;
     rtlNegativeScroll = template.scrollLeft < 0;
     document.body.removeChild(template);
 
