@@ -115,7 +115,7 @@ export class ShowRowGroupColValueService extends BeanStub implements NamedBean, 
             // if cell value is empty, populate with (Blanks)
             const formattedValue = valueSvc.formatValue(groupedCol, displayedNode, value);
             if (formattedValue == null && displayedNode.key === '') {
-                const localeTextFunc = this.beans.localeSvc!.getLocaleTextFunc();
+                const localeTextFunc = this.getLocaleTextFunc();
                 return localeTextFunc('blanks', '(Blanks)');
             }
 
