@@ -80,8 +80,8 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
         return !!node.rowGroupColumn && col && col.isRowGroupDisplayed(node.rowGroupColumn.getId());
     }
 
-    public applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode, column: AgColumn): string {
-        const totalValueGetter = column.colDef.cellRendererParams?.totalValueGetter;
+    public applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode, column: Column): string {
+        const totalValueGetter = column.getColDef().cellRendererParams?.totalValueGetter;
         if (totalValueGetter) {
             const valueGetterParams = _addGridCommonParams(this.gos, { column, node, value, formattedValue });
             const getterType = typeof totalValueGetter;
