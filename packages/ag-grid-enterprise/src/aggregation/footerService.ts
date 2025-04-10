@@ -1,4 +1,4 @@
-import type { AgColumn, GridOptions, IFooterService, IRowNode, NamedBean, RowNode } from 'ag-grid-community';
+import type { Column, GridOptions, IFooterService, IRowNode, NamedBean, RowNode } from 'ag-grid-community';
 import { BeanStub, _addGridCommonParams, _getGrandTotalRow, _getGroupTotalRowCallback, _warn } from 'ag-grid-community';
 
 import { _createRowNodeFooter } from './footerUtils';
@@ -61,8 +61,8 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
         return getDefaultIndex(adjustedIndex);
     }
 
-    public doesCellShowTotalPrefix(node: IRowNode, col: AgColumn): boolean {
-        if (!node.footer || !col.colDef.showRowGroup) {
+    public doesCellShowTotalPrefix(node: IRowNode, col?: Column): boolean {
+        if (!node.footer || !col?.getColDef().showRowGroup) {
             return false;
         }
 
