@@ -211,7 +211,6 @@ export function _getScrollLeft(element: HTMLElement, rtl: boolean): number {
     let scrollLeft = element.scrollLeft;
 
     if (rtl) {
-        // Absolute value - for FF that reports RTL scrolls in negative numbers
         scrollLeft = Math.abs(scrollLeft);
     }
 
