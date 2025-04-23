@@ -370,7 +370,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.build_lint.outputs.test_pkg_matrix )}}
-    if: (needs.init.outputs.build_type == 'latest' || needs.init.outputs.build_type == 'release')
+    if: (needs.build_lint.outputs.build_type == 'latest' || needs.build_lint.outputs.build_type == 'release')
     env:
       NX_BASE: ${{ needs.init.outputs.nx_base }}
     steps:
