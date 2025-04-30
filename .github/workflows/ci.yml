@@ -51,6 +51,7 @@ env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   SHARP_IGNORE_GLOBAL_LIBVIPS: true
   YARN_REGISTRY: "http://52.50.158.57:4873"
+  CI: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -203,11 +204,11 @@ jobs:
       - name: nx test
         if: matrix.shard != 0
         id: test
-        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test --configuration=ci --exclude tag:no-sharding --exclude all --shard=${{ matrix.shard }}/$((${{ strategy.job-total }} - 1))
+        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test -c=staging --exclude tag:no-sharding --exclude all --shard=${{ matrix.shard }}/$((${{ strategy.job-total }} - 1))
       - name: nx test (non-sharded)
         if: matrix.shard == 0
         id: test-no-shard
-        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test --configuration=ci --exclude '*,!tag:no-sharding'
+        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test -c staging --exclude '*,!tag:no-sharding'
       - name: nx pack:verify
         if: matrix.shard == 0
         id: pack-verify
@@ -258,7 +259,7 @@ jobs:
 
       - name: nx test:e2e
         id: tests
-        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test:e2e --configuration=ci --exclude 'tag:module-size' --exclude all
+        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test:e2e -c staging --exclude 'tag:module-size' --exclude all
 
       - name: Persist test results
         if: always() && matrix.shard != 0
@@ -269,7 +270,7 @@ jobs:
             reports/
 
   bundle_size:
-    runs-on: ubuntu-latest
+    runsif -on: ubuntu-latest
     name: Bundle Size Tests
     needs: build_lint
     if: needs.build_lint.result == 'success' && ${{ github.event.inputs.run_bundle_size_tests }}
@@ -300,11 +301,11 @@ jobs:
       - name: module-size tests (non-sharded)
         if: matrix.shard == 0
         id: test-no-shard
-        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test:e2e --configuration=ci --exclude '!tag:module-size' --exclude 'tag:sharding' --exclude all
+        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }} -t test:e2e -c staging --exclude '!tag:module-size' --exclude 'tag:sharding' --exclude all
       - name: module-size tests
         if: matrix.shard != 0
         id: test
-        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }}  -t test:e2e --configuration=ci --exclude '!tag:module-size' --exclude 'tag:non-sharding' --exclude all --shard=${{ matrix.shard }}/$((${{ strategy.job-total }} - 1))
+        run: yarn nx ${{ github.event.inputs.nx_command || 'affected' }}  -t test:e2e -c staging --exclude '!tag:module-size' --exclude 'tag:non-sharding' --exclude all --shard=${{ matrix.shard }}/$((${{ strategy.job-total }} - 1))
 
       - name: Persist test results
         if: always() && matrix.shard != 0
@@ -404,7 +405,7 @@ jobs:
       - name: nx package:test
         id: package-test
         if: matrix.framework != 'none'
-        run: yarn nx run-many -t test:package -p ${{ matrix.framework }}-package-tests --configuration=ci
+        run: yarn nx run-many -t test:package -p ${{ matrix.framework }}-package-tests -c=staging
 
   angular_fw_pkg_test:
     runs-on: ubuntu-24.04
@@ -439,7 +440,7 @@ jobs:
       - name: nx package:test
         id: package-test
         if: matrix.framework != 'none'
-        run: yarn nx run-many -t test:package:shard-${{ matrix.shard }} -p angular-package-tests --configuration=ci
+        run: yarn nx run-many -t test:package:shard-${{ matrix.shard }} -p angular-package-tests -c staging
 
   report:
     runs-on: ubuntu-24.04
