@@ -581,7 +581,7 @@ jobs:
                     "Docs": "${{ needs.docs.result }}",
                     "Bundle": "${{ needs.bundle_size.result }}",
                     "FW_Pkg": "${{ needs.fw_pkg_test.result }}",
-                    "Angular_Pkg": "${{ needs.fw_pkg_test.result }}"
+                    "Angular_Pkg": "${{ needs.angular_fw_pkg_test.result }}"
                 }
             }
         run: |
