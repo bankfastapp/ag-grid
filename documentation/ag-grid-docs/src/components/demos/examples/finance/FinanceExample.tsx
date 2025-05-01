@@ -211,7 +211,7 @@ export const FinanceExample: React.FC<Props> = ({
                         type: 'bar',
                         direction: 'vertical',
                         axis: {
-                            type: 'number',
+                            type: 'category',
                             strokeWidth: 0,
                         },
                         tooltip: {
