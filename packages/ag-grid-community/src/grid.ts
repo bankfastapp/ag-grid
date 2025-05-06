@@ -304,7 +304,7 @@ export class GridCoreCreator {
                 _isModuleRegistered(moduleName, gridId, correctRowModelType as RowModelType)
             ) {
                 _logPreInitErr(
-                    273,
+                    275,
                     {
                         moduleName,
                         correctRowModelType: correctRowModelType as RowModelType,

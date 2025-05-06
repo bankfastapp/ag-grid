@@ -673,10 +673,10 @@ export const AG_GRID_ERRORS = {
         return msg;
     },
     275: ({
-              moduleName,
-              correctRowModelType,
-              rowModelType,
-              fallbackRowModelType,
+        moduleName,
+        correctRowModelType,
+        rowModelType,
+        fallbackRowModelType,
     }: {
         moduleName: CommunityModuleName | EnterpriseModuleName;
         correctRowModelType: RowModelType;
