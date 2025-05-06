@@ -653,6 +653,18 @@ export const AG_GRID_ERRORS = {
     271: ({ id, parentId }: { id: string; parentId: string }) =>
         `Parent row not found for row with id='${id}' and parent id='${parentId}'. Showing row with id='${id}' as a root-level node.` as const,
     272: () => NoModulesRegisteredError(),
+    273: ({
+              moduleName,
+              correctRowModelType,
+              rowModelType,
+              fallbackRowModelType,
+    }: {
+        moduleName: CommunityModuleName | EnterpriseModuleName;
+        correctRowModelType: RowModelType;
+        rowModelType: RowModelType | undefined;
+        fallbackRowModelType: RowModelType;
+    }) =>
+        `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${rowModelType || `nothing (defaults to ${fallbackRowModelType})`}` as const,
 };
 
 export type ErrorMap = typeof AG_GRID_ERRORS;

@@ -185,11 +185,9 @@ export class GridCoreCreator {
 
         const gridId = gridOptions.gridId ?? String(nextGridId++);
 
-        const rowModelType = gridOptions.rowModelType ?? 'clientSide';
+        const registeredModules = this.getRegisteredModules(params, gridId, gridOptions.rowModelType);
 
-        const registeredModules = this.getRegisteredModules(params, gridId, rowModelType);
-
-        const beanClasses = this.createBeansList(rowModelType, registeredModules, gridId);
+        const beanClasses = this.createBeansList(gridOptions.rowModelType, registeredModules, gridId);
         const providedBeanInstances = this.createProvidedBeans(eGridDiv, gridOptions, params);
 
         if (!beanClasses) {
@@ -222,12 +220,16 @@ export class GridCoreCreator {
         return context.getBean('gridApi');
     }
 
-    private getRegisteredModules(params: GridParams | undefined, gridId: string, rowModelType: RowModelType): Module[] {
+    private getRegisteredModules(
+        params: GridParams | undefined,
+        gridId: string,
+        rowModelType: RowModelType | undefined
+    ): Module[] {
         _registerModule(CommunityCoreModule, undefined, true);
 
         params?.modules?.forEach((m) => _registerModule(m, gridId));
 
-        return _getRegisteredModules(gridId, rowModelType);
+        return _getRegisteredModules(gridId, GridCoreCreator.getDefaultRowModelType(rowModelType));
     }
 
     private registerModuleFeatures(
@@ -271,7 +273,7 @@ export class GridCoreCreator {
     }
 
     private createBeansList(
-        rowModelType: RowModelType,
+        passedRowModelType: RowModelType | undefined,
         registeredModules: Module[],
         gridId: string
     ): SingletonBean[] | undefined {
@@ -282,7 +284,7 @@ export class GridCoreCreator {
             serverSide: 'ServerSideRowModel',
             viewport: 'ViewportRowModel',
         };
-
+        const rowModelType = GridCoreCreator.getDefaultRowModelType(passedRowModelType);
         const rowModuleModelName = rowModelModuleNames[rowModelType];
 
         if (!rowModuleModelName) {
@@ -294,6 +296,25 @@ export class GridCoreCreator {
         if (!_hasUserRegistered()) {
             _logPreInitErr(272, undefined, NoModulesRegisteredError());
             return;
+        }
+
+        for (let [correctRowModelType, moduleName] of Object.entries(rowModelModuleNames)) {
+            if (
+                correctRowModelType !== rowModelType &&
+                _isModuleRegistered(moduleName, gridId, correctRowModelType as RowModelType)
+            ) {
+                _logPreInitErr(
+                    273,
+                    {
+                        moduleName,
+                        correctRowModelType: correctRowModelType as RowModelType,
+                        rowModelType: passedRowModelType,
+                        fallbackRowModelType: rowModelType,
+                    },
+                    `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
+                );
+                return;
+            }
         }
 
         if (!_isModuleRegistered(rowModuleModelName, gridId, rowModelType)) {
@@ -316,5 +337,9 @@ export class GridCoreCreator {
         registeredModules.forEach((module) => module.beans?.forEach((bean) => beans.add(bean)));
 
         return Array.from(beans);
+    }
+
+    private static getDefaultRowModelType(passedRowModelType?: RowModelType): RowModelType {
+        return passedRowModelType ?? 'clientSide';
     }
 }
