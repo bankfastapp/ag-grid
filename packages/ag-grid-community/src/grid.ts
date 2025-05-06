@@ -298,7 +298,7 @@ export class GridCoreCreator {
             return;
         }
 
-        for (let [correctRowModelType, moduleName] of Object.entries(rowModelModuleNames)) {
+        for (const [correctRowModelType, moduleName] of Object.entries(rowModelModuleNames)) {
             if (
                 correctRowModelType !== rowModelType &&
                 _isModuleRegistered(moduleName, gridId, correctRowModelType as RowModelType)
