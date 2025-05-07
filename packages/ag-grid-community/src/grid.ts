@@ -229,7 +229,7 @@ export class GridCoreCreator {
 
         params?.modules?.forEach((m) => _registerModule(m, gridId));
 
-        return _getRegisteredModules(gridId, GridCoreCreator.getDefaultRowModelType(rowModelType));
+        return _getRegisteredModules(gridId, getDefaultRowModelType(rowModelType));
     }
 
     private registerModuleFeatures(
@@ -278,14 +278,15 @@ export class GridCoreCreator {
         gridId: string
     ): SingletonBean[] | undefined {
         // assert that the relevant module has been loaded
-        const rowModelModuleNames: Record<RowModelType, CommunityModuleName | EnterpriseModuleName> = {
-            clientSide: 'ClientSideRowModel',
-            infinite: 'InfiniteRowModel',
-            serverSide: 'ServerSideRowModel',
-            viewport: 'ViewportRowModel',
-        };
-        const rowModelType = GridCoreCreator.getDefaultRowModelType(passedRowModelType);
-        const rowModuleModelName = rowModelModuleNames[rowModelType];
+        const rowModelModuleNames: Map<RowModelType, CommunityModuleName | EnterpriseModuleName> = new Map([
+            ['clientSide', 'ClientSideRowModel'],
+            ['infinite', 'InfiniteRowModel'],
+            ['serverSide', 'ServerSideRowModel'],
+            ['viewport', 'ViewportRowModel'],
+        ]);
+
+        const rowModelType = getDefaultRowModelType(passedRowModelType);
+        const rowModuleModelName = rowModelModuleNames.get(rowModelType);
 
         if (!rowModuleModelName) {
             // can't use validation service here as hasn't been created yet
@@ -298,23 +299,27 @@ export class GridCoreCreator {
             return;
         }
 
-        for (const [correctRowModelType, moduleName] of Object.entries(rowModelModuleNames)) {
-            if (
-                correctRowModelType !== rowModelType &&
-                _isModuleRegistered(moduleName, gridId, correctRowModelType as RowModelType)
-            ) {
-                _logPreInitErr(
-                    275,
-                    {
-                        moduleName,
-                        correctRowModelType: correctRowModelType as RowModelType,
-                        rowModelType: passedRowModelType,
-                        fallbackRowModelType: rowModelType,
-                    },
-                    `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
-                );
-                return;
+        const registeredModels = [];
+        // See if we load exactly one row model module
+        for (const [rowModelType, moduleName] of rowModelModuleNames) {
+            if (_isModuleRegistered(moduleName, gridId, rowModelType)) {
+                registeredModels.push([rowModelType, moduleName]);
             }
+        }
+
+        if (registeredModels.length === 1) {
+            const [correctRowModelType, loadedModuleName] = registeredModels.pop();
+            _logPreInitErr(
+                275,
+                {
+                    loadedModuleName,
+                    correctRowModelType: correctRowModelType as RowModelType,
+                    rowModelType: passedRowModelType,
+                    fallbackRowModelType: rowModelType,
+                },
+                `Module ${loadedModuleName} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
+            );
+            return;
         }
 
         if (!_isModuleRegistered(rowModuleModelName, gridId, rowModelType)) {
@@ -338,8 +343,8 @@ export class GridCoreCreator {
 
         return Array.from(beans);
     }
+}
 
-    private static getDefaultRowModelType(passedRowModelType?: RowModelType): RowModelType {
-        return passedRowModelType ?? 'clientSide';
-    }
+function getDefaultRowModelType(passedRowModelType?: RowModelType): RowModelType {
+    return passedRowModelType ?? 'clientSide';
 }
