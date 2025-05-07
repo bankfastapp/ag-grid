@@ -278,15 +278,14 @@ export class GridCoreCreator {
         gridId: string
     ): SingletonBean[] | undefined {
         // assert that the relevant module has been loaded
-        const rowModelModuleNames: Map<RowModelType, CommunityModuleName | EnterpriseModuleName> = new Map([
-            ['clientSide', 'ClientSideRowModel'],
-            ['infinite', 'InfiniteRowModel'],
-            ['serverSide', 'ServerSideRowModel'],
-            ['viewport', 'ViewportRowModel'],
-        ]);
-
+        const rowModelModuleNames: Record<RowModelType, CommunityModuleName | EnterpriseModuleName> = {
+            clientSide: 'ClientSideRowModel',
+            infinite: 'InfiniteRowModel',
+            serverSide: 'ServerSideRowModel',
+            viewport: 'ViewportRowModel',
+        };
         const rowModelType = getDefaultRowModelType(passedRowModelType);
-        const rowModuleModelName = rowModelModuleNames.get(rowModelType);
+        const rowModuleModelName = rowModelModuleNames[rowModelType];
 
         if (!rowModuleModelName) {
             // can't use validation service here as hasn't been created yet
@@ -299,25 +298,21 @@ export class GridCoreCreator {
             return;
         }
 
-        const registeredModels = [];
         // See if we load exactly one row model module
-        for (const [rowModelType, moduleName] of rowModelModuleNames) {
-            if (_isModuleRegistered(moduleName, gridId, rowModelType)) {
-                registeredModels.push([rowModelType, moduleName]);
-            }
-        }
-
-        if (registeredModels.length === 1) {
-            const [correctRowModelType, loadedModuleName] = registeredModels.pop();
+        const [correctRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
+            (rowModelType: RowModelType) => _isModuleRegistered(rowModelModuleNames[rowModelType], gridId, rowModelType)
+        ) as RowModelType[];
+        if (!restRegisteredModelTypes.length && correctRowModelType !== rowModelType) {
+            const registeredModelModule = rowModelModuleNames[correctRowModelType];
             _logPreInitErr(
                 275,
                 {
-                    loadedModuleName,
-                    correctRowModelType: correctRowModelType as RowModelType,
+                    moduleName: registeredModelModule,
                     rowModelType: passedRowModelType,
+                    correctRowModelType: correctRowModelType as RowModelType,
                     fallbackRowModelType: rowModelType,
                 },
-                `Module ${loadedModuleName} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
+                `Module ${registeredModelModule} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
             );
             return;
         }
