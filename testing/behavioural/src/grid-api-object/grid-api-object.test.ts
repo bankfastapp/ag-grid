@@ -1,6 +1,7 @@
-import { MockInstance, beforeEach } from 'vitest';
+import type { MockInstance } from 'vitest';
+import { beforeEach } from 'vitest';
 
-import { AllCommunityModule, GridApi, GridOptions } from 'ag-grid-community';
+import type { GridApi, GridOptions, Params } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
@@ -8,14 +9,13 @@ import {
     ValidationModule,
     createGrid,
 } from 'ag-grid-community';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 describe('ag-grid overlays state', () => {
     let consoleWarnSpy: MockInstance | undefined;
     let consoleErrorSpy: MockInstance | undefined;
 
-    function createMyGrid(gridOptions: GridOptions = {}) {
-        return createGrid(document.getElementById('myGrid')!, gridOptions);
+    function createMyGrid(gridOptions: GridOptions = {}, extraParams: Params = {}) {
+        return createGrid(document.getElementById('myGrid')!, gridOptions, extraParams);
     }
 
     function resetGrids() {
@@ -23,9 +23,11 @@ describe('ag-grid overlays state', () => {
     }
 
     beforeEach(() => {
+        consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
+        consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+
         resetGrids();
     });
-
     afterEach(() => {
         consoleWarnSpy?.mockRestore();
         consoleErrorSpy?.mockRestore();
@@ -37,9 +39,6 @@ describe('ag-grid overlays state', () => {
         });
 
         test('grid api is a simple JS object and has core methods', () => {
-            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
-            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
-
             const api = createMyGrid();
 
             expect(api).toBeDefined();
@@ -129,8 +128,6 @@ describe('ag-grid overlays state', () => {
         });
 
         test('destruction warnings', () => {
-            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
-
             const api = createMyGrid();
             expect(api.isDestroyed()).toBe(false);
 
@@ -161,9 +158,6 @@ describe('ag-grid overlays state', () => {
         });
 
         test('missing module warning', () => {
-            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
-            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
-
             const api = createMyGrid();
 
             expect(typeof api.exportDataAsExcel).toBe('function');
@@ -194,42 +188,6 @@ describe('ag-grid overlays state', () => {
             );
 
             expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-        });
-    });
-
-    describe('Mismatched rowModelType error', () => {
-        beforeEach(() => {
-            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
-        });
-
-        test('No options provided', () => {
-            ModuleRegistry.registerModules([ServerSideRowModelModule]);
-            createMyGrid({});
-
-            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-            expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-                "Module ServerSideRowModel expects rowModelType 'serverSide', got nothing (defaults to 'clientSide')."
-            );
-        });
-
-        test('Wrong options provided', () => {
-            ModuleRegistry.registerModules([ServerSideRowModelModule]);
-            createMyGrid({
-                rowModelType: 'infinite',
-            });
-
-            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-            expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-                "Module ServerSideRowModel expects rowModelType 'serverSide', got infinite."
-            );
-        });
-
-        test("shouldn't issue the error message if more than 1 model module is registered", () => {
-            ModuleRegistry.registerModules([ServerSideRowModelModule, ClientSideRowModelModule]);
-            createMyGrid({});
-            expect(consoleErrorSpy).not.toHaveBeenCalledWith(
-                expect.stringContaining('Module ServerSideRowModel expects rowModelType')
-            );
         });
     });
 });

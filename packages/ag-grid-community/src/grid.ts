@@ -313,7 +313,7 @@ export class GridCoreCreator {
                     correctRowModelType: userAssumedRowModelType as RowModelType,
                     fallbackRowModelType: rowModelType,
                 },
-                `Module ${registeredModelModule} expects rowModelType '${userAssumedRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
+                `Module ${registeredModelModule} expects rowModelType '${userAssumedRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`,
             );
             return;
         }
