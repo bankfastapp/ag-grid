@@ -1,4 +1,4 @@
-import type { MockInstance } from 'vitest';
+import { MockInstance, beforeEach } from 'vitest';
 
 import { AllCommunityModule, GridApi, GridOptions } from 'ag-grid-community';
 import {
@@ -198,29 +198,37 @@ describe('ag-grid overlays state', () => {
     });
 
     describe('Mismatched rowModelType error', () => {
-        test('No options provided', () => {
+        beforeEach(() => {
             consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+        });
 
+        test('No options provided', () => {
             ModuleRegistry.registerModules([ServerSideRowModelModule]);
             createMyGrid({});
 
             expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-            expect(consoleErrorSpy.mock.calls[0][1]).toContain(
+            expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
                 "Module ServerSideRowModel expects rowModelType 'serverSide', got nothing (defaults to 'clientSide')."
             );
         });
 
         test('Wrong options provided', () => {
-            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
-
             ModuleRegistry.registerModules([ServerSideRowModelModule]);
             createMyGrid({
                 rowModelType: 'infinite',
             });
 
             expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-            expect(consoleErrorSpy.mock.calls[0][1]).toContain(
+            expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
                 "Module ServerSideRowModel expects rowModelType 'serverSide', got infinite."
+            );
+        });
+
+        test("shouldn't issue the error message if more than 1 model module is registered", () => {
+            ModuleRegistry.registerModules([ServerSideRowModelModule, ClientSideRowModelModule]);
+            createMyGrid({});
+            expect(consoleErrorSpy).not.toHaveBeenCalledWith(
+                expect.stringContaining('Module ServerSideRowModel expects rowModelType')
             );
         });
     });
