@@ -1,6 +1,6 @@
 import type { MockInstance } from 'vitest';
 
-import type { GridApi, GridOptions } from 'ag-grid-community';
+import { AllCommunityModule, GridApi, GridOptions } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
@@ -8,6 +8,7 @@ import {
     ValidationModule,
     createGrid,
 } from 'ag-grid-community';
+import { ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 describe('ag-grid overlays state', () => {
     let consoleWarnSpy: MockInstance | undefined;
@@ -21,10 +22,6 @@ describe('ag-grid overlays state', () => {
         document.body.innerHTML = '<div id="myGrid"></div>';
     }
 
-    beforeAll(() => {
-        ModuleRegistry.registerModules([ClientSideRowModelModule, ValidationModule, RowApiModule]);
-    });
-
     beforeEach(() => {
         resetGrids();
     });
@@ -34,163 +31,197 @@ describe('ag-grid overlays state', () => {
         consoleErrorSpy?.mockRestore();
     });
 
-    test('grid api is a simple JS object and has core methods', () => {
-        consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
-        consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+    describe('with registered modules', () => {
+        beforeAll(() => {
+            ModuleRegistry.registerModules([ClientSideRowModelModule, ValidationModule, RowApiModule]);
+        });
 
-        const api = createMyGrid();
+        test('grid api is a simple JS object and has core methods', () => {
+            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
+            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
 
-        expect(api).toBeDefined();
-        expect(typeof api).toBe('object');
+            const api = createMyGrid();
 
-        // It has all Object.prototype methods
-        for (const key of Object.getOwnPropertyNames(Object.prototype)) {
-            if (key !== 'constructor' && key !== '__proto__') {
-                expect((api as any)[key]).toBe(Object.prototype[key]);
+            expect(api).toBeDefined();
+            expect(typeof api).toBe('object');
+
+            // It has all Object.prototype methods
+            for (const key of Object.getOwnPropertyNames(Object.prototype)) {
+                if (key !== 'constructor' && key !== '__proto__') {
+                    expect((api as any)[key]).toBe(Object.prototype[key]);
+                }
             }
-        }
-        expect(typeof api.constructor).toBe('function');
+            expect(typeof api.constructor).toBe('function');
 
-        // It has a class name
+            // It has a class name
 
-        expect(api.constructor.name).toBe('GridApi');
+            expect(api.constructor.name).toBe('GridApi');
 
-        // It has functions
-        expect(typeof api.isDestroyed).toBe('function');
-        expect(typeof api.destroy).toBe('function');
-        expect(typeof api.getRowNode).toBe('function');
-        expect(typeof api.dispatchEvent).toBe('function');
+            // It has functions
+            expect(typeof api.isDestroyed).toBe('function');
+            expect(typeof api.destroy).toBe('function');
+            expect(typeof api.getRowNode).toBe('function');
+            expect(typeof api.dispatchEvent).toBe('function');
 
-        // It passes "in" check
-        expect('isDestroyed' in api).toBe(true);
-        expect('destroy' in api).toBe(true);
-        expect('getRowNode' in api).toBe(true);
-        expect('dispatchEvent' in api).toBe(true);
+            // It passes "in" check
+            expect('isDestroyed' in api).toBe(true);
+            expect('destroy' in api).toBe(true);
+            expect('getRowNode' in api).toBe(true);
+            expect('dispatchEvent' in api).toBe(true);
 
-        // It has Object.keys
-        const keys = Object.keys(api);
-        expect(keys).toContain('isDestroyed');
-        expect(keys).toContain('destroy');
-        expect(keys).toContain('getRowNode');
-        expect(keys).toContain('dispatchEvent');
+            // It has Object.keys
+            const keys = Object.keys(api);
+            expect(keys).toContain('isDestroyed');
+            expect(keys).toContain('destroy');
+            expect(keys).toContain('getRowNode');
+            expect(keys).toContain('dispatchEvent');
 
-        const getOwnPropertyNames = Object.getOwnPropertyNames(api);
-        expect(getOwnPropertyNames).toContain('isDestroyed');
-        expect(getOwnPropertyNames).toContain('destroy');
-        expect(getOwnPropertyNames).toContain('getRowNode');
-        expect(getOwnPropertyNames).toContain('dispatchEvent');
+            const getOwnPropertyNames = Object.getOwnPropertyNames(api);
+            expect(getOwnPropertyNames).toContain('isDestroyed');
+            expect(getOwnPropertyNames).toContain('destroy');
+            expect(getOwnPropertyNames).toContain('getRowNode');
+            expect(getOwnPropertyNames).toContain('dispatchEvent');
 
-        // Always the same instance is returned
-        expect(api.isDestroyed).toBe(api.isDestroyed);
-        expect(api.destroy).toBe(api.destroy);
-        expect(api.getRowNode).toBe(api.getRowNode);
-        expect(api.dispatchEvent).toBe(api.dispatchEvent);
+            // Always the same instance is returned
+            expect(api.isDestroyed).toBe(api.isDestroyed);
+            expect(api.destroy).toBe(api.destroy);
+            expect(api.getRowNode).toBe(api.getRowNode);
+            expect(api.dispatchEvent).toBe(api.dispatchEvent);
 
-        // All API function names are correct
-        expect(api.isDestroyed.name).toBe('isDestroyed');
-        expect(api.destroy.name).toBe('destroy');
-        expect(api.getRowNode.name).toBe('getRowNode');
-        expect(api.dispatchEvent.name).toBe('dispatchEvent');
+            // All API function names are correct
+            expect(api.isDestroyed.name).toBe('isDestroyed');
+            expect(api.destroy.name).toBe('destroy');
+            expect(api.getRowNode.name).toBe('getRowNode');
+            expect(api.dispatchEvent.name).toBe('dispatchEvent');
 
-        // It has different instances for different functions
-        expect(api.getRowNode).not.toBe(api.getAllGridColumns);
+            // It has different instances for different functions
+            expect(api.getRowNode).not.toBe(api.getAllGridColumns);
 
-        expect(api.isDestroyed()).toBe(false);
+            expect(api.isDestroyed()).toBe(false);
 
-        // Properties can be set
-        expect('myProperty' in api).toBe(false);
-        expect((api as any).myProperty).toBe(undefined);
-        (api as any).myProperty = 123;
-        expect((api as any).myProperty).toBe(123);
-        expect('myProperty' in api).toBe(true);
+            // Properties can be set
+            expect('myProperty' in api).toBe(false);
+            expect((api as any).myProperty).toBe(undefined);
+            (api as any).myProperty = 123;
+            expect((api as any).myProperty).toBe(123);
+            expect('myProperty' in api).toBe(true);
 
-        // Methods can be overridden (or spied with testing frameworks)
-        const oldGetRowNode = api.getRowNode;
-        api.getRowNode = () => 'xxxx' as any;
-        expect((api.getRowNode as any)()).toBe('xxxx');
-        api.getRowNode = oldGetRowNode;
-        expect(api.getRowNode).toBe(oldGetRowNode);
+            // Methods can be overridden (or spied with testing frameworks)
+            const oldGetRowNode = api.getRowNode;
+            api.getRowNode = () => 'xxxx' as any;
+            expect((api.getRowNode as any)()).toBe('xxxx');
+            api.getRowNode = oldGetRowNode;
+            expect(api.getRowNode).toBe(oldGetRowNode);
 
-        // Methods can be deleted
-        delete (api as Partial<GridApi>).getRowNode;
-        expect('getRowNode' in api).toBe(false);
-        api.getRowNode = oldGetRowNode;
+            // Methods can be deleted
+            delete (api as Partial<GridApi>).getRowNode;
+            expect('getRowNode' in api).toBe(false);
+            api.getRowNode = oldGetRowNode;
 
-        // Methods are bound to the grid
-        const { isDestroyed, getRowNode } = api;
-        expect(isDestroyed()).toBe(false);
-        expect(getRowNode('123')).toBe(undefined);
+            // Methods are bound to the grid
+            const { isDestroyed, getRowNode } = api;
+            expect(isDestroyed()).toBe(false);
+            expect(getRowNode('123')).toBe(undefined);
 
-        // No warnings or errors
-        expect(consoleWarnSpy).toHaveBeenCalledTimes(0);
-        expect(consoleErrorSpy).toHaveBeenCalledTimes(0);
-    });
+            // No warnings or errors
+            expect(consoleWarnSpy).toHaveBeenCalledTimes(0);
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(0);
+        });
 
-    test('destruction warnings', () => {
-        consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
+        test('destruction warnings', () => {
+            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
 
-        const api = createMyGrid();
-        expect(api.isDestroyed()).toBe(false);
+            const api = createMyGrid();
+            expect(api.isDestroyed()).toBe(false);
 
-        expect(api.getRowNode('123')).toBeUndefined();
+            expect(api.getRowNode('123')).toBeUndefined();
 
-        api.destroy();
-        expect(api.isDestroyed()).toBe(true);
+            api.destroy();
+            expect(api.isDestroyed()).toBe(true);
 
-        api.destroy();
-        expect(api.isDestroyed()).toBe(true);
+            api.destroy();
+            expect(api.isDestroyed()).toBe(true);
 
-        expect(consoleWarnSpy).toHaveBeenCalledTimes(0);
+            expect(consoleWarnSpy).toHaveBeenCalledTimes(0);
 
-        expect(api.getRowNode('123')).toBe(undefined);
+            expect(api.getRowNode('123')).toBe(undefined);
 
-        expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
-        expect(consoleWarnSpy).toHaveBeenCalledWith(
-            'AG Grid: error #26',
-            expect.stringContaining(`Grid API function getRowNode() cannot be called as the grid has been destroyed.
+            expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+            expect(consoleWarnSpy).toHaveBeenCalledWith(
+                'AG Grid: error #26',
+                expect.stringContaining(`Grid API function getRowNode() cannot be called as the grid has been destroyed.
  Either clear local references to the grid api, when it is destroyed, or check gridApi.isDestroyed() to avoid calling methods against a destroyed grid.
  To run logic when the grid is about to be destroyed use the gridPreDestroy event.`),
-            expect.stringContaining('/javascript-data-grid/errors/26')
-        );
+                expect.stringContaining('/javascript-data-grid/errors/26')
+            );
 
-        expect(api.getRowNode('123')).toBe(undefined);
+            expect(api.getRowNode('123')).toBe(undefined);
 
-        expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
-    });
+            expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+        });
 
-    test('missing module warning', () => {
-        consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
-        consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
+        test('missing module warning', () => {
+            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+            consoleWarnSpy = vitest.spyOn(console, 'warn').mockImplementation(() => {});
 
-        const api = createMyGrid();
+            const api = createMyGrid();
 
-        expect(typeof api.exportDataAsExcel).toBe('function');
-        expect('exportDataAsExcel' in api).toBe(true);
-        expect(api.exportDataAsExcel).toBe(api.exportDataAsExcel);
+            expect(typeof api.exportDataAsExcel).toBe('function');
+            expect('exportDataAsExcel' in api).toBe(true);
+            expect(api.exportDataAsExcel).toBe(api.exportDataAsExcel);
 
-        expect(consoleErrorSpy).toHaveBeenCalledTimes(0);
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(0);
 
-        expect(api.exportDataAsExcel()).toBeUndefined();
+            expect(api.exportDataAsExcel()).toBeUndefined();
 
-        expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-        // expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('exportDataAsExcel'));
-        // expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('ExcelExportModule'));
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            // expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('exportDataAsExcel'));
+            // expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('ExcelExportModule'));
 
-        expect(api.exportDataAsExcel()).toBeUndefined();
-        expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            expect(api.exportDataAsExcel()).toBeUndefined();
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 
-        api.destroy();
+            api.destroy();
 
-        expect(api.exportDataAsExcel()).toBeUndefined();
-        expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
-        expect(consoleWarnSpy).toHaveBeenCalledWith(
-            'AG Grid: error #26',
-            expect.stringContaining(`Grid API function exportDataAsExcel() cannot be called as the grid has been destroyed.
+            expect(api.exportDataAsExcel()).toBeUndefined();
+            expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+            expect(consoleWarnSpy).toHaveBeenCalledWith(
+                'AG Grid: error #26',
+                expect.stringContaining(`Grid API function exportDataAsExcel() cannot be called as the grid has been destroyed.
  Either clear local references to the grid api, when it is destroyed, or check gridApi.isDestroyed() to avoid calling methods against a destroyed grid.
  To run logic when the grid is about to be destroyed use the gridPreDestroy event.`),
-            expect.stringContaining('/javascript-data-grid/errors/26')
-        );
+                expect.stringContaining('/javascript-data-grid/errors/26')
+            );
 
-        expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe('Mismatched rowModelType error', () => {
+        test('No options provided', () => {
+            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+
+            ModuleRegistry.registerModules([ServerSideRowModelModule]);
+            createMyGrid({});
+
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            expect(consoleErrorSpy.mock.calls[0][1]).toContain(
+                "Module ServerSideRowModel expects rowModelType 'serverSide', got nothing (defaults to 'clientSide')."
+            );
+        });
+
+        test('Wrong options provided', () => {
+            consoleErrorSpy = vitest.spyOn(console, 'error').mockImplementation(() => {});
+
+            ModuleRegistry.registerModules([ServerSideRowModelModule]);
+            createMyGrid({
+                rowModelType: 'infinite',
+            });
+
+            expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+            expect(consoleErrorSpy.mock.calls[0][1]).toContain(
+                "Module ServerSideRowModel expects rowModelType 'serverSide', got infinite."
+            );
+        });
     });
 });
