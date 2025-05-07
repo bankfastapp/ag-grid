@@ -683,7 +683,7 @@ export const AG_GRID_ERRORS = {
         rowModelType: RowModelType | undefined;
         fallbackRowModelType: RowModelType;
     }) =>
-        `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${rowModelType || `nothing (defaults to ${fallbackRowModelType})`}` as const,
+        `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${rowModelType || `nothing (defaults to '${fallbackRowModelType}').`}` as const,
 };
 
 export type ErrorMap = typeof AG_GRID_ERRORS;

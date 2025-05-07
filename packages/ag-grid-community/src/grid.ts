@@ -298,21 +298,22 @@ export class GridCoreCreator {
             return;
         }
 
-        // See if we load exactly one row model module
-        const [correctRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
+        // Grab registered model types modules
+        const [userAssumedRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
             (rowModelType: RowModelType) => _isModuleRegistered(rowModelModuleNames[rowModelType], gridId, rowModelType)
         ) as RowModelType[];
-        if (!restRegisteredModelTypes.length && correctRowModelType !== rowModelType) {
-            const registeredModelModule = rowModelModuleNames[correctRowModelType];
+        // ensure user doesn't load more than one model module
+        if (!restRegisteredModelTypes.length && userAssumedRowModelType !== rowModelType) {
+            const registeredModelModule = rowModelModuleNames[userAssumedRowModelType];
             _logPreInitErr(
                 275,
                 {
                     moduleName: registeredModelModule,
                     rowModelType: passedRowModelType,
-                    correctRowModelType: correctRowModelType as RowModelType,
+                    correctRowModelType: userAssumedRowModelType as RowModelType,
                     fallbackRowModelType: rowModelType,
                 },
-                `Module ${registeredModelModule} expects rowModelType '${correctRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
+                `Module ${registeredModelModule} expects rowModelType '${userAssumedRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`
             );
             return;
         }
