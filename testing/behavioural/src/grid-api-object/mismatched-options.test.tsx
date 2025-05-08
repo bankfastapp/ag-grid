@@ -4,6 +4,7 @@ import type { MockInstance } from 'vitest';
 import { beforeEach } from 'vitest';
 
 import type { GridOptions, Params } from 'ag-grid-community';
+import { RowDragModule } from 'ag-grid-community';
 import { ClientSideRowModelModule, createGrid } from 'ag-grid-community';
 import { ServerSideRowModelModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
@@ -37,6 +38,15 @@ describe('Mismatched rowModelType error', () => {
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
             "Module ServerSideRowModel expects rowModelType='serverSide', got rowModelType='undefined' (defaults to rowModelType='clientSide')."
+        );
+    });
+
+    test('No options and no model modules provided should skip the check', () => {
+        createMyGrid({}, { modules: [RowDragModule] });
+
+        expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+        expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
+            'Missing module ClientSideRowModelModule for rowModelType clientSide.'
         );
     });
 
