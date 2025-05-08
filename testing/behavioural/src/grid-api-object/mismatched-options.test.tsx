@@ -36,16 +36,16 @@ describe('Mismatched rowModelType error', () => {
 
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-            "Module ServerSideRowModel expects rowModelType 'serverSide', got nothing (defaults to 'clientSide')."
+            "Module ServerSideRowModel expects rowModelType='serverSide', got rowModelType='undefined' (defaults to rowModelType='clientSide')."
         );
     });
 
-    test('Wrong options provided', () => {
+    test('If rowModelType is specified, treat that as higher priority', () => {
         createMyGrid({ rowModelType: 'infinite' }, { modules: [ServerSideRowModelModule] });
 
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-            "Module ServerSideRowModel expects rowModelType 'serverSide', got infinite."
+            'Missing module InfiniteRowModelModule for rowModelType infinite.'
         );
     });
 
@@ -65,7 +65,7 @@ describe('Mismatched rowModelType error', () => {
             render(<AgGridReact modules={[ServerSideRowModelModule]} />);
             expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
             expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-                "Module ServerSideRowModel expects rowModelType 'serverSide', got nothing (defaults to 'clientSide')."
+                "Module ServerSideRowModel expects rowModelType='serverSide', got rowModelType='undefined' (defaults to rowModelType='clientSide')."
             );
         });
     });

@@ -672,19 +672,26 @@ export const AG_GRID_ERRORS = {
         }
         return msg;
     },
-    275: ({
-        moduleName,
-        correctRowModelType,
-        rowModelType,
-        fallbackRowModelType,
-    }: {
-        moduleName: CommunityModuleName | EnterpriseModuleName;
-        correctRowModelType: RowModelType;
-        rowModelType: RowModelType | undefined;
-        fallbackRowModelType: RowModelType;
-    }) =>
-        `Module ${moduleName} expects rowModelType '${correctRowModelType}', got ${rowModelType || `nothing (defaults to '${fallbackRowModelType}').`}` as const,
+    275: getModuleExpectsError,
 };
+
+export function getModuleExpectsError({
+    moduleName,
+    correctRowModelType,
+    rowModelType,
+    fallbackRowModelType,
+}: {
+    moduleName: CommunityModuleName | EnterpriseModuleName;
+    correctRowModelType: RowModelType;
+    rowModelType: RowModelType | undefined;
+    fallbackRowModelType: RowModelType;
+}) {
+    const gotTypeStr = rowModelType
+        ? `'${rowModelType}'`
+        : `'${JSON.stringify(rowModelType)}' (defaults to rowModelType='${fallbackRowModelType}').`;
+
+    return `Module ${moduleName} expects rowModelType='${correctRowModelType}', got rowModelType=${gotTypeStr}`;
+}
 
 export type ErrorMap = typeof AG_GRID_ERRORS;
 export type ErrorId = keyof ErrorMap;

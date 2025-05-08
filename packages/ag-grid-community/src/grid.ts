@@ -26,7 +26,7 @@ import {
 import { _createElement } from './utils/dom';
 import { _missing } from './utils/generic';
 import { _mergeDeep } from './utils/object';
-import { NoModulesRegisteredError } from './validation/errorMessages/errorText';
+import { NoModulesRegisteredError, getModuleExpectsError } from './validation/errorMessages/errorText';
 import { _error, _logPreInitErr } from './validation/logging';
 import { VanillaFrameworkOverrides } from './vanillaFrameworkOverrides';
 
@@ -298,24 +298,24 @@ export class GridCoreCreator {
             return;
         }
 
-        // Grab registered model types modules
-        const [userAssumedRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
-            (rowModelType: RowModelType) => _isModuleRegistered(rowModelModuleNames[rowModelType], gridId, rowModelType)
-        ) as RowModelType[];
-        // ensure user doesn't load more than one model module
-        if (!restRegisteredModelTypes.length && userAssumedRowModelType !== rowModelType) {
-            const registeredModelModule = rowModelModuleNames[userAssumedRowModelType];
-            _logPreInitErr(
-                275,
-                {
+        if (!passedRowModelType) {
+            // Grab registered model types modules
+            const [userAssumedRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
+                (rowModelType: RowModelType): rowModelType is RowModelType =>
+                    _isModuleRegistered(rowModelModuleNames[rowModelType], gridId, rowModelType)
+            );
+            // ensure user doesn't load more than one model module
+            if (!restRegisteredModelTypes.length && userAssumedRowModelType !== rowModelType) {
+                const registeredModelModule = rowModelModuleNames[userAssumedRowModelType];
+                const params = {
                     moduleName: registeredModelModule,
                     rowModelType: passedRowModelType,
                     correctRowModelType: userAssumedRowModelType as RowModelType,
                     fallbackRowModelType: rowModelType,
-                },
-                `Module ${registeredModelModule} expects rowModelType '${userAssumedRowModelType}', got ${passedRowModelType || `nothing (defaults to '${rowModelType}')`}.`,
-            );
-            return;
+                };
+                _logPreInitErr(275, params, getModuleExpectsError(params));
+                return;
+            }
         }
 
         if (!_isModuleRegistered(rowModuleModelName, gridId, rowModelType)) {
