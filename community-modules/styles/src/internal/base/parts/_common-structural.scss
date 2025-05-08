@@ -1683,7 +1683,7 @@
     .ag-row-number-cell {
         width: 100%;
         white-space: nowrap;
-        overflow: visible;
+        overflow: hidden;
         user-select: none;
         @include ag.unthemed-rtl(
             (
@@ -1696,7 +1696,7 @@
         position: absolute;
         bottom: -2px;
         left: 0;
-        height: 3px;
+        height: 4px;
         width: 100%;
         cursor: ns-resize;
     }
