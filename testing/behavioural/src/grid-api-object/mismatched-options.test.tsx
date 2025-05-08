@@ -37,7 +37,7 @@ describe('Mismatched rowModelType error', () => {
 
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-            "Module ServerSideRowModel expects rowModelType='serverSide', got rowModelType='undefined' (defaults to rowModelType='clientSide')."
+            `To use the ServerSideRowModelModule you must set the gridOption "rowModelType='serverSide'"`
         );
     });
 
@@ -75,7 +75,7 @@ describe('Mismatched rowModelType error', () => {
             render(<AgGridReact modules={[ServerSideRowModelModule]} />);
             expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
             expect(consoleErrorSpy!.mock.calls[0][1]).toContain(
-                "Module ServerSideRowModel expects rowModelType='serverSide', got rowModelType='undefined' (defaults to rowModelType='clientSide')."
+                `To use the ServerSideRowModelModule you must set the gridOption "rowModelType='serverSide'"`
             );
         });
     });
