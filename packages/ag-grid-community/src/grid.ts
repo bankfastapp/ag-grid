@@ -26,7 +26,7 @@ import {
 import { _createElement } from './utils/dom';
 import { _missing } from './utils/generic';
 import { _mergeDeep } from './utils/object';
-import { NoModulesRegisteredError, getModuleExpectsError } from './validation/errorMessages/errorText';
+import { NoModulesRegisteredError, ModuleExpectsError } from './validation/errorMessages/errorText';
 import { _error, _logPreInitErr } from './validation/logging';
 import { VanillaFrameworkOverrides } from './vanillaFrameworkOverrides';
 
@@ -313,7 +313,7 @@ export class GridCoreCreator {
                     correctRowModelType: userAssumedRowModelType as RowModelType,
                     fallbackRowModelType: rowModelType,
                 };
-                _logPreInitErr(275, params, getModuleExpectsError(params));
+                _logPreInitErr(275, params, ModuleExpectsError(params));
                 return;
             }
         }
