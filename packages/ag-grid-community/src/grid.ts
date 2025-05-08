@@ -26,7 +26,7 @@ import {
 import { _createElement } from './utils/dom';
 import { _missing } from './utils/generic';
 import { _mergeDeep } from './utils/object';
-import { NoModulesRegisteredError, getModuleExpectsError } from './validation/errorMessages/errorText';
+import { NoModulesRegisteredError, missingRowModelTypeError } from './validation/errorMessages/errorText';
 import { _error, _logPreInitErr } from './validation/logging';
 import { VanillaFrameworkOverrides } from './vanillaFrameworkOverrides';
 
@@ -273,7 +273,7 @@ export class GridCoreCreator {
     }
 
     private createBeansList(
-        passedRowModelType: RowModelType | undefined,
+        userProvidedRowModelType: RowModelType | undefined,
         registeredModules: Module[],
         gridId: string
     ): SingletonBean[] | undefined {
@@ -284,7 +284,7 @@ export class GridCoreCreator {
             serverSide: 'ServerSideRowModel',
             viewport: 'ViewportRowModel',
         };
-        const rowModelType = getDefaultRowModelType(passedRowModelType);
+        const rowModelType = getDefaultRowModelType(userProvidedRowModelType);
         const rowModuleModelName = rowModelModuleNames[rowModelType];
 
         if (!rowModuleModelName) {
@@ -298,23 +298,27 @@ export class GridCoreCreator {
             return;
         }
 
-        if (!passedRowModelType) {
-            // Grab registered model types modules
-            const [userAssumedRowModelType, ...restRegisteredModelTypes] = Object.keys(rowModelModuleNames).filter(
-                (rowModelType: RowModelType): rowModelType is RowModelType =>
-                    _isModuleRegistered(rowModelModuleNames[rowModelType], gridId, rowModelType)
+        if (!userProvidedRowModelType) {
+            // If the user has not specified a rowModelType, but have registered one of the RowModel modules, we need to check
+            // that the user has registered the correct module for the rowModelType.
+            // eslint-disable-next-line no-restricted-properties
+            const registeredRowModelModules = Object.entries(rowModelModuleNames).filter(([rowModelType, module]) =>
+                _isModuleRegistered(module, gridId, rowModelType as RowModelType)
             );
-            // ensure user doesn't load more than one model module
-            if (!restRegisteredModelTypes.length && userAssumedRowModelType !== rowModelType) {
-                const registeredModelModule = rowModelModuleNames[userAssumedRowModelType];
-                const params = {
-                    moduleName: registeredModelModule,
-                    rowModelType: passedRowModelType,
-                    correctRowModelType: userAssumedRowModelType as RowModelType,
-                    fallbackRowModelType: rowModelType,
-                };
-                _logPreInitErr(275, params, getModuleExpectsError(params));
-                return;
+
+            if (registeredRowModelModules.length == 1) {
+                const [userRowModelType, moduleName] = registeredRowModelModules[0] as [
+                    RowModelType,
+                    CommunityModuleName | EnterpriseModuleName,
+                ];
+                if (userRowModelType !== rowModelType) {
+                    const params = {
+                        moduleName,
+                        rowModelType: userRowModelType!,
+                    };
+                    _logPreInitErr(275, params, missingRowModelTypeError(params));
+                    return;
+                }
             }
         }
 

@@ -63,6 +63,16 @@ function umdMissingModule(
     return message;
 }
 
+export function missingRowModelTypeError({
+    moduleName,
+    rowModelType,
+}: {
+    moduleName: CommunityModuleName | EnterpriseModuleName;
+    rowModelType: RowModelType;
+}) {
+    return `To use the ${moduleName}Module you must set the gridOption "rowModelType='${rowModelType}'"`;
+}
+
 const missingModule = ({
     reasonOrId,
     moduleName,
@@ -672,26 +682,8 @@ export const AG_GRID_ERRORS = {
         }
         return msg;
     },
-    275: getModuleExpectsError,
+    275: missingRowModelTypeError,
 };
-
-export function getModuleExpectsError({
-    moduleName,
-    correctRowModelType,
-    rowModelType,
-    fallbackRowModelType,
-}: {
-    moduleName: CommunityModuleName | EnterpriseModuleName;
-    correctRowModelType: RowModelType;
-    rowModelType: RowModelType | undefined;
-    fallbackRowModelType: RowModelType;
-}) {
-    const gotTypeStr = rowModelType
-        ? `'${rowModelType}'`
-        : `'${JSON.stringify(rowModelType)}' (defaults to rowModelType='${fallbackRowModelType}').`;
-
-    return `Module ${moduleName} expects rowModelType='${correctRowModelType}', got rowModelType=${gotTypeStr}`;
-}
 
 export type ErrorMap = typeof AG_GRID_ERRORS;
 export type ErrorId = keyof ErrorMap;
