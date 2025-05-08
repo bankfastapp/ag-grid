@@ -129,6 +129,25 @@ const clipboardApiError = (method: string) =>
     'Either fix why Clipboard API is blocked, OR stop this message from appearing by setting grid ' +
     'property suppressClipboardApi=true (which will default the grid to using the workaround rather than the API.';
 
+type ModuleExpectsErrorParams = {
+    moduleName: CommunityModuleName | EnterpriseModuleName;
+    correctRowModelType: RowModelType;
+    rowModelType: RowModelType | undefined;
+    fallbackRowModelType: RowModelType;
+};
+export const ModuleExpectsError = ({
+    moduleName,
+    correctRowModelType,
+    rowModelType,
+    fallbackRowModelType,
+}: ModuleExpectsErrorParams) => {
+    const gotTypeStr = rowModelType
+        ? `'${rowModelType}'`
+        : `'${JSON.stringify(rowModelType)}' (defaults to rowModelType='${fallbackRowModelType}').`;
+
+    return `Module ${moduleName} expects rowModelType='${correctRowModelType}', got rowModelType=${gotTypeStr}`;
+};
+
 /**
  * NOTES on setting console messages:
  * 1. The message is a function that returns either a string or an array of any type.
