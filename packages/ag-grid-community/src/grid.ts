@@ -26,7 +26,7 @@ import {
 import { _createElement } from './utils/dom';
 import { _missing } from './utils/generic';
 import { _mergeDeep } from './utils/object';
-import { NoModulesRegisteredError, ModuleExpectsError } from './validation/errorMessages/errorText';
+import { ModuleExpectsError, NoModulesRegisteredError } from './validation/errorMessages/errorText';
 import { _error, _logPreInitErr } from './validation/logging';
 import { VanillaFrameworkOverrides } from './vanillaFrameworkOverrides';
 
