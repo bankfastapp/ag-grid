@@ -36,10 +36,12 @@ export class RowNumbersRowResizeFeature implements IRowNumbersRowResizeFeature {
 
     private isRowResizeSupported(node: RowNode): boolean {
         const { pinnedRowModel, rowModel } = this.beans;
+        const rowModelModelHasOnRowHeightChanged = !!(rowModel as any).onRowHeightChanged;
+
         if (node.rowPinned != null) {
-            return !pinnedRowModel?.isManual();
+            return pinnedRowModel?.isManual() ? rowModelModelHasOnRowHeightChanged : true;
         }
-        return !!(rowModel as any).onRowHeightChanged;
+        return rowModelModelHasOnRowHeightChanged;
     }
 
     private addResizerToCellComp() {

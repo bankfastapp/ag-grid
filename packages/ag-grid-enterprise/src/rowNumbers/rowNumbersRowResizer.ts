@@ -73,11 +73,14 @@ export class AgRowNumbersRowResizer extends Component {
         }
 
         node?.setRowHeight(newSize);
-        const { rowRenderer, rowModel } = beans;
 
-        if (node?.rowPinned) {
+        const { rowRenderer, rowModel, pinnedRowModel } = beans;
+        const pinned = !!node?.rowPinned;
+        if (pinned) {
             rowRenderer.redraw({ afterScroll: true });
-        } else {
+        }
+
+        if (!pinned || pinnedRowModel?.isManual()) {
             (rowModel as any).onRowHeightChanged({ animate: false });
         }
     }
