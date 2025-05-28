@@ -268,6 +268,8 @@ export {
     BooleanAdvancedFilterModel,
     DateAdvancedFilterModel,
     DateStringAdvancedFilterModel,
+    DateTimeAdvancedFilterModel,
+    DateTimeStringAdvancedFilterModel,
     ObjectAdvancedFilterModel,
     TextAdvancedFilterModelType,
     ScalarAdvancedFilterModelType,
@@ -837,6 +839,8 @@ export {
     BooleanDataTypeDefinition,
     DateDataTypeDefinition,
     DateStringDataTypeDefinition,
+    DateTimeDataTypeDefinition,
+    DateTimeStringDataTypeDefinition,
     ObjectDataTypeDefinition,
     ValueFormatterLiteFunc,
     ValueFormatterLiteParams,
@@ -1016,7 +1020,7 @@ export {
 export { _EmptyArray, _removeFromArray, _last, _areEqual, _flatten } from './utils/array';
 export { _isIOSUserAgent } from './utils/browser';
 export { ChangedPath } from './utils/changedPath';
-export { _serialiseDate, _parseDateTimeFromString } from './utils/date';
+export { _serialiseDate, _getDateParts, _parseDateTimeFromString } from './utils/date';
 export {
     _getAbsoluteHeight,
     _getAbsoluteWidth,
