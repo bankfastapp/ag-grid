@@ -8,7 +8,7 @@ dev_port=4200
 
 function install_fw {
     if [[ ${version} == "latest" ]] ; then
-        echo ">>> npm i -g @angular/cli@latest"
+        echo ">>> npm i -g @angular/cli@19"
         npm i -g @angular/cli --cache ${cache_location}
     else
         echo ">>> npm i -g @angular/cli@^${version}.0.0"
