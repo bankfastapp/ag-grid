@@ -180,7 +180,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["^build", "generate-examples", "lint", "format", "test"],
       "options": {
-        "commands"t: ["nx run-many -t test --parallel 1"]
+        "commands": ["nx run-many -t test --parallel 1"]
       }
     },
     "clean": {
