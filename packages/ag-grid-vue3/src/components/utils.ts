@@ -166,6 +166,7 @@ import type {
     RangeSelectionChangedEvent,
     RedoEndedEvent,
     RedoStartedEvent,
+    ResetColumnsEvent,
     RowClickedEvent,
     RowDataUpdatedEvent,
     RowDoubleClickedEvent,
@@ -1774,6 +1775,7 @@ export interface Props<TData> {
    'onDisplayed-columns-changed'?: DisplayedColumnsChangedEvent<TData>,
    'onVirtual-columns-changed'?: VirtualColumnsChangedEvent<TData>,
    'onColumn-everything-changed'?: ColumnEverythingChangedEvent<TData>,
+   'onReset-columns'?: ResetColumnsEvent<TData>,
    'onColumn-header-mouse-over'?: ColumnHeaderMouseOverEvent<TData>,
    'onColumn-header-mouse-leave'?: ColumnHeaderMouseLeaveEvent<TData>,
    'onColumn-header-clicked'?: ColumnHeaderClickedEvent<TData>,
@@ -2288,7 +2290,8 @@ export function getProps() {
         'onRow-drag-cancel': undefined,
         'onFind-changed': undefined,
         'onRow-resize-started': undefined,
-        'onRow-resize-ended': undefined
+        'onRow-resize-ended': undefined,
+        'onReset-columns': undefined
 // @END_EVENT_PROPS@
 
     };

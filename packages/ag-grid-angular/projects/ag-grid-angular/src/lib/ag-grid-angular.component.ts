@@ -155,6 +155,7 @@ import type {
     RangeSelectionChangedEvent,
     RedoEndedEvent,
     RedoStartedEvent,
+    ResetColumnsEvent,
     RowClassParams,
     RowClassRules,
     RowClickedEvent,
@@ -2054,6 +2055,11 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      */
     @Output() public columnEverythingChanged: EventEmitter<ColumnEverythingChangedEvent<TData>> = new EventEmitter<
         ColumnEverythingChangedEvent<TData>
+    >();
+    /** Columns have been reset to their default state as reflected by the colDefs.
+     */
+    @Output() public resetColumns: EventEmitter<ResetColumnsEvent<TData>> = new EventEmitter<
+        ResetColumnsEvent<TData>
     >();
     /** A mouse cursor is initially moved over a column header.
      */

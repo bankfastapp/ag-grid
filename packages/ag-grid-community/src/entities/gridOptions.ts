@@ -80,6 +80,7 @@ import type {
     RangeSelectionChangedEvent,
     RedoEndedEvent,
     RedoStartedEvent,
+    ResetColumnsEvent,
     RowClickedEvent,
     RowDataUpdatedEvent,
     RowDoubleClickedEvent,
@@ -2290,6 +2291,10 @@ export interface GridOptions<TData = any> {
      * or use one of the more specific column events.
      */
     onColumnEverythingChanged?(event: ColumnEverythingChangedEvent<TData>): void;
+    /**
+     * Columns have been reset to their default state as reflected by the colDefs.
+     */
+    onResetColumns?(event: ResetColumnsEvent<TData>): void;
 
     // *** Column Header *** //
 
