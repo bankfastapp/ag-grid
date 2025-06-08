@@ -13,6 +13,7 @@
           "mkdir -p e2e",
           "npm run generate-tests"
         ],
+        "parallel": false,
         "cwd": "testing/accessibility"
       }
     },
