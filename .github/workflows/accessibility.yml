@@ -138,8 +138,9 @@ jobs:
           needs.e2e_accessibility.result == 'success' || needs.e2e_accessibility.result == 'failure'
         id: testReport
         continue-on-error: true
+        fail-on-error: false
         with:
-          name: 'Tests Results'
+          name: 'Accessibility Results'
           path: reports/*.xml
           reporter: java-junit
 
