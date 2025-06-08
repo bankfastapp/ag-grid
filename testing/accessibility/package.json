@@ -2,7 +2,7 @@
   "name": "ag-grid-accessibility",
   "version": "33.3.0",
   "scripts": {
-    "download-examples": "curl https://grid-staging.ag-grid.com/debug/all-examples.json > ./all-examples.json",
+    "download-examples": "curl --retry 5 -retry-all-errors https://grid-staging.ag-grid.com/debug/all-examples.json > ./all-examples.json",
     "download-examples-local": "curl https://localhost:4610/debug/all-examples.json > ./all-examples.json",
     "download-examples-prod": "curl https://www.ag-grid.com/debug/all-examples.json > ./all-examples.json",
     "generate-tests": "npx tsx generate-tests.ts "
