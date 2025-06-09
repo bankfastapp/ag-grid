@@ -140,3 +140,7 @@ jobs:
           path: reports/*.xml
           reporter: java-junit
 
+      - name: Output Report URL
+        run: |
+          echo "Accessibility Report URL: ${{ steps.testReport.outputs.url_html }}"
+
