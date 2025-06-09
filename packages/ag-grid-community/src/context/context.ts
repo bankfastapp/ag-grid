@@ -64,7 +64,7 @@ import type { IPivotColDefService } from '../interfaces/iPivotColDefService';
 import type { IPivotResultColsService } from '../interfaces/iPivotResultColsService';
 import type { IRowChildrenService } from '../interfaces/iRowChildrenService';
 import type { IRowModel } from '../interfaces/iRowModel';
-import type { IRowNodeStage } from '../interfaces/iRowNodeStage';
+import type { IRowGroupStage, IRowNodeStage } from '../interfaces/iRowNodeStage';
 import type { ISelectionService } from '../interfaces/iSelectionService';
 import type { IServerSideTransactionManager } from '../interfaces/iServerSideRowModel';
 import type { IShowRowGroupColsService } from '../interfaces/iShowRowGroupColsService';
@@ -311,7 +311,7 @@ export interface CoreBeanCollection {
     filterStage?: IRowNodeStage;
     sortStage?: IRowNodeStage;
     flattenStage?: IRowNodeStage;
-    groupStage?: IRowNodeStage;
+    groupStage?: IRowGroupStage;
     aggStage?: IRowNodeStage;
     pivotStage?: IRowNodeStage;
     filterAggStage?: IRowNodeStage;
@@ -324,7 +324,6 @@ export interface CoreBeanCollection {
     stickyRowSvc?: IStickyRowService;
     filterValueSvc?: FilterValueService;
     csrmNodeSvc?: IClientSideNodeManager;
-    csrmPathTreeNodeSvc?: IClientSideNodeManager;
     csrmChildrenTreeNodeSvc?: IClientSideNodeManager;
     cellFlashSvc?: CellFlashService;
     masterDetailSvc?: IMasterDetailService;
@@ -524,7 +523,6 @@ export type BeanName =
     | 'validationLogger'
     | 'validation'
     | 'csrmNodeSvc'
-    | 'csrmPathTreeNodeSvc'
     | 'csrmChildrenTreeNodeSvc'
     | 'rowSpanSvc'
     | 'spannedRowRenderer'
