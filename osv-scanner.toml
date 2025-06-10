@@ -1,5 +1,5 @@
 [[PackageOverrides]]
-dependency_group = "dev"
+group = "dev"
 ignore = true
 
 [[IgnoredVulns]]
