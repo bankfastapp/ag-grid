@@ -1,3 +1,7 @@
+[[PackageOverrides]]
+dependency_group = "dev"
+ignore = true
+
 [[IgnoredVulns]]
 id = "GHSA-67mh-4wv8-2f99"
 reason = "We do not have a HTTP endpoint"
