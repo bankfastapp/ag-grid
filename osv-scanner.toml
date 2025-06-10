@@ -2,14 +2,11 @@
 group = "dev"
 ignore = true
 
+[[PackageOverrides]]
+name = "octokit"
+ignore = true
+
 [[IgnoredVulns]]
 id = "GHSA-67mh-4wv8-2f99"
 reason = "We do not have a HTTP endpoint"
 
-[[IgnoredVulns]]
-id = "GHSA-x4c5-c7rf-jjgv"
-reason = "Octokit not exposed to users"
-
-[[IgnoredVulns]]
-id = "GHSA-h5c3-5r3r-rr8q"
-reason = "Octokit not exposed to users"
