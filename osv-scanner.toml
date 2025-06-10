@@ -2,7 +2,6 @@
 id = "GHSA-67mh-4wv8-2f99"
 reason = "We do not have a HTTP endpoint"
 
-[[IgnoredVulns]]
 id = "GHSA-x4c5-c7rf-jjgv"
 reason = "We do not have a HTTP endpoint"
 
