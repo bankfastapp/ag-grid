@@ -8,7 +8,7 @@ on:
       notify:
         description: 'Notify Slack channel'
         type: boolean
-        default: false
+        default: true
         required: true
   # schedule:
   #- cron: '0 0 * * *' # Run daily at midnight UTC
@@ -110,16 +110,15 @@ jobs:
         if: failure() && github.event_name == 'issue_comment'
         with:
           script: |
-            const body = `❌ ${process.env.JOB_URL}`
             github.rest.issues.updateComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               comment_id: ${{ steps.notify-start.outputs.result }},
-              body,
+              body: `❌ ${process.env.JOB_URL}`,
             })
 
       - name: Slack Notification
-        if: always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.notify == true))
+        if: (github.event_name == 'schedule' || ((github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment') && inputs.notify == true))
         continue-on-error: true
         env:
           SLACK_CHANNEL: '#ci-gate'
@@ -129,7 +128,7 @@ jobs:
           SLACK_COLOR: ${{ steps.playwright-test.outputs.status != 'failure' && 'success' || 'failure' }}
         run: |
           node ./testing/shared/scripts/convert-playwright-output-to-slack-msg.mjs > ./benchmark-slack.json
-          curl -X POST -H 'Content-type: application/json' ${{ SLACK_WEBHOOK }} --data @./benchmark-slack.json
+          curl -X POST -H 'Content-type: application/json' ${{ secrets.GRID_CI_QUALITY }} --data @./benchmark-slack.json
 
       - name: Upload Benchmark Report
         uses: actions/upload-artifact@v4
