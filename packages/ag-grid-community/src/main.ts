@@ -398,6 +398,7 @@ export {
     GetEditingCellsParams,
     EditingCellPosition,
 } from './interfaces/iCellEditor';
+export { AgAbstractCellEditor } from './widgets/agAbstractCellEditor';
 export { ILargeTextEditorParams } from './edit/cellEditors/iLargeTextCellEditor';
 export type { LargeTextCellEditor } from './edit/cellEditors/largeTextCellEditor';
 export type { PopupEditorWrapper } from './edit/cellEditors/popupEditorWrapper';
@@ -1005,7 +1006,6 @@ export { ITooltipComp, ITooltipParams, TooltipLocation } from './tooltip/tooltip
 export {
     TooltipFeature,
     ITooltipCtrl,
-    _shouldDisplayTooltip,
     _getShouldDisplayTooltip,
     _isShowTooltipWhenTruncated,
 } from './tooltip/tooltipFeature';
@@ -1078,6 +1078,7 @@ export {
     _observeResize,
     _preserveRangesWhile,
     _requestAnimationFrame,
+    _isElementOverflowingCallback,
 } from './utils/dom';
 export { _selectAllCells } from './utils/selection';
 export { _stopPropagationForAgGrid, _isStopPropagationForAgGrid, _isElementInEventPath } from './utils/event';
