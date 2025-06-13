@@ -6,6 +6,7 @@ import type { AgColumn } from '../entities/agColumn';
 import { _getRowNode } from '../entities/positionUtils';
 import type { RowNode } from '../entities/rowNode';
 import type { AgEventType } from '../eventTypes';
+import { ModelUpdatedEvent } from '../events';
 import { _isClientSideRowModel } from '../gridOptionsUtils';
 import type { CellRange, IRangeService } from '../interfaces/IRangeService';
 import type { EditStrategyType } from '../interfaces/editStrategyType';
@@ -92,6 +93,15 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
             rowGroupOpened: handler,
             pinnedRowsChanged: handler,
             displayedRowsChanged: handler,
+            rowDataUpdated: () => {
+                if (this.isEditing()) {
+                    if (this.isBatchEditing()) {
+                        _destroyEditors(beans, this.model.getEditPositions());
+                    } else {
+                        this.stopEditing(undefined, CANCEL_PARAMS);
+                    }
+                }
+            },
         });
     }
 
