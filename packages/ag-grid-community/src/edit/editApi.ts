@@ -24,16 +24,12 @@ export function redoCellEditing(beans: BeanCollection): void {
     beans.undoRedo?.redo('api');
 }
 
-export function enableBatchEditing(beans: BeanCollection): void {
-    beans.editSvc?.enableBatchEditing();
+export function setBatchEditing(beans: BeanCollection, enabled: boolean): void {
+    beans.editSvc?.setBatchEditing(enabled);
 }
 
-export function disableBatchEditing(beans: BeanCollection): void {
-    beans.editSvc?.disableBatchEditing();
-}
-
-export function batchEditingEnabled(beans: BeanCollection): boolean {
-    return beans.editSvc?.batch ?? false;
+export function isBatchEditing(beans: BeanCollection): boolean {
+    return beans.editSvc?.isBatchEditing() ?? false;
 }
 
 export function getEditingCells(beans: BeanCollection, params: GetEditingCellsParams): EditingCellPosition[] {
@@ -55,6 +51,7 @@ export function getEditingCells(beans: BeanCollection, params: GetEditingCellsPa
                 oldValue,
                 state,
                 column,
+                colId: column.getColId(),
                 colKey: column.getColId(),
                 rowIndex: rowIndex!,
                 rowPinned,
@@ -71,7 +68,7 @@ export function setEditingCells(
 ): void {
     const { editSvc, colModel, valueSvc, editModelSvc } = beans;
 
-    if (!editSvc?.batch) {
+    if (!editSvc?.isBatchEditing()) {
         return;
     }
 
@@ -82,8 +79,8 @@ export function setEditingCells(
         edits = new Map(existingEdits?.entries() ?? []);
     }
 
-    cells.forEach(({ colKey, column, rowIndex, rowPinned, newValue, state }) => {
-        const col = colKey ? colModel.getCol(colKey) : column;
+    cells.forEach(({ colId, column, colKey, rowIndex, rowPinned, newValue, state }) => {
+        const col = colId ? colModel.getCol(colId) : colKey ? colModel.getCol(colKey) : column;
 
         if (!col) {
             return;
@@ -125,8 +122,8 @@ export function stopEditing(beans: BeanCollection, cancel: boolean = false): voi
     beans.editSvc?.stopEditing(undefined, { cancel, source: 'api' });
 }
 
-export function isEditing(beans: BeanCollection, rowId?: string, colId?: string): boolean {
-    const cellCtrl = _getCellCtrl(beans, { rowId, colId });
+export function isEditing(beans: BeanCollection, cellPosition: CellPosition): boolean {
+    const cellCtrl = _getCellCtrl(beans, cellPosition);
     return beans.editSvc?.isEditing(cellCtrl) ?? false;
 }
 
