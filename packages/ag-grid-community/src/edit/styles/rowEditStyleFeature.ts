@@ -23,7 +23,7 @@ export class RowEditStyleFeature extends BeanStub implements IRowStyleFeature {
     }
 
     public applyRowStyles() {
-        const { rowCtrl, editSvc, editModelSvc, beans } = this;
+        const { rowCtrl, editModelSvc, beans } = this;
 
         let rowNode = rowCtrl.rowNode;
         let edits = editModelSvc?.getEditRow({ rowNode });
@@ -40,9 +40,8 @@ export class RowEditStyleFeature extends BeanStub implements IRowStyleFeature {
                     _hasPinnedEdits(beans, position)
                 );
             });
-            const batchEdit = editSvc?.isBatchEditing() ?? false;
 
-            this.applyStyle(editing, batchEdit);
+            this.applyStyle(editing);
 
             return;
         }
@@ -50,10 +49,17 @@ export class RowEditStyleFeature extends BeanStub implements IRowStyleFeature {
         this.applyStyle();
     }
 
-    private applyStyle(editing: boolean = false, batchEdit: boolean = false) {
+    private applyStyle(editing: boolean = false) {
+        const batchEdit = this.editSvc?.isBatchEditing() ?? false;
+        const fullRow = this.gos.get('editType') === 'fullRow';
+
         this.rowCtrl?.forEachGui(undefined, ({ rowComp }) => {
-            rowComp.toggleCss('ag-row-editing', editing);
-            rowComp.toggleCss('ag-row-batch-edit', editing && batchEdit);
+            if (fullRow) {
+                rowComp.toggleCss('ag-row-editing', editing);
+                rowComp.toggleCss('ag-row-batch-edit', editing && batchEdit);
+            }
+
+            // required for Material theme
             rowComp.toggleCss('ag-row-inline-editing', editing);
             rowComp.toggleCss('ag-row-not-inline-editing', !editing);
         });
