@@ -23,35 +23,39 @@ export class RowEditStyleFeature extends BeanStub implements IRowStyleFeature {
     }
 
     public applyRowStyles() {
-        const { gos, rowCtrl, editSvc, editModelSvc, beans } = this;
-        if (gos.get('editType') === 'fullRow') {
-            let node = rowCtrl.rowNode;
-            let edits = editModelSvc?.getEditRow({ rowNode: node });
-            if (!edits && node.pinnedSibling) {
-                node = node.pinnedSibling!;
-                edits = editModelSvc?.getEditRow({ rowNode: node });
-            }
-            if (edits) {
-                const newState = Array.from(edits.keys()).some((key) => {
-                    const position = { rowNode: node, column: key };
-                    return (
-                        _hasEdits(beans, position) || _hasLeafEdits(beans, position) || _hasPinnedEdits(beans, position)
-                    );
-                });
-                const batchEdit = editSvc?.isBatchEditing() ?? false;
-                this.applyStyle(newState, batchEdit);
+        const { rowCtrl, editSvc, editModelSvc, beans } = this;
 
-                return;
-            }
+        let rowNode = rowCtrl.rowNode;
+        let edits = editModelSvc?.getEditRow({ rowNode });
+        if (!edits && rowNode.pinnedSibling) {
+            rowNode = rowNode.pinnedSibling!;
+            edits = editModelSvc?.getEditRow({ rowNode });
+        }
+        if (edits) {
+            const editing = Array.from(edits.keys()).some((column) => {
+                const position = { rowNode, column };
+                return (
+                    _hasEdits(beans, position, true) ||
+                    _hasLeafEdits(beans, position) ||
+                    _hasPinnedEdits(beans, position)
+                );
+            });
+            const batchEdit = editSvc?.isBatchEditing() ?? false;
+
+            this.applyStyle(editing, batchEdit);
+
+            return;
         }
 
         this.applyStyle();
     }
 
-    private applyStyle(newState?: boolean, batchEdit?: boolean) {
+    private applyStyle(editing: boolean = false, batchEdit: boolean = false) {
         this.rowCtrl?.forEachGui(undefined, ({ rowComp }) => {
-            rowComp.toggleCss('ag-row-editing', newState ?? false);
-            rowComp.toggleCss('ag-row-batch-edit', (newState && batchEdit) ?? false);
+            rowComp.toggleCss('ag-row-editing', editing);
+            rowComp.toggleCss('ag-row-batch-edit', editing && batchEdit);
+            rowComp.toggleCss('ag-row-inline-editing', editing);
+            rowComp.toggleCss('ag-row-not-inline-editing', !editing);
         });
     }
 }
