@@ -156,6 +156,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         cellStartedEdit?: boolean | null,
         source: EditSource = 'ui'
     ): boolean | null {
+        this.strategy ??= this.createStrategy();
         return this.strategy?.shouldStart(position, event, cellStartedEdit, source) ?? null;
     }
 
