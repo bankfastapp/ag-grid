@@ -32,21 +32,18 @@ export function isBatchEditing(beans: BeanCollection): boolean {
     return beans.editSvc?.isBatchEditing() ?? false;
 }
 
-export function getEditingCells(beans: BeanCollection, params: GetEditingCellsParams): EditingCellPosition[] {
+export function getEditingCells(beans: BeanCollection, params?: GetEditingCellsParams): EditingCellPosition[] {
     const edits = beans.editModelSvc?.getEditMap();
     const positions: EditingCellPosition[] = [];
     edits?.forEach((editRow, { rowIndex, rowPinned }) => {
         editRow.forEach(({ newValue, oldValue, state }, column) => {
-            if (newValue === UNEDITED || !_valuesDiffer({ newValue, oldValue })) {
-                // filter out internal details, let null through as that indicates cleared cell value
+            const diff = _valuesDiffer({ newValue, oldValue });
+
+            if (newValue === UNEDITED) {
                 return;
             }
 
-            if (state === 'changed' && !params?.includePending) {
-                return; // skip changed cells if not requested
-            }
-
-            positions.push({
+            const edit: EditingCellPosition = {
                 newValue,
                 oldValue,
                 state,
@@ -55,7 +52,16 @@ export function getEditingCells(beans: BeanCollection, params: GetEditingCellsPa
                 colKey: column.getColId(),
                 rowIndex: rowIndex!,
                 rowPinned,
-            });
+            };
+
+            const changed = state === 'changed' && diff;
+            const editing = state === 'editing';
+
+            if (editing && params?.includePending) {
+                positions.push(edit);
+            } else if (changed) {
+                positions.push(edit);
+            }
         });
     });
     return positions;
