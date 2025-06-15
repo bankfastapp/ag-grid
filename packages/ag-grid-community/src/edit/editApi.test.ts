@@ -9,7 +9,8 @@ import type { CellCtrl } from '../rendering/cell/cellCtrl';
 import type { RowCtrl } from '../rendering/row/rowCtrl';
 import type { RowRenderer } from '../rendering/rowRenderer';
 import type { ValueService } from '../valueService/valueService';
-import { getEditingCells, setEditingCells } from './editApi';
+import { getEditingCells } from './editApi';
+import { EditService } from './editService';
 import { UNEDITED } from './utils/editors';
 
 describe('Edit API', () => {
@@ -41,18 +42,18 @@ describe('Edit API', () => {
     let editMap: EditMap | undefined;
     let beans: BeanCollection;
 
+    let editSvc: IEditService;
+    let setEditingCells: (beans: BeanCollection, cells: EditingCellPosition[], params?: { update?: boolean }) => void;
+
     beforeEach(() => {
         editMap = new Map();
         beans = {
-            editSvc: {
-                setBatchEditing: jest.fn(),
-                isBatchEditing: jest.fn().mockReturnValue(false),
-                setEditMap: jest.fn((em) => beans.editModelSvc!.setEditMap(em)),
-                getEditMap: jest.fn(() => beans.editModelSvc!.getEditMap()),
-            } as unknown as IEditService,
             editModelSvc: {
                 getEditMap: jest.fn(() => editMap),
-                setEditMap: jest.fn((em) => (editMap = em)),
+                setEditMap: jest.fn((em) => {
+                    editMap?.clear();
+                    em.forEach((value, key) => editMap!.set(key, value));
+                }),
             } as unknown as IEditModelService,
             colModel: {
                 getCol: jest.fn((col: Column | string) => {
@@ -89,7 +90,19 @@ describe('Edit API', () => {
                     return undefined;
                 }),
             } as unknown as ValueService,
+            registry: {
+                createDynamicBean: jest.fn(),
+            },
         } as unknown as BeanCollection;
+
+        editSvc = new EditService();
+        beans.editSvc = editSvc;
+        editSvc['beans'] = beans;
+        editSvc['gos'] = beans.gos;
+        editSvc['model'] = beans.editModelSvc;
+        editSvc.setEditMap = jest.fn((map) => beans.editModelSvc?.setEditMap(map));
+
+        setEditingCells = (beans, cells: any[], params?: any) => editSvc.setEditingCells(cells, params);
     });
 
     afterEach(() => {
@@ -251,23 +264,23 @@ describe('Edit API', () => {
 
     describe('setEditingCells', () => {
         test('does not set edits when not in batch editing mode', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(false);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(false);
             const cells = [
                 { colId: 'col1', rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).not.toHaveBeenCalled();
-            expect(getEditingCells(beans)).toEqual([]);
+            expect(beans.editSvc!.setEditMap).not.toHaveBeenCalled();
+            expect(editMap).toEqual(new Map());
         });
 
         test('sets edits in batch editing mode, using colId', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             const cells = [
                 { colId: 'col1', rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
                 { colId: 'col2', rowIndex: 1, rowPinned: undefined, newValue: 'new2', state: 'changed' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).toHaveBeenCalledWith(
+            expect(beans.editSvc!.setEditMap).toHaveBeenCalledWith(
                 new Map([
                     [
                         { rowIndex: 0, rowPinned: undefined },
@@ -282,13 +295,13 @@ describe('Edit API', () => {
         });
 
         test('sets edits in batch editing mode, using colKey:string', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             const cells = [
                 { colKey: 'col1', rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
                 { colKey: 'col2', rowIndex: 1, rowPinned: undefined, newValue: 'new2', state: 'changed' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).toHaveBeenCalledWith(
+            expect(beans.editSvc!.setEditMap).toHaveBeenCalledWith(
                 new Map([
                     [
                         { rowIndex: 0, rowPinned: undefined },
@@ -303,13 +316,13 @@ describe('Edit API', () => {
         });
 
         test('sets edits in batch editing mode, using colKey:column', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             const cells = [
                 { colKey: column1, rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
                 { colKey: column2, rowIndex: 1, rowPinned: undefined, newValue: 'new2', state: 'changed' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).toHaveBeenCalledWith(
+            expect(beans.editSvc!.setEditMap).toHaveBeenCalledWith(
                 new Map([
                     [
                         { rowIndex: 0, rowPinned: undefined },
@@ -324,13 +337,13 @@ describe('Edit API', () => {
         });
 
         test('sets edits in batch editing mode, using column', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             const cells = [
                 { column: column1, rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
                 { column: column2, rowIndex: 1, rowPinned: undefined, newValue: 'new2', state: 'changed' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).toHaveBeenCalledWith(
+            expect(beans.editSvc!.setEditMap).toHaveBeenCalledWith(
                 new Map([
                     [
                         { rowIndex: 0, rowPinned: undefined },
@@ -345,7 +358,7 @@ describe('Edit API', () => {
         });
 
         test('sets edits in batch editing mode, using all three column options', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             const cells = [
                 {
                     colId: 'col1',
@@ -367,7 +380,7 @@ describe('Edit API', () => {
                 },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells);
-            expect(beans.editModelSvc!.setEditMap).toHaveBeenCalledWith(
+            expect(beans.editSvc!.setEditMap).toHaveBeenCalledWith(
                 new Map([
                     [
                         { rowIndex: 0, rowPinned: undefined },
@@ -382,13 +395,13 @@ describe('Edit API', () => {
         });
 
         test('updates existing edits when update flag is true (append)', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             editMap!.set(rowNode1, new Map([[column1, { newValue: 'old1', oldValue: UNEDITED, state: 'editing' }]]));
             const cells = [
                 { colId: 'col2', rowIndex: 1, rowPinned: undefined, newValue: 'new2', state: 'changed' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells, { update: true });
-            expect(beans.editModelSvc!.getEditMap()).toEqual(
+            expect(editMap).toEqual(
                 new Map([
                     [
                         rowNode1,
@@ -403,13 +416,13 @@ describe('Edit API', () => {
         });
 
         test('updates existing edits when update flag is true (replace)', () => {
-            beans.editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
+            editSvc!.isBatchEditing = jest.fn().mockReturnValue(true);
             editMap!.set(rowNode1, new Map([[column1, { newValue: 'old1', oldValue: UNEDITED, state: 'editing' }]]));
             const cells = [
                 { colId: 'col1', rowIndex: 0, rowPinned: undefined, newValue: 'new1', state: 'editing' },
             ] as EditingCellPosition[];
             setEditingCells(beans, cells, { update: true });
-            expect(beans.editModelSvc!.getEditMap()).toEqual(
+            expect(editMap).toEqual(
                 new Map([
                     [
                         rowNode1,
