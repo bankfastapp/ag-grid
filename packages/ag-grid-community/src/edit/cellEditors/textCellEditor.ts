@@ -34,10 +34,10 @@ class TextCellEditorInput<TValue = any>
         }
     }
 
-    public getErrors(): string[] | null {
+    public getValidationErrors(): string[] | null {
         const value = this.getValue();
         const { params } = this;
-        const { maxLength, getErrors } = params;
+        const { maxLength, getValidationErrors } = params;
         let internalErrors: string[] | null = [];
 
         if (maxLength != null && typeof value === 'string' && value.length > maxLength) {
@@ -48,8 +48,8 @@ class TextCellEditorInput<TValue = any>
             internalErrors = null;
         }
 
-        if (getErrors) {
-            return getErrors({ value, cellEditorParams: params, internalErrors });
+        if (getValidationErrors) {
+            return getValidationErrors({ value, cellEditorParams: params, internalErrors });
         }
 
         return internalErrors;
