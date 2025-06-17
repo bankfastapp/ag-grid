@@ -128,18 +128,28 @@ reason = "We only use the dev server for development/testing - it's not used in 
 id = "GHSA-9jgg-88mc-972h"
 reason = "We only use the dev server for development/testing - it's not used in the final production build"
 
-
-IgnoredVulns = [
-  { id = "GHSA-4r6h-8v6p-xvw6" },
-  { id = "GHSA-5pgg-2g8v-p4x9" },
-  { id = "GHSA-72xf-g2v4-qvf3" },
-  { id = "GHSA-64vr-g452-qvp3" },
-  { id = "GHSA-4vvj-4cpr-p986" },
-  { id = "GHSA-952p-6rrq-rcjv" },
-  { id = "GHSA-x7hr-w5r2-h6wg" },
-  { id = "GHSA-968p-4wvh-cqc8" },
-  { id = "GHSA-grv7-fg5c-xmjg" },
-  { id = "GHSA-w7q9-p3jq-fmhm" },
-  { id = "GHSA-xvf7-4v9q-58w6" },
+[[IgnoredVulns]]
+id = "GHSA-4r6h-8v6p-xvw6" 
+[[IgnoredVulns]]
+id = "GHSA-5pgg-2g8v-p4x9" 
+[[IgnoredVulns]]
+id = "GHSA-72xf-g2v4-qvf3" 
+[[IgnoredVulns]]
+id = "GHSA-64vr-g452-qvp3" 
+[[IgnoredVulns]]
+id = "GHSA-4vvj-4cpr-p986" 
+[[IgnoredVulns]]
+id = "GHSA-952p-6rrq-rcjv" 
+[[IgnoredVulns]]
+id = "GHSA-x7hr-w5r2-h6wg" 
+[[IgnoredVulns]]
+id = "GHSA-968p-4wvh-cqc8" 
+[[IgnoredVulns]]
+id = "GHSA-grv7-fg5c-xmjg" 
+[[IgnoredVulns]]
+id = "GHSA-w7q9-p3jq-fmhm" 
+[[IgnoredVulns]]
+id = "GHSA-xvf7-4v9q-58w6" 
 ]
+
 

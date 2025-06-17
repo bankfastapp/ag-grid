@@ -450,6 +450,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      repository-projects: write
     needs: [ build_lint, test, e2e, docs, bundle_size, fw_pkg_test, angular_fw_pkg_test ]
     if: cancelled() != true
     steps:
