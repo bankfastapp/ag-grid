@@ -71,8 +71,6 @@ class NumberCellEditorInput implements CellEditorInput<number, INumberCellEditor
                     translate('maxValueValidation', `Must be less than or equal to ${max}.`, [String(max)])
                 );
             }
-        } else {
-            internalErrors.push(translate('invalidValue', `Invalid value: '${value}'.`, [String(value)]));
         }
 
         if (!internalErrors.length) {

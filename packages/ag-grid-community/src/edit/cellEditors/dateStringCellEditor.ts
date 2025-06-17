@@ -63,10 +63,10 @@ class DateStringCellEditorInput implements CellEditorInput<string, IDateStringCe
         const value = this.formatDate(this.parseDate(raw ?? undefined));
         const { min, max, getValidationErrors } = params;
         let internalErrors: string[] | null = [];
-        const translate = this.getLocaleTextFunc();
 
         if (value) {
             const date = new Date(value);
+            const translate = this.getLocaleTextFunc();
 
             if (min) {
                 const minDate = new Date(min);
