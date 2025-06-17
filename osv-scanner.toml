@@ -68,3 +68,63 @@ reason = "We only use axios in examples"
 id = "GHSA-3xgq-45jj-v275"
 reason = "cross-spawn is used in development/testing - it's not used in the final production build"
 
+[[IgnoredVulns]]
+id = "GHSA-4www-5p9h-95mh"
+reason = "middleware is used in development/testing - it's not used in the final production build"
+
+[[IgnoredVulns]]
+id = "GHSA-9gqv-wp59-fq42"
+reason = "middleware is used in development/testing - it's not used in the final production build"
+
+[[IgnoredVulns]]
+id = "GHSA-593f-38f6-jp5m"
+reason = "middleware is used in development/testing - it's not used in the final production build"
+
+[[IgnoredVulns]]
+id = "GHSA-x2rg-q646-7m2v"
+reason = "middleware is used in development/testing - it's not used in the final production build"
+
+[[IgnoredVulns]]
+id = "GHSA-p8p7-x288-28g6"
+reason = "Request calls are only used in our examples - not in the production code"
+
+[[IgnoredVulns]]
+id = "GHSA-9cwx-2883-4wfx"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-vg6x-rcgg-rjx6"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-x574-m823-4x7w"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-4r4m-qw57-chr8"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-xcj6-pq6g-qj4x"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-356w-63v5-8wf4"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-859w-5945-r5v3"
+reason = "We don't use vite to serve files outside of development"
+
+[[IgnoredVulns]]
+id = "GHSA-9crc-q9x8-hgqq"
+reason = "We don't use vitest to visit non ag-grid/charts sites, only for testing/dev purposes"
+
+[[IgnoredVulns]]
+id = "GHSA-4v9v-hfq4-rm2v"
+reason = "We only use the dev server for development/testing - it's not used in the final production build"
+
+[[IgnoredVulns]]
+id = "GHSA-9jgg-88mc-972h"
+reason = "We only use the dev server for development/testing - it's not used in the final production build"
+
