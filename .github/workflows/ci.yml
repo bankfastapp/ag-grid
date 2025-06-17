@@ -451,7 +451,7 @@ jobs:
     needs: [ build_lint, test, e2e, docs, bundle_size, fw_pkg_test, angular_fw_pkg_test ]
     if: cancelled() != true
     permissions:
-      contents: read
+      contents: write
       actions: read
       checks: write
     steps:
