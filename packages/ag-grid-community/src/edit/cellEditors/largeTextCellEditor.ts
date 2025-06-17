@@ -96,6 +96,8 @@ export class LargeTextCellEditor extends AgAbstractCellEditor<ILargeTextEditorPa
             internalErrors.push(
                 translate('maxLengthValidation', `Must be ${maxLength} characters or fewer.`, [String(maxLength)])
             );
+        } else {
+            internalErrors.push(translate('invalidValue', `Invalid value: '${value}'.`, [String(value)]));
         }
 
         if (!internalErrors.length) {
