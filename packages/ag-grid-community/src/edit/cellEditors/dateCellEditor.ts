@@ -76,8 +76,6 @@ class DateCellEditorInput implements CellEditorInput<Date, IDateCellEditorParams
                     translate('maxDateValidation', `Date must be before ${maxDateString}`, [maxDateString])
                 );
             }
-        } else {
-            internalErrors.push(translate('invalidValue', `Invalid value: '${value}'.`, [String(value)]));
         }
 
         if (!internalErrors.length) {

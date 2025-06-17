@@ -87,8 +87,6 @@ class DateStringCellEditorInput implements CellEditorInput<string, IDateStringCe
                     );
                 }
             }
-        } else {
-            internalErrors.push(translate('invalidValue', `Invalid value: '${value}'.`, [String(value)]));
         }
 
         if (!internalErrors.length) {
