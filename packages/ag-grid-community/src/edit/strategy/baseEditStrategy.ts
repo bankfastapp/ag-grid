@@ -100,7 +100,7 @@ export abstract class BaseEditStrategy extends BeanStub {
         return (column as AgColumn).isColumnFunc(rowNode, column.getColDef().editable);
     }
 
-    public stop(): boolean {
+    public stop(cancel?: boolean): boolean {
         const editingCells = this.model.getEditPositions();
 
         const results: EditValidationResult = { all: [], pass: [], fail: [] };
@@ -121,6 +121,14 @@ export abstract class BaseEditStrategy extends BeanStub {
 
             results.pass.push(cell);
         });
+
+        if (cancel) {
+            editingCells.forEach((cell) => {
+                _destroyEditor(this.beans, cell);
+                this.model.stop(cell);
+            });
+            return true;
+        }
 
         const actions = this.processValidationResults(results);
 
