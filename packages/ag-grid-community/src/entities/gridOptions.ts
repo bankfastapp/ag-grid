@@ -129,6 +129,7 @@ import type { AlignedGrid } from '../interfaces/iAlignedGrid';
 import type {
     FillOperationParams,
     FocusGridInnerElementParams,
+    FullRowEditValidationParams,
     GetChartMenuItemsParams,
     GetChartToolbarItemsParams,
     GetContextMenuItemsParams,
@@ -512,6 +513,12 @@ export interface GridOptions<TData = any> {
      * @agModule `TextEditorModule` / `LargeTextEditorModule` / `NumberEditorModule` / `DateEditorModule` / `CheckboxEditorModule` / `CustomEditorModule` / `SelectEditorModule` / `RichSelectModule`
      */
     editType?: EditStrategyType;
+
+    /**
+     * Validates the Full Row Edit. Only relevant when `editType="fullRow"`.
+     * @agModule `TextEditorModule` / `LargeTextEditorModule` / `NumberEditorModule` / `DateEditorModule` / `CheckboxEditorModule` / `CustomEditorModule` / `SelectEditorModule` / `RichSelectModule`
+     */
+    getFullRowEditValidationErrors?: GetFullRowEditValidationErrors;
 
     /**
      * Set to `block` to block the commit of invalid cell edits, keeping editors open.
@@ -2757,6 +2764,11 @@ export interface GetContextMenuItems<TData = any, TContext = any> {
         | MenuCallbackReturn<DefaultMenuItem, TData, TContext>
         | Promise<MenuCallbackReturn<DefaultMenuItem, TData, TContext>>;
 }
+
+export interface GetFullRowEditValidationErrors {
+    (validationResult: FullRowEditValidationParams): string[] | null;
+}
+
 export interface GetChartToolbarItems {
     (params: GetChartToolbarItemsParams): ChartToolbarMenuItemOptions[];
 }

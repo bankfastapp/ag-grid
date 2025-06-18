@@ -106,6 +106,15 @@ export class FullRowEditStrategy extends BaseEditStrategy {
     }
 
     protected override processValidationResults(results: EditValidationResult): EditValidationAction {
+        // TODO - process getFullRowEditValidationErrors
+        // const { gos } = this;
+        // const getFullRowEditValidationErrors = gos.get('getFullRowEditValidationErrors');
+
+        // const res = getFullRowEditValidationErrors?.({
+        //     allEditors: results.all as any,
+        //     editorsWithErrors: results.fail as any,
+        // });
+
         const anyFailed = results.fail.length > 0;
 
         // if any of the cells failed, keep those editors

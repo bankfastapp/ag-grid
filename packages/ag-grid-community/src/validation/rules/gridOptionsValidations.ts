@@ -121,6 +121,7 @@ export const GRID_OPTIONS_MODULES: Partial<Record<keyof GridOptions, ValidationM
     enableRangeSelection: 'CellSelection',
     enableRowPinning: 'PinnedRow',
     findSearchValue: 'Find',
+    getFullRowEditValidationErrors: 'EditCore',
     getContextMenuItems: 'ContextMenu',
     getLocaleText: 'Locale',
     getMainMenuItems: 'ColumnMenu',
