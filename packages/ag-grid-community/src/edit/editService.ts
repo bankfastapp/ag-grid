@@ -47,6 +47,7 @@ import {
     _syncFromEditor,
     _syncFromEditors,
     _validateEdit,
+    _validateEditAsMap,
     _valuesDiffer,
 } from './utils/editors';
 import { _refreshEditCells } from './utils/refresh';
@@ -496,6 +497,43 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         return this.strategy?.isCellEditable(position, source) ?? false;
     }
 
+    public focusOnFirstError(): void {
+        const errors = _validateEditAsMap(this.beans);
+        if (!errors || errors.size === 0) {
+            return;
+        }
+
+        const rowNode = errors.keys().next()?.value;
+        if (!rowNode) {
+            return;
+        }
+
+        const column = errors.get(rowNode)?.keys().next()?.value;
+        if (!column) {
+            return;
+        }
+
+        const cellCtrl = _getCellCtrl(this.beans, { rowNode, column });
+        if (cellCtrl) {
+            cellCtrl.focusCell();
+            cellCtrl?.comp?.getCellEditor()?.focusIn?.();
+        }
+    }
+
+    public hasValidationErrors({ rowNode, column }: EditPosition = {}): boolean {
+        const validationErrors = _validateEditAsMap(this.beans);
+        if (!rowNode) {
+            return validationErrors?.size > 0;
+        }
+
+        const errorRow = validationErrors?.get(rowNode as RowNode);
+        if (!column) {
+            return !!errorRow;
+        }
+
+        return !!errorRow?.get(column);
+    }
+
     public moveToNextCell(
         prev: CellCtrl | RowCtrl,
         backwards: boolean,
@@ -505,6 +543,14 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         let res: boolean | null | undefined;
 
         if (prev instanceof CellCtrl && this.isEditing()) {
+            if (this.hasValidationErrors(prev)) {
+                // trap focus in the editor if validation fails
+                event?.preventDefault();
+
+                // pretend that we moved to the next cell so that the editor does not close
+                return true;
+            }
+
             // if we are editing, we know it's not a Full Width Row (RowComp)
             res = this.strategy?.moveToNextEditingCell(prev, backwards, event, source);
         }
