@@ -156,12 +156,12 @@ export class FullRowEditStrategy extends BaseEditStrategy {
         return !!fullRowEditErrors?.length;
     }
 
-    public override stop(): boolean {
+    public override stop(cancel?: boolean): boolean {
         if (this.rowNode && !this.model.hasRowEdits({ rowNode: this.rowNode })) {
             return false;
         }
 
-        super.stop();
+        super.stop(cancel);
 
         this.rowNode = undefined;
 

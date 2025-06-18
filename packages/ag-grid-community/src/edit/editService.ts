@@ -267,7 +267,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
             _syncFromEditors(beans);
             const freshEdits = model.getEditMap();
 
-            this.strategy?.stop();
+            this.strategy?.stop(cancel);
 
             this.processEdits(freshEdits, cancel);
 

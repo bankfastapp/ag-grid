@@ -3,6 +3,7 @@ import { BeanStub } from '../../context/beanStub';
 import type { BeanCollection } from '../../context/context';
 import type { RowNode } from '../../entities/rowNode';
 import { _isCellSelectionEnabled, _isRowSelection } from '../../gridOptionsUtils';
+import type { EditSource } from '../../interfaces/iEditService';
 import { _isMacOsUserAgent } from '../../utils/browser';
 import type { RowCtrl } from '../row/rowCtrl';
 import type { SpannedCellCtrl } from '../spanning/spannedCellCtrl';
@@ -176,9 +177,16 @@ export class CellKeyboardListenerFeature extends BeanStub {
             beans: { editSvc },
         } = this;
 
+        let source: EditSource = 'ui';
+
+        if (editSvc?.hasValidationErrors(cellCtrl)) {
+            source = 'api';
+        }
+
         editSvc?.stopEditing(cellCtrl, {
             event,
             cancel: true,
+            source,
         });
     }
 
