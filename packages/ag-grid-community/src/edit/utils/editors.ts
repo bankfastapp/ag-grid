@@ -2,7 +2,6 @@ import { _unwrapUserComp } from '../../components/framework/unwrapUserComp';
 import { _getCellEditorDetails } from '../../components/framework/userCompUtils';
 import type { BeanCollection } from '../../context/context';
 import type { AgColumn } from '../../entities/agColumn';
-import type { RowNode } from '../../entities/rowNode';
 import { _addGridCommonParams } from '../../gridOptionsUtils';
 import type {
     DefaultProvidedCellEditorParams,
@@ -11,8 +10,7 @@ import type {
     ICellEditorParams,
     ICellEditorValidationError,
 } from '../../interfaces/iCellEditor';
-import type { Column } from '../../interfaces/iColumn';
-import type { EditValue } from '../../interfaces/iEditModelService';
+import type { EditMap, EditValue } from '../../interfaces/iEditModelService';
 import type { EditPosition } from '../../interfaces/iEditService';
 import type { IRowNode } from '../../interfaces/iRowNode';
 import { _getLocaleTextFunc } from '../../misc/locale/localeUtils';
@@ -144,7 +142,10 @@ export function _setupEditor(
     return;
 }
 
-function _valueFromEditor(cancel: boolean, cellComp?: ICellComp): { newValue?: any; newValueExists: boolean } {
+function _valueFromEditor(
+    cancel: boolean,
+    cellComp?: ICellComp
+): { newValue?: any; newValueExists: boolean; validationErrors?: string[] | null } {
     const noValueResult = { newValueExists: false };
 
     if (cancel) {
@@ -163,8 +164,13 @@ function _valueFromEditor(cancel: boolean, cellComp?: ICellComp): { newValue?: a
         return noValueResult;
     }
 
-    if (cellEditor.getValidationErrors?.()?.length) {
-        return noValueResult;
+    const validationErrors = cellEditor.getValidationErrors?.();
+
+    if (validationErrors?.length ?? 0 > 0) {
+        return {
+            ...noValueResult,
+            validationErrors,
+        };
     }
 
     const newValue = cellEditor.getValue();
@@ -278,11 +284,18 @@ export function _syncFromEditors(beans: BeanCollection): void {
             return;
         }
 
-        const { newValue, newValueExists } = _valueFromEditor(false, cellCtrl.comp);
+        const { newValue, newValueExists, validationErrors } = _valueFromEditor(false, cellCtrl.comp);
 
         if (!newValueExists) {
             return;
         }
+
+        if (validationErrors?.length) {
+            beans.editModelSvc?.setErrors(cellCtrl, validationErrors);
+            return;
+        }
+
+        beans.editModelSvc?.clearErrors(cellId);
 
         _syncFromEditor(beans, cellId, newValue);
     });
@@ -338,7 +351,7 @@ export function _destroyEditors(beans: BeanCollection, edits: Required<EditPosit
     edits.forEach((cellPosition) => _destroyEditor(beans, cellPosition));
 }
 
-export function _destroyEditor(beans: BeanCollection, position: EditPosition): void {
+export function _destroyEditor(beans: BeanCollection, position: Required<EditPosition>): void {
     const cellCtrl = _getCellCtrl(beans, position);
     if (!cellCtrl) {
         return;
@@ -349,6 +362,13 @@ export function _destroyEditor(beans: BeanCollection, position: EditPosition): v
     if (comp && !comp.getCellEditor()) {
         // no editor, nothing to do
         return;
+    }
+
+    const errorMessages = comp.getCellEditor()?.getValidationErrors?.();
+    if (errorMessages?.length) {
+        beans.editModelSvc?.setErrors(position, errorMessages);
+    } else {
+        beans.editModelSvc?.clearErrors(position);
     }
 
     const { rowNode, column } = position;
@@ -365,9 +385,9 @@ export function _destroyEditor(beans: BeanCollection, position: EditPosition): v
     beans.rowRenderer.refreshCells({ rowNodes: rowNode ? [rowNode] : [], suppressFlash: true, force: true });
 }
 
-export type MappedValidationErrors = Map<RowNode, Map<Column, string[]>>;
+export type MappedValidationErrors = EditMap | undefined;
 
-export function _validateEditAsMap(beans: BeanCollection): MappedValidationErrors {
+export function _populateModelValidationErrors(beans: BeanCollection): MappedValidationErrors {
     const mappedEditors = getCellEditorInstanceMap(beans);
     const errors: MappedValidationErrors = new Map();
 
@@ -404,22 +424,17 @@ export function _validateEditAsMap(beans: BeanCollection): MappedValidationError
         }
 
         if (errorMessages) {
-            if (!errors.has(rowNode)) {
-                errors.set(rowNode, new Map());
-            }
-            const rowErrors = errors.get(rowNode)!;
-            if (!rowErrors.has(column)) {
-                rowErrors.set(column, []);
-            }
-            rowErrors.get(column)!.push(...errorMessages);
+            beans.editModelSvc?.setErrors({ rowNode, column }, errorMessages);
+        } else {
+            beans.editModelSvc?.clearErrors({ rowNode, column });
         }
     }
 
-    return errors;
+    return beans.editModelSvc?.getEditMap();
 }
 
 export function _validateEdit(beans: BeanCollection): ICellEditorValidationError[] | null {
-    const map = _validateEditAsMap(beans);
+    const map = _populateModelValidationErrors(beans);
 
     // flatten map of maps rownode -> column -> messages into an array of validation errors
     if (!map) {
@@ -427,12 +442,12 @@ export function _validateEdit(beans: BeanCollection): ICellEditorValidationError
     }
     const validations: ICellEditorValidationError[] = [];
     map.forEach((rowErrors, rowNode) => {
-        rowErrors.forEach((messages, column) => {
+        rowErrors.forEach(({ errorMessages }, column) => {
             validations.push({
                 column,
                 rowIndex: rowNode.rowIndex!,
                 rowPinned: rowNode.rowPinned,
-                messages,
+                messages: errorMessages ?? null,
             });
         });
     });
