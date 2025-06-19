@@ -1,5 +1,5 @@
 ---
-title: "Batch Editing"
+title: 'Batch Editing'
 enterprise: true
 ---
 
@@ -29,10 +29,7 @@ The grid API methods `startEditingCell()` and `stopEditing()` can be used to con
 
 {% apiDocumentation source="grid-api/api.json" section="editing" names=["isBatchEditing", "setBatchEditing", "getEditingCells", "setEditingCells", "startEditingCell", "stopEditing"] /%}
 
-
 ## Using API methods to batch edit data:
-
-
 
 small description and API method docs for setBatchEditing, isBatchEditing and any other data level methods that will be used in the following example. See for reference: https://grid-staging.ag-grid.com/javascript-data-grid/find/#customising-find
 
@@ -57,13 +54,16 @@ When you edit a full row, the grid allows you to edit multiple cells in that row
 As more cells are edited, each new edit will emit start events as required, but the stop events will only be emitted when the batch is completed.
 
 ### Important Differences To Non-Batch Editing
-- In batch editing, the grid does not immediately update the data source when a cell is edited. Instead, it tracks changes until you explicitly commit them.
-- The grid allows you to edit multiple cells in a row without committing changes until you decide to do so.
+
+-   In batch editing, the grid does not immediately update the data source when a cell is edited. Instead, it tracks changes until you explicitly commit them.
+-   The grid allows you to edit multiple cells in a row without committing changes until you decide to do so.
 
 #### Clipboard Interaction
+
 The grid supports clipboard operations during batch editing. You can copy and paste data into the grid, and it will respect the batch editing state.
 
 #### Exporting Data
+
 When exporting data from the grid, you can choose to include any pending changes made during batch editing. The exported data will reflect the changes made in the batch editing session. This is off by default.
 
 ## Custom Renderers
@@ -73,10 +73,10 @@ The `ICellRendererComp` interface provides a means for your cell renderer to upd
 {% interfaceDocumentation interfaceName="ICellRendererComp" names=["refresh"] /%}
 
 ## Custom editors
+
 As with custom renderers, the `ICellEditor` interface includes the `refresh` method, which the grid calls when the cell needs to be re-rendered. The parameters include the latest pending value.
 
 {% interfaceDocumentation interfaceName="ICellEditor" names=["refresh"] /%}
-
 
 ## Batch Editing API
 

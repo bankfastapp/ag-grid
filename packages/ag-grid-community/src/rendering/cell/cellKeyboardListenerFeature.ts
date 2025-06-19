@@ -136,7 +136,7 @@ export class CellKeyboardListenerFeature extends BeanStub {
                 return;
             }
 
-            if (editSvc?.checkNavWithValidation(cellCtrl, event)) {
+            if (editSvc?.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
                 return;
             }
 
