@@ -133,7 +133,7 @@ export function _setupEditor(
             ? compDetails.popupPositionFromSelector
             : colDef.cellEditorPopupPosition;
 
-    handleNumberEditor(compDetails!.params, event);
+    checkAndPreventDefault(compDetails!.params, event);
 
     if (cellCtrl) {
         cellCtrl.editCompDetails = compDetails;
@@ -253,10 +253,10 @@ export function _refreshEditorOnColDefChanged(beans: BeanCollection, cellCtrl: C
     const colDef = column.getColDef();
     const compDetails = _getCellEditorDetails(beans.userCompFactory, colDef, editorParams);
 
-    editor.refresh(handleNumberEditor(compDetails!.params, eventKey));
+    editor.refresh(checkAndPreventDefault(compDetails!.params, eventKey));
 }
 
-function handleNumberEditor(
+function checkAndPreventDefault(
     params: ICellEditorParams & DefaultProvidedCellEditorParams,
     event?: Event | null
 ): ICellEditorParams {
