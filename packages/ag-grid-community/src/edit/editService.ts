@@ -77,24 +77,18 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
     private valueSvc: ValueService;
     private rangeSvc: IRangeService;
     private strategy?: BaseEditStrategy;
-    protected cellEditingInvalidCommitType: boolean = false;
 
     public postConstruct(): void {
         const { beans } = this;
         this.model = beans.editModelSvc!;
         this.valueSvc = beans.valueSvc;
         this.rangeSvc = beans.rangeSvc!;
-        this.cellEditingInvalidCommitType = this.gos.get('cellEditingInvalidCommitType') === 'block';
 
         this.addManagedPropertyListener('editType', ({ currentValue }: any) => {
             this.stopEditing(undefined, CANCEL_PARAMS);
 
             // will re-create if different
             this.createStrategy(currentValue);
-        });
-
-        this.addManagedPropertyListener('cellEditingInvalidCommitType', ({ currentValue }) => {
-            this.cellEditingInvalidCommitType = currentValue === 'block';
         });
 
         const handler = _refreshEditCells(beans);
@@ -529,7 +523,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
     }
 
     public cellEditingInvalidCommitBlocks(): boolean {
-        return this.cellEditingInvalidCommitType;
+        return this.gos.get('cellEditingInvalidCommitType') === 'block';
     }
 
     public checkNavWithValidation(cellCtrl: CellCtrl, event: EditInputEvents): EditNavOnValidationResult {

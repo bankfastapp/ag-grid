@@ -5,7 +5,6 @@ import type { AgColumn } from '../../entities/agColumn';
 import type { ColDef } from '../../entities/colDef';
 import type { AgEventType } from '../../eventTypes';
 import type { CellFocusedEvent, CommonCellFocusParams } from '../../events';
-import type { DefaultProvidedCellEditorParams } from '../../interfaces/iCellEditor';
 import type { EditMap, EditValue, IEditModelService } from '../../interfaces/iEditModelService';
 import type { EditPosition, EditRowPosition, EditSource, IEditService } from '../../interfaces/iEditService';
 import type { CellCtrl } from '../../rendering/cell/cellCtrl';
@@ -194,13 +193,7 @@ export abstract class BaseEditStrategy extends BeanStub {
         ignoreEventKey: boolean = false
     ) {
         const key = (event instanceof KeyboardEvent && !ignoreEventKey && event.key) || undefined;
-        const compDetails = _setupEditors(this.beans, cells, position, key, cellStartedEdit);
-        const suppressPreventDefault = !(compDetails?.params as DefaultProvidedCellEditorParams)
-            ?.suppressPreventDefault;
-
-        if (!suppressPreventDefault) {
-            event?.preventDefault();
-        }
+        _setupEditors(this.beans, cells, position, key, event, cellStartedEdit);
     }
 
     public dispatchCellEvent<T extends AgEventType>(
