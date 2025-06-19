@@ -217,8 +217,10 @@ export class TooltipService extends BeanStub implements NamedBean {
                 }
 
                 const errors = editor.getValidationErrors();
-
-                return errors && errors.length ? errors.join('. ') : undefined;
+                const translate = this.getLocaleTextFunc();
+                return errors && errors.length
+                    ? errors.join(translate('tooltipValidationErrorSeparator', '. '))
+                    : undefined;
             },
             getLocation: () => 'cellEditor',
             shouldDisplayTooltip: () => {
