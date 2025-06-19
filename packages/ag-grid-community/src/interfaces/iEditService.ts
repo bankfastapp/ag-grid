@@ -120,7 +120,6 @@ export interface IEditService extends NamedBean {
     createRowStyleFeature(rowCtrl: RowCtrl, beans: BeanCollection): IRowStyleFeature;
     setEditingCells(cells: EditingCellPosition[], params?: SetEditingCellsParams): void;
     hasValidationErrors(position?: EditPosition): boolean;
-    focusOnFirstError(): void;
     cellEditingInvalidCommitBlocks(): boolean;
     checkNavWithValidation(cellCtrl: CellCtrl, event: Event | CellFocusedEvent): EditNavOnValidationResult;
     revertSingleCellEdit(cellCtrl: CellCtrl, focus?: boolean): void;

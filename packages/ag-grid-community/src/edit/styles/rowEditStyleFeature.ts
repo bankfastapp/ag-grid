@@ -27,7 +27,7 @@ export class RowEditStyleFeature extends BeanStub implements IRowStyleFeature {
 
         let rowNode = rowCtrl.rowNode;
         let edits = editModelSvc?.getEditRow({ rowNode });
-        const hasErrors = this.editSvc?.hasValidationErrors({ rowNode }) ?? false;
+        const hasErrors = this.editModelSvc?.getRowValidationModel().hasRowValidation({ rowNode });
 
         if (!edits && rowNode.pinnedSibling) {
             rowNode = rowNode.pinnedSibling!;

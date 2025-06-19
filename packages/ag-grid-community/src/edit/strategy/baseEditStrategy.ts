@@ -15,7 +15,6 @@ import {
     _destroyEditors,
     _purgeUnchangedEdits,
     _setupEditors,
-    _syncFromEditor,
     _syncFromEditors,
 } from '../utils/editors';
 
@@ -108,10 +107,10 @@ export abstract class BaseEditStrategy extends BeanStub {
         editingCells.forEach((cell) => {
             results.all.push(cell);
 
-            const edit = this.model.getEdit(cell);
+            const validation = this.model.getCellValidationModel().getCellValidation(cell);
             // check if the cell is valid
 
-            if (edit?.errorMessages?.length ?? 0 > 0) {
+            if (validation?.errorMessages?.length ?? 0 > 0) {
                 results.fail.push(cell);
                 return;
             }
@@ -138,16 +137,11 @@ export abstract class BaseEditStrategy extends BeanStub {
 
         if (actions.keep.length > 0) {
             actions.keep.forEach((cell) => {
-                const edit = this.model.getEdit(cell);
+                const cellCtrl = _getCellCtrl(this.beans, cell);
 
-                // revert value on error
-                this.model.setEdit(cell, {
-                    oldValue: edit?.oldValue,
-                    newValue: edit?.oldValue ?? UNEDITED,
-                    state: this.editSvc?.cellEditingInvalidCommitBlocks() ? 'editing' : 'changed',
-                });
-
-                _syncFromEditor(this.beans, cell, edit?.oldValue, 'api');
+                if (!this.editSvc?.cellEditingInvalidCommitBlocks()) {
+                    cellCtrl && this.editSvc.revertSingleCellEdit(cellCtrl);
+                }
             });
         }
 
