@@ -4,7 +4,6 @@ import type { BeanCollection } from '../../context/context';
 import type { RowNode } from '../../entities/rowNode';
 import { _isCellSelectionEnabled, _isRowSelection } from '../../gridOptionsUtils';
 import type { DefaultProvidedCellEditorParams } from '../../interfaces/iCellEditor';
-import type { EditSource } from '../../interfaces/iEditService';
 import { _isMacOsUserAgent } from '../../utils/browser';
 import type { RowCtrl } from '../row/rowCtrl';
 import type { SpannedCellCtrl } from '../spanning/spannedCellCtrl';
@@ -145,6 +144,10 @@ export class CellKeyboardListenerFeature extends BeanStub {
                 const key = event.shiftKey ? KeyCode.UP : KeyCode.DOWN;
                 navigation?.navigateToNextCell(null, key, cellCtrl.cellPosition, false);
             } else {
+                if (editSvc?.hasValidationErrors(cellCtrl)) {
+                    editSvc.revertSingleCellEdit(cellCtrl, true);
+                }
+
                 const started = editSvc?.startEditing(cellCtrl, {
                     startedEdit: true,
                     event,
@@ -178,17 +181,14 @@ export class CellKeyboardListenerFeature extends BeanStub {
             beans: { editSvc },
         } = this;
 
-        let source: EditSource = 'ui';
-
         if (editSvc?.hasValidationErrors(cellCtrl)) {
-            source = 'api';
+            editSvc.revertSingleCellEdit(cellCtrl, true);
+        } else {
+            editSvc?.stopEditing(cellCtrl, {
+                event,
+                cancel: true,
+            });
         }
-
-        editSvc?.stopEditing(cellCtrl, {
-            event,
-            cancel: true,
-            source,
-        });
     }
 
     public processCharacter(event: KeyboardEvent): void {

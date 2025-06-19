@@ -6,6 +6,7 @@ import type { AgColumn } from '../entities/agColumn';
 import { _getRowNode } from '../entities/positionUtils';
 import type { RowNode } from '../entities/rowNode';
 import type { AgEventType } from '../eventTypes';
+import type { CellFocusedEvent } from '../events';
 import { _isClientSideRowModel } from '../gridOptionsUtils';
 import type { CellRange, IRangeService } from '../interfaces/IRangeService';
 import type { EditStrategyType } from '../interfaces/editStrategyType';
@@ -18,7 +19,6 @@ import type {
 import type { RefreshCellsParams } from '../interfaces/iCellsParams';
 import type { EditMap, EditRow, EditValue, GetEditsParams, IEditModelService } from '../interfaces/iEditModelService';
 import type {
-    EditInputEvents,
     EditNavOnValidationResult,
     EditPosition,
     EditRowPosition,
@@ -44,13 +44,13 @@ import { _addStopEditingWhenGridLosesFocus, _getCellCtrl } from './utils/control
 import {
     UNEDITED,
     _destroyEditors,
+    _populateModelValidationErrors,
     _purgeUnchangedEdits,
     _refreshEditorOnColDefChanged,
     _setupEditor,
     _syncFromEditor,
     _syncFromEditors,
     _validateEdit,
-    _validateEditAsMap,
     _valuesDiffer,
 } from './utils/editors';
 import { _refreshEditCells } from './utils/refresh';
@@ -500,7 +500,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
     }
 
     public focusOnFirstError(): void {
-        const errors = _validateEditAsMap(this.beans);
+        const errors = _populateModelValidationErrors(this.beans);
         if (!errors || errors.size === 0) {
             return;
         }
@@ -516,29 +516,25 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         }
 
         const cellCtrl = _getCellCtrl(this.beans, { rowNode, column });
-        if (cellCtrl) {
-            cellCtrl.focusCell();
-            cellCtrl?.comp?.getCellEditor()?.focusIn?.();
-        }
+        cellCtrl?.focusCell();
+        cellCtrl?.comp?.getCellEditor()?.focusIn?.();
     }
 
     public cellEditingInvalidCommitBlocks(): boolean {
         return this.gos.get('cellEditingInvalidCommitType') === 'block';
     }
 
-    public checkNavWithValidation(cellCtrl: CellCtrl, event: EditInputEvents): EditNavOnValidationResult {
+    public checkNavWithValidation(cellCtrl: CellCtrl, event?: Event | CellFocusedEvent): EditNavOnValidationResult {
         if (this.hasValidationErrors()) {
             if (this.cellEditingInvalidCommitBlocks()) {
-                event?.preventDefault();
-                this.focusOnFirstError();
+                (event as Event)?.preventDefault?.();
+                if (event?.type !== 'cellFocused') {
+                    this.focusOnFirstError();
+                }
                 return 'block-stop';
             }
 
-            this.model.clearEditValue(cellCtrl);
-
-            _destroyEditors(this.beans, [cellCtrl]);
-
-            _setupEditor(this.beans, cellCtrl);
+            this.revertSingleCellEdit(cellCtrl);
 
             return 'revert-continue';
         }
@@ -546,18 +542,43 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         return 'continue';
     }
 
+    public revertSingleCellEdit(cellCtrl: CellCtrl, focus = false): void {
+        this.model.clearEditValue(cellCtrl);
+
+        _destroyEditors(this.beans, [cellCtrl]);
+
+        _setupEditor(this.beans, cellCtrl);
+
+        if (!focus) {
+            return;
+        }
+
+        cellCtrl?.focusCell();
+        cellCtrl?.comp?.getCellEditor()?.focusIn?.();
+    }
+
     public hasValidationErrors({ rowNode, column }: EditPosition = {}): boolean {
-        const validationErrors = _validateEditAsMap(this.beans);
+        _populateModelValidationErrors(this.beans);
+        const cellCtrl = _getCellCtrl(this.beans, { rowNode, column });
+        cellCtrl?.rowCtrl.refreshRow({ suppressFlash: true, force: true });
+
+        const validationErrors = this.model.getEditMap();
+        const errors = [];
+
         if (!rowNode) {
-            return validationErrors?.size > 0;
+            validationErrors.forEach((editRow) =>
+                editRow.forEach(({ errorMessages }) => errorMessages && errors.push(...errorMessages))
+            );
+            return errors.length > 0;
         }
 
         const errorRow = validationErrors?.get(rowNode as RowNode);
         if (!column) {
-            return !!errorRow;
+            errorRow?.forEach(({ errorMessages }) => errorMessages && errors.push(...errorMessages));
+            return errors.length > 0;
         }
 
-        return !!errorRow?.get(column);
+        return !!errorRow?.get(column)?.errorMessages?.length;
     }
 
     public moveToNextCell(

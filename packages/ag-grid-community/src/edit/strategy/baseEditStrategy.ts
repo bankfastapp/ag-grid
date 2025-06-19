@@ -60,8 +60,18 @@ export abstract class BaseEditStrategy extends BeanStub {
     ): void;
 
     public onCellFocusChanged(event: CellFocusedEvent<any, any>): void {
+        let cellCtrl: CellCtrl | undefined;
+        const previous = (event as any)['previousParams']! as CommonCellFocusParams;
+        if (previous) {
+            cellCtrl = _getCellCtrl(this.beans, previous);
+        }
+
         // check if any editors open
         if (this.editSvc.isEditing(undefined, { withOpenEditor: true })) {
+            if (cellCtrl && this.editSvc.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
+                return;
+            }
+
             const result = this.editSvc.stopEditing();
 
             // editSvc didn't handle the stopEditing, we need to do more ourselves
@@ -76,10 +86,7 @@ export abstract class BaseEditStrategy extends BeanStub {
             }
         }
 
-        const previous = (event as any)['previousParams']! as CommonCellFocusParams;
-        if (previous) {
-            _getCellCtrl(this.beans, previous)?.refreshCell({ suppressFlash: true, force: true });
-        }
+        cellCtrl?.refreshCell({ suppressFlash: true, force: true });
     }
 
     public abstract moveToNextEditingCell(
@@ -101,15 +108,12 @@ export abstract class BaseEditStrategy extends BeanStub {
         editingCells.forEach((cell) => {
             results.all.push(cell);
 
+            const edit = this.model.getEdit(cell);
             // check if the cell is valid
-            const cellCtrl = _getCellCtrl(this.beans, cell);
-            if (cellCtrl) {
-                const editor = cellCtrl.comp?.getCellEditor();
 
-                if (editor?.getValidationErrors?.()?.length ?? 0 > 0) {
-                    results.fail.push(cell);
-                    return;
-                }
+            if (edit?.errorMessages?.length ?? 0 > 0) {
+                results.fail.push(cell);
+                return;
             }
 
             results.pass.push(cell);
