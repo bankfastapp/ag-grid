@@ -357,8 +357,6 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
                     if (cellCtrl) {
                         cellCtrl.suppressRefreshCell = false;
                     }
-
-                    cellCtrl?.refreshCell({ force: true, suppressFlash: true });
                 } else {
                     cellCtrl?.refreshCell({ force: true, suppressFlash: true });
                 }
