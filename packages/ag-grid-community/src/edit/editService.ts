@@ -18,6 +18,8 @@ import type {
 import type { RefreshCellsParams } from '../interfaces/iCellsParams';
 import type { EditMap, EditRow, EditValue, GetEditsParams, IEditModelService } from '../interfaces/iEditModelService';
 import type {
+    EditInputEvents,
+    EditNavOnValidationResult,
     EditPosition,
     EditRowPosition,
     EditSource,
@@ -44,6 +46,7 @@ import {
     _destroyEditors,
     _purgeUnchangedEdits,
     _refreshEditorOnColDefChanged,
+    _setupEditor,
     _syncFromEditor,
     _syncFromEditors,
     _validateEdit,
@@ -74,19 +77,24 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
     private valueSvc: ValueService;
     private rangeSvc: IRangeService;
     private strategy?: BaseEditStrategy;
-    private includeParents: boolean = true;
+    protected cellEditingInvalidCommitType: boolean = false;
 
     public postConstruct(): void {
         const { beans } = this;
         this.model = beans.editModelSvc!;
         this.valueSvc = beans.valueSvc;
         this.rangeSvc = beans.rangeSvc!;
+        this.cellEditingInvalidCommitType = this.gos.get('cellEditingInvalidCommitType') === 'block';
 
         this.addManagedPropertyListener('editType', ({ currentValue }: any) => {
             this.stopEditing(undefined, CANCEL_PARAMS);
 
             // will re-create if different
             this.createStrategy(currentValue);
+        });
+
+        this.addManagedPropertyListener('cellEditingInvalidCommitType', ({ currentValue }) => {
+            this.cellEditingInvalidCommitType = currentValue === 'block';
         });
 
         const handler = _refreshEditCells(beans);
@@ -520,6 +528,30 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         }
     }
 
+    public cellEditingInvalidCommitBlocks(): boolean {
+        return this.cellEditingInvalidCommitType;
+    }
+
+    public checkNavWithValidation(cellCtrl: CellCtrl, event: EditInputEvents): EditNavOnValidationResult {
+        if (this.hasValidationErrors()) {
+            if (this.cellEditingInvalidCommitBlocks()) {
+                event?.preventDefault();
+                this.focusOnFirstError();
+                return 'block-stop';
+            }
+
+            this.model.clearEditValue(cellCtrl);
+
+            _destroyEditors(this.beans, [cellCtrl]);
+
+            _setupEditor(this.beans, cellCtrl);
+
+            return 'revert-continue';
+        }
+
+        return 'continue';
+    }
+
     public hasValidationErrors({ rowNode, column }: EditPosition = {}): boolean {
         const validationErrors = _validateEditAsMap(this.beans);
         if (!rowNode) {
@@ -543,11 +575,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         let res: boolean | null | undefined;
 
         if (prev instanceof CellCtrl && this.isEditing()) {
-            if (this.hasValidationErrors(prev)) {
-                // trap focus in the editor if validation fails
-                event?.preventDefault();
-
-                // pretend that we moved to the next cell so that the editor does not close
+            if (this.checkNavWithValidation(prev, event) === 'block-stop') {
                 return true;
             }
 

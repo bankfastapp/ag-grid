@@ -79,8 +79,7 @@ export class CellMouseListenerFeature extends BeanStub {
         }
 
         if (editModelSvc?.getState(cellCtrl) !== 'editing') {
-            if (editSvc?.hasValidationErrors()) {
-                editSvc?.focusOnFirstError();
+            if (editSvc?.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
                 return;
             }
 
@@ -115,8 +114,7 @@ export class CellMouseListenerFeature extends BeanStub {
             editSvc?.shouldStartEditing(this.cellCtrl, event) &&
             this.beans.editModelSvc?.getState(this.cellCtrl) !== 'editing'
         ) {
-            if (editSvc?.hasValidationErrors()) {
-                editSvc?.focusOnFirstError();
+            if (editSvc?.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
                 return;
             }
 

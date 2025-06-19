@@ -19,20 +19,22 @@ import type { IRowNode } from './iRowNode';
 import type { IRowStyleFeature } from './iRowStyleFeature';
 import type { UserCompDetails } from './iUserCompDetails';
 
-type EditEvents = KeyboardEvent | MouseEvent | null;
+export type EditInputEvents = KeyboardEvent | MouseEvent | null | undefined;
+
+export type EditNavOnValidationResult = 'block-stop' | 'revert-continue' | 'continue';
 
 export type EditSource = 'api' | 'ui' | 'paste' | 'rangeSvc' | 'fillHandle' | 'cellClear';
 
 export type StartEditParams = {
     startedEdit?: boolean | null;
-    event?: EditEvents;
+    event?: EditInputEvents;
     source?: EditSource;
     silent?: boolean;
     ignoreEventKey?: boolean;
 };
 
 export type StopEditParams = {
-    event?: EditEvents;
+    event?: EditInputEvents;
     cancel?: boolean;
     source?: EditSource;
     suppressNavigateAfterEdit?: boolean;
@@ -118,4 +120,6 @@ export interface IEditService extends NamedBean {
     setEditingCells(cells: EditingCellPosition[], params?: SetEditingCellsParams): void;
     hasValidationErrors(position?: EditPosition): boolean;
     focusOnFirstError(): void;
+    cellEditingInvalidCommitBlocks(): boolean;
+    checkNavWithValidation(cellCtrl: CellCtrl, event: EditInputEvents): EditNavOnValidationResult;
 }

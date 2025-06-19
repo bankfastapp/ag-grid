@@ -35,20 +35,14 @@ export abstract class BaseEditStrategy extends BeanStub {
     beanName: BeanName | undefined;
     protected model: IEditModelService;
     protected editSvc: IEditService;
-    protected keepInvalidEditors: boolean = false;
 
     public postConstruct(): void {
         this.model = this.beans.editModelSvc!;
         this.editSvc = this.beans.editSvc!;
-        this.keepInvalidEditors = this.gos.get('cellEditingInvalidCommitType') === 'block';
 
         this.addManagedListeners(this.beans.eventSvc, {
             cellFocused: this.onCellFocusChanged?.bind(this),
             cellFocusCleared: this.onCellFocusChanged?.bind(this),
-        });
-
-        this.addManagedPropertyListener('cellEditingInvalidCommitType', ({ currentValue }) => {
-            this.keepInvalidEditors = currentValue === 'block';
         });
     }
 
@@ -147,7 +141,7 @@ export abstract class BaseEditStrategy extends BeanStub {
                 this.model.setEdit(cell, {
                     oldValue: edit?.oldValue,
                     newValue: edit?.oldValue ?? UNEDITED,
-                    state: this.keepInvalidEditors ? 'editing' : 'changed',
+                    state: this.editSvc?.cellEditingInvalidCommitBlocks() ? 'editing' : 'changed',
                 });
 
                 _syncFromEditor(this.beans, cell, edit?.oldValue, 'api');
@@ -308,7 +302,10 @@ export abstract class BaseEditStrategy extends BeanStub {
     ): boolean | null {
         const batch = this.editSvc.isBatchEditing();
         if (event instanceof KeyboardEvent && !batch) {
-            return event.key === KeyCode.ESCAPE;
+            const result = event.key === KeyCode.ESCAPE;
+            if (result) {
+                return true;
+            }
         }
 
         if (batch && source === 'api') {

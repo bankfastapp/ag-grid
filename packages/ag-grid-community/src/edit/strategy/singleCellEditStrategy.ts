@@ -144,7 +144,7 @@ export class SingleCellEditStrategy extends BaseEditStrategy {
         const anyFailed = results.fail.length > 0;
 
         // if any of the cells failed, we keep all editors
-        if (anyFailed && this.keepInvalidEditors) {
+        if (anyFailed && this.editSvc.cellEditingInvalidCommitBlocks()) {
             return {
                 destroy: [],
                 keep: results.all,

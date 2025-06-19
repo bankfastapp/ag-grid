@@ -112,7 +112,7 @@ export class FullRowEditStrategy extends BaseEditStrategy {
         const anyFailed = results.fail.length > 0 || this.handleCustomFullRowValidation(results.all);
 
         // if any of the cells failed, keep those editors
-        if (anyFailed && this.keepInvalidEditors) {
+        if (anyFailed && this.editSvc.cellEditingInvalidCommitBlocks()) {
             return {
                 destroy: [],
                 keep: results.all,
