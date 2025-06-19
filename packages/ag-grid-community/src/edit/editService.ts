@@ -316,7 +316,6 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         this.bulkRefresh();
 
         if (cancel) {
-            _syncFromEditors(beans);
             this.beans.rowRenderer.refreshRows({ suppressFlash: true, force: true });
         }
 
@@ -369,6 +368,14 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
                     value: newValue,
                     valueChanged,
                 });
+
+                if (cancel) {
+                    // refresh aggs
+                    this.beans.changeDetectionSvc?.refreshRows(
+                        { node: rowNode, column },
+                        { suppressFlash: true, force: true }
+                    );
+                }
             }
         }
 

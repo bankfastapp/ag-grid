@@ -1,29 +1,20 @@
-import type { NamedBean } from '../context/bean';
 import { BeanStub } from '../context/beanStub';
 import type { AgColumn } from '../entities/agColumn';
 import type { RowNode } from '../entities/rowNode';
 import type { CellEditValuesChangedEvent, CellValueChangedEvent } from '../events';
 import { _isClientSideRowModel } from '../gridOptionsUtils';
+import type {
+    ChangeDetectionParams,
+    ChangeDetectionPosition,
+    IChangeDetectionService,
+} from '../interfaces/iChangeDetectionService';
 import type { IClientSideRowModel } from '../interfaces/iClientSideRowModel';
-import type { Column } from '../interfaces/iColumn';
-import type { IRowNode } from '../interfaces/iRowNode';
 import { ChangedPath } from '../utils/changedPath';
 
 // Matches value in clipboard module
 const SOURCE_PASTE = 'paste';
 
-type RefreshCDParams = {
-    suppressFlash?: boolean;
-    force?: boolean;
-    onlyChangedColumns?: boolean;
-};
-
-type RefreshPosition = {
-    node: IRowNode;
-    column: Column | null;
-};
-
-export class ChangeDetectionService extends BeanStub implements NamedBean {
+export class ChangeDetectionService extends BeanStub implements IChangeDetectionService {
     beanName = 'changeDetectionSvc' as const;
 
     private clientSideRowModel: IClientSideRowModel | null = null;
@@ -63,9 +54,9 @@ export class ChangeDetectionService extends BeanStub implements NamedBean {
         this.refreshRows(event, { onlyChangedColumns });
     }
 
-    private refreshRows(
-        { node, column }: RefreshPosition,
-        { suppressFlash, force, onlyChangedColumns }: RefreshCDParams = {}
+    public refreshRows(
+        { node, column }: ChangeDetectionPosition,
+        { suppressFlash, force, onlyChangedColumns }: ChangeDetectionParams = {}
     ): void {
         const { gos, rowRenderer } = this.beans;
 
