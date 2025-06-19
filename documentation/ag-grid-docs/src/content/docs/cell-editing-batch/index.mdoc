@@ -29,19 +29,19 @@ The grid API methods `startEditingCell()` and `stopEditing()` can be used to con
 
 {% apiDocumentation source="grid-api/api.json" section="editing" names=["isBatchEditing", "setBatchEditing", "getEditingCells", "setEditingCells", "startEditingCell", "stopEditing"] /%}
 
-## Using API methods to batch edit data
+## Using API methods to batch edit data:
 
-Small description and API method docs for setBatchEditing, isBatchEditing and any other data level methods that will be used in the following example. See for reference: https://grid-staging.ag-grid.com/javascript-data-grid/find/#customising-find
+small description and API method docs for setBatchEditing, isBatchEditing and any other data level methods that will be used in the following example. See for reference: https://grid-staging.ag-grid.com/javascript-data-grid/find/#customising-find
 
-{% apiDocumentation source="grid-api/api.json" section="editing" names=["isBatchEditing", "setBatchEditing", "getEditingCells", "setEditingCells", "startEditingCell", "stopEditing"] /%}
+### Single Cell Editing
 
-An example similar to above for showcasing Batch Editing API, with buttons for:
+TODO: Single Cell Example
 
-Set Editing Cells
-Set Editing Cells (empty values)
-Clear Editing cells
+When you start editing a cell, the grid enters a state where it can track changes made to that cell. The following lifecycle events are triggered:
 
-### Full Row Editing: Small explanation
+{% apiDocumentation source="grid-events/events.json" section="editing" names=["cellEditingStarted", "cellEditingStopped"] /%}
+
+### Full Row Editing
 
 TODO: FullRow Example
 
