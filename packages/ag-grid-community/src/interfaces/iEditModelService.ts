@@ -5,17 +5,20 @@ import type { IRowNode } from './iRowNode';
 export type EditState = 'editing' | 'changed';
 
 export type EditValidation = {
-    errorMessages?: string[];
+    errorMessages: string[];
 };
 
 export type EditValue = {
     newValue: any;
     oldValue: any;
     state: EditState;
-} & EditValidation;
+};
 
 export type EditRow<C = Column, V = EditValue> = Map<C, V>;
-export type EditMap<R = IRowNode, C = Column, V = EditValue> = Map<R, EditRow<C, V>>;
+export type EditMap = Map<IRowNode, Map<Column, EditValue>>;
+
+export type EditValidationMap = Map<IRowNode, Map<Column, EditValidation>>;
+export type EditRowValidationMap = Map<IRowNode, EditValidation>;
 
 export type GetEditsParams = {
     checkSiblings?: boolean;
@@ -47,7 +50,27 @@ export interface IEditModelService {
     start(position: Required<EditPosition>): void;
     stop(position?: Required<EditPosition>): void;
 
-    setErrors(position: Required<EditPosition>, errors: string[]): void;
-    clearErrors(position: Required<EditPosition>): void;
-    getErrors(position: EditPosition): string[] | undefined;
+    getCellValidationModel(): IEditCellValidationModel;
+    getRowValidationModel(): IEditRowValidationModel;
+    setCellValidationModel(model: IEditCellValidationModel): void;
+    setRowValidationModel(model: IEditRowValidationModel): void;
+}
+export interface IEditCellValidationModel {
+    getCellValidation(position: EditPosition): EditValidation | undefined;
+    hasCellValidation(position: Required<EditPosition>): boolean;
+    setCellValidation(position: Required<EditPosition>, validation: EditValidation): void;
+    clearCellValidation(position: Required<EditPosition>): void;
+    setCellValidationMap(validationMap: EditValidationMap): void;
+    getCellValidationMap(): EditValidationMap;
+    clearCellValidationMap(): void;
+}
+
+export interface IEditRowValidationModel {
+    getRowValidation(position: Required<EditRowPosition>): EditValidation | undefined;
+    hasRowValidation(position: Required<EditRowPosition>): boolean;
+    setRowValidation(position: Required<EditRowPosition>, rowValidation: EditValidation): void;
+    clearRowValidation(position: Required<EditRowPosition>): void;
+    setRowValidationMap(validationMap: EditRowValidationMap): void;
+    getRowValidationMap(): EditRowValidationMap;
+    clearRowValidationMap(): void;
 }

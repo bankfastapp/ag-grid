@@ -5,17 +5,19 @@ import type { AgColumn } from '../../entities/agColumn';
 import { _addGridCommonParams } from '../../gridOptionsUtils';
 import type {
     DefaultProvidedCellEditorParams,
+    EditingCellPosition,
     GetCellEditorInstancesParams,
     ICellEditor,
     ICellEditorParams,
     ICellEditorValidationError,
 } from '../../interfaces/iCellEditor';
-import type { EditMap, EditValue } from '../../interfaces/iEditModelService';
+import type { EditMap, EditValidationMap, EditValue } from '../../interfaces/iEditModelService';
 import type { EditPosition } from '../../interfaces/iEditService';
 import type { IRowNode } from '../../interfaces/iRowNode';
 import { _getLocaleTextFunc } from '../../misc/locale/localeUtils';
 import type { CellCtrl, ICellComp } from '../../rendering/cell/cellCtrl';
 import { _setAriaInvalid } from '../../utils/aria';
+import { EditCellValidationModel, EditRowValidationModel } from '../editModelService';
 import { _getCellCtrl } from './controllers';
 
 export const UNEDITED = Symbol('unedited');
@@ -142,10 +144,7 @@ export function _setupEditor(
     return;
 }
 
-function _valueFromEditor(
-    cancel: boolean,
-    cellComp?: ICellComp
-): { newValue?: any; newValueExists: boolean; validationErrors?: string[] | null } {
+function _valueFromEditor(cancel: boolean, cellComp?: ICellComp): { newValue?: any; newValueExists: boolean } {
     const noValueResult = { newValueExists: false };
 
     if (cancel) {
@@ -167,10 +166,7 @@ function _valueFromEditor(
     const validationErrors = cellEditor.getValidationErrors?.();
 
     if (validationErrors?.length ?? 0 > 0) {
-        return {
-            ...noValueResult,
-            validationErrors,
-        };
+        return noValueResult;
     }
 
     const newValue = cellEditor.getValue();
@@ -284,18 +280,11 @@ export function _syncFromEditors(beans: BeanCollection): void {
             return;
         }
 
-        const { newValue, newValueExists, validationErrors } = _valueFromEditor(false, cellCtrl.comp);
+        const { newValue, newValueExists } = _valueFromEditor(false, cellCtrl.comp);
 
         if (!newValueExists) {
             return;
         }
-
-        if (validationErrors?.length) {
-            beans.editModelSvc?.setErrors(cellCtrl, validationErrors);
-            return;
-        }
-
-        beans.editModelSvc?.clearErrors(cellId);
 
         _syncFromEditor(beans, cellId, newValue);
     });
@@ -365,10 +354,11 @@ export function _destroyEditor(beans: BeanCollection, position: Required<EditPos
     }
 
     const errorMessages = comp.getCellEditor()?.getValidationErrors?.();
+    const cellValidationModel = beans.editModelSvc?.getCellValidationModel();
     if (errorMessages?.length) {
-        beans.editModelSvc?.setErrors(position, errorMessages);
+        cellValidationModel?.setCellValidation(position, { errorMessages });
     } else {
-        beans.editModelSvc?.clearErrors(position);
+        cellValidationModel?.clearCellValidation(position);
     }
 
     const { rowNode, column } = position;
@@ -387,22 +377,25 @@ export function _destroyEditor(beans: BeanCollection, position: Required<EditPos
 
 export type MappedValidationErrors = EditMap | undefined;
 
-export function _populateModelValidationErrors(beans: BeanCollection): MappedValidationErrors {
+export function _populateModelValidationErrors(beans: BeanCollection): EditValidationMap | undefined {
     const mappedEditors = getCellEditorInstanceMap(beans);
-    const errors: MappedValidationErrors = new Map();
+    const cellValidationModel = new EditCellValidationModel();
+    const rowValidationModel = new EditRowValidationModel();
 
     if (!mappedEditors || mappedEditors.length === 0) {
-        return errors;
+        return new Map();
     }
 
     const { ariaAnnounce, localeSvc } = beans;
     const translate = _getLocaleTextFunc(localeSvc);
     const ariaValidationErrorPrefix = translate('ariaValidationErrorPrefix', 'Cell Editor Validation');
 
+    const getFullRowEditValidationErrors = beans.gos.get('getFullRowEditValidationErrors');
+
     for (const mappedEditor of mappedEditors) {
         const { ctrl, editor } = mappedEditor;
         const { rowNode, column } = ctrl;
-        const errorMessages = editor.getValidationErrors?.();
+        const errorMessages = editor.getValidationErrors?.() ?? [];
         const el = editor.getValidationElement?.();
 
         ctrl.refreshEditorTooltip();
@@ -423,26 +416,65 @@ export function _populateModelValidationErrors(beans: BeanCollection): MappedVal
             }
         }
 
-        if (errorMessages) {
-            beans.editModelSvc?.setErrors({ rowNode, column }, errorMessages);
-        } else {
-            beans.editModelSvc?.clearErrors({ rowNode, column });
+        if (errorMessages?.length > 0) {
+            cellValidationModel.setCellValidation(
+                {
+                    rowNode,
+                    column,
+                },
+                {
+                    errorMessages,
+                }
+            );
         }
     }
 
-    return beans.editModelSvc?.getEditMap();
+    _syncFromEditors(beans);
+
+    // populate row-level errors
+    beans.editModelSvc?.getEditMap().forEach((cellValidation, rowNode) => {
+        const editorsState: EditingCellPosition[] = [];
+        const { rowIndex, rowPinned } = rowNode;
+        cellValidation.forEach((editValue, column) => {
+            editorsState.push({
+                column,
+                colId: column.getColId(),
+                rowIndex: rowIndex!,
+                rowPinned,
+                ...editValue,
+            });
+        });
+
+        const errorMessages = getFullRowEditValidationErrors?.({ editorsState }) ?? [];
+
+        if (errorMessages.length > 0) {
+            rowValidationModel.setRowValidation(
+                {
+                    rowNode,
+                },
+                { errorMessages }
+            );
+        }
+    });
+
+    beans.editModelSvc?.setCellValidationModel(cellValidationModel);
+    beans.editModelSvc?.setRowValidationModel(rowValidationModel);
+
+    return;
 }
 
 export function _validateEdit(beans: BeanCollection): ICellEditorValidationError[] | null {
-    const map = _populateModelValidationErrors(beans);
+    _populateModelValidationErrors(beans);
 
-    // flatten map of maps rownode -> column -> messages into an array of validation errors
+    const map = beans.editModelSvc?.getCellValidationModel().getCellValidationMap();
+
     if (!map) {
         return null;
     }
+
     const validations: ICellEditorValidationError[] = [];
-    map.forEach((rowErrors, rowNode) => {
-        rowErrors.forEach(({ errorMessages }, column) => {
+    map.forEach((rowValidations, rowNode) => {
+        rowValidations.forEach(({ errorMessages }, column) => {
             validations.push({
                 column,
                 rowIndex: rowNode.rowIndex!,

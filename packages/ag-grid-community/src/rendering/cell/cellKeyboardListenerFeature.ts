@@ -185,14 +185,16 @@ export class CellKeyboardListenerFeature extends BeanStub {
             beans: { editSvc },
         } = this;
 
-        if (editSvc?.hasValidationErrors(cellCtrl)) {
-            editSvc.revertSingleCellEdit(cellCtrl, true);
-        } else {
-            editSvc?.stopEditing(cellCtrl, {
-                event,
-                cancel: true,
-            });
+        if (editSvc?.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
+            // for escape we always revert, even if blocking
+            editSvc.revertSingleCellEdit(cellCtrl);
+            return;
         }
+
+        editSvc?.stopEditing(cellCtrl, {
+            event,
+            cancel: true,
+        });
     }
 
     public processCharacter(event: KeyboardEvent): void {

@@ -6,10 +6,15 @@ import type { Column } from '../interfaces/iColumn';
 import type {
     EditMap,
     EditRow,
+    EditRowValidationMap,
     EditState,
+    EditValidation,
+    EditValidationMap,
     EditValue,
     GetEditsParams,
+    IEditCellValidationModel,
     IEditModelService,
+    IEditRowValidationModel,
 } from '../interfaces/iEditModelService';
 import type { EditPosition, EditRowPosition } from '../interfaces/iEditService';
 import type { IRowNode } from '../interfaces/iRowNode';
@@ -19,6 +24,8 @@ export class EditModelService extends BeanStub implements NamedBean, IEditModelS
     beanName = 'editModelSvc' as const;
 
     private edits: EditMap = new Map();
+    private cellValidations: IEditCellValidationModel = new EditCellValidationModel();
+    private rowValidations: IEditRowValidationModel = new EditRowValidationModel();
 
     public removeEdits({ rowNode, column }: EditPosition): void {
         if (!this.hasEdits({ rowNode }) || !rowNode) {
@@ -246,26 +253,90 @@ export class EditModelService extends BeanStub implements NamedBean, IEditModelS
         this.edits.clear();
     }
 
-    public setErrors(position: Required<EditPosition>, errorMessages: string[]) {
-        const edit = this.getEdit(position);
-        if (edit) {
-            edit.errorMessages = errorMessages;
-        }
+    public getCellValidationModel(): IEditCellValidationModel {
+        return this.cellValidations;
     }
 
-    public clearErrors(position: Required<EditPosition>): void {
-        const edit = this.getEdit(position);
-        if (edit) {
-            edit.errorMessages = undefined;
-        }
+    public getRowValidationModel(): IEditRowValidationModel {
+        return this.rowValidations;
     }
 
-    public getErrors(position: Required<EditPosition>): string[] | undefined {
-        return this.getEdit(position)?.errorMessages;
+    public setCellValidationModel(model: IEditCellValidationModel): void {
+        this.cellValidations = model;
+    }
+
+    public setRowValidationModel(model: IEditRowValidationModel): void {
+        this.rowValidations = model;
     }
 
     public override destroy(): void {
         super.destroy();
         this.clear();
+    }
+}
+
+export class EditCellValidationModel implements IEditCellValidationModel {
+    private cellValidations: EditValidationMap = new Map();
+
+    public getCellValidation({ rowNode, column }: EditPosition): EditValidation | undefined {
+        return this.cellValidations?.get(rowNode!)?.get(column!);
+    }
+
+    public hasCellValidation(position: Required<EditPosition>): boolean {
+        return !!this.getCellValidation(position);
+    }
+
+    public setCellValidation(position: Required<EditPosition>, validation: EditValidation): void {
+        const { rowNode, column } = position;
+        if (!this.cellValidations.has(rowNode)) {
+            this.cellValidations.set(rowNode, new Map());
+        }
+        this.cellValidations.get(rowNode)!.set(column, validation);
+    }
+
+    public clearCellValidation(position: Required<EditPosition>): void {
+        const { rowNode, column } = position;
+        this.cellValidations.get(rowNode)?.delete(column);
+    }
+
+    setCellValidationMap(validationMap: EditValidationMap): void {
+        this.cellValidations = validationMap;
+    }
+
+    public getCellValidationMap(): EditValidationMap {
+        return this.cellValidations;
+    }
+
+    clearCellValidationMap(): void {
+        this.cellValidations.clear();
+    }
+}
+export class EditRowValidationModel implements IEditRowValidationModel {
+    private rowValidations: EditRowValidationMap = new Map();
+
+    public getRowValidation({ rowNode }: Required<EditRowPosition>): EditValidation | undefined {
+        return this.rowValidations.get(rowNode);
+    }
+
+    public hasRowValidation({ rowNode }: Required<EditRowPosition>): boolean {
+        return !!this.getRowValidation({ rowNode });
+    }
+
+    public setRowValidation({ rowNode }: Required<EditRowPosition>, rowValidation: EditValidation): void {
+        this.rowValidations.set(rowNode, rowValidation);
+    }
+
+    public clearRowValidation({ rowNode }: Required<EditRowPosition>): void {
+        this.rowValidations.delete(rowNode);
+    }
+
+    public setRowValidationMap(validationMap: EditRowValidationMap): void {
+        this.rowValidations = validationMap;
+    }
+    public getRowValidationMap(): EditRowValidationMap {
+        return this.rowValidations;
+    }
+    public clearRowValidationMap(): void {
+        this.rowValidations.clear();
     }
 }

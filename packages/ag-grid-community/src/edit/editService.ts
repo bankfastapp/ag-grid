@@ -507,38 +507,16 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         return this.strategy?.isCellEditable(position, source) ?? false;
     }
 
-    public focusOnFirstError(): void {
-        const errors = _populateModelValidationErrors(this.beans);
-        if (!errors || errors.size === 0) {
-            return;
-        }
-
-        const rowNode = errors.keys().next()?.value;
-        if (!rowNode) {
-            return;
-        }
-
-        const column = errors.get(rowNode)?.keys().next()?.value;
-        if (!column) {
-            return;
-        }
-
-        const cellCtrl = _getCellCtrl(this.beans, { rowNode, column });
-        cellCtrl?.focusCell();
-        cellCtrl?.comp?.getCellEditor()?.focusIn?.();
-    }
-
     public cellEditingInvalidCommitBlocks(): boolean {
         return this.gos.get('cellEditingInvalidCommitType') === 'block';
     }
 
     public checkNavWithValidation(cellCtrl: CellCtrl, event?: Event | CellFocusedEvent): EditNavOnValidationResult {
-        if (this.hasValidationErrors()) {
+        if (this.hasValidationErrors(cellCtrl)) {
             if (this.cellEditingInvalidCommitBlocks()) {
                 (event as Event)?.preventDefault?.();
-                if (event?.type !== 'cellFocused') {
-                    this.focusOnFirstError();
-                }
+                !cellCtrl?.hasBrowserFocus() && cellCtrl?.focusCell();
+                cellCtrl?.comp?.getCellEditor()?.focusIn?.();
                 return 'block-stop';
             }
 
@@ -557,6 +535,11 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
 
         _setupEditor(this.beans, cellCtrl);
 
+        _populateModelValidationErrors(this.beans);
+
+        cellCtrl.refreshCell({ suppressFlash: true, force: true });
+        cellCtrl.rowCtrl.refreshRow({ suppressFlash: true, force: true });
+
         if (!focus) {
             return;
         }
@@ -565,28 +548,18 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         cellCtrl?.comp?.getCellEditor()?.focusIn?.();
     }
 
-    public hasValidationErrors({ rowNode, column }: EditPosition = {}): boolean {
+    public hasValidationErrors(position: Required<EditPosition>): boolean {
         _populateModelValidationErrors(this.beans);
-        const cellCtrl = _getCellCtrl(this.beans, { rowNode, column });
-        cellCtrl?.rowCtrl.refreshRow({ suppressFlash: true, force: true });
-
-        const validationErrors = this.model.getEditMap();
-        const errors = [];
-
-        if (!rowNode) {
-            validationErrors.forEach((editRow) =>
-                editRow.forEach(({ errorMessages }) => errorMessages && errors.push(...errorMessages))
-            );
-            return errors.length > 0;
+        const cellCtrl = _getCellCtrl(this.beans, position);
+        if (cellCtrl) {
+            cellCtrl.refreshCell({ suppressFlash: true, force: true });
+            cellCtrl.rowCtrl.refreshRow({ suppressFlash: true, force: true });
         }
 
-        const errorRow = validationErrors?.get(rowNode as RowNode);
-        if (!column) {
-            errorRow?.forEach(({ errorMessages }) => errorMessages && errors.push(...errorMessages));
-            return errors.length > 0;
-        }
-
-        return !!errorRow?.get(column)?.errorMessages?.length;
+        return (
+            this.model.getCellValidationModel().hasCellValidation(position) ||
+            this.model.getRowValidationModel().hasRowValidation(position)
+        );
     }
 
     public moveToNextCell(
