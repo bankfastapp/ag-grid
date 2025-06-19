@@ -111,17 +111,16 @@ const linksText = (createLink) =>
         createLink('Benchmark report', process.env.REPORT_URL ?? 'https://example.com'),
     ].join(' | ');
 
-const slackMessage = getSlackMessage([
-    section(`Test results.`),
-    DIVIDER,
-    section(linksText(slackLink)),
-    DIVIDER,
-    section(getTotalsText(report)),
-    section(resultsStringDistilled),
-]);
+const slackMessage = getSlackMessage(
+    [section(linksText(slackLink)), DIVIDER, section(getTotalsText(report))].concat(
+        process.env.IS_SUCCESS ? [] : [section(resultsStringDistilled)]
+    )
+);
 
-const textMessage = [`Test results.`, '---', linksText(mdLink), '', getTotalsText(report), '', resultsStringDistilled]
-    .concat(process.env.IS_SUCCESS ? [] : ['---', `Please address the issues before merging.`])
+const textMessage = [linksText(mdLink), getTotalsText(report)]
+    .concat(
+        process.env.IS_SUCCESS ? [] : ['', resultsStringDistilled, '---', `Please address the issues before merging.`]
+    )
     .join('\n');
 fs.writeFileSync(commentFileName, textMessage);
 fs.writeFileSync(slackFileName, JSON.stringify(slackMessage, null, 2));
