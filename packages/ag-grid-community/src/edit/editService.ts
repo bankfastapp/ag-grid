@@ -316,6 +316,7 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
         this.bulkRefresh();
 
         if (cancel) {
+            _syncFromEditors(beans);
             this.beans.rowRenderer.refreshRows({ suppressFlash: true, force: true });
         }
 
