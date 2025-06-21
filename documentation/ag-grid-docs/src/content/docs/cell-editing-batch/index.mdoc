@@ -97,12 +97,3 @@ Small description how to change the styling
 Small description to explain consequences of using batch mid session (visible values are considered not original values).
 
 {% gridExampleRunner title="Batch Editing Sort / Excel" name="batch-editing-sort-excel" exampleHeight=560 /%}
-
-### Exporting Data
-
-When exporting data from the grid, you can choose to include any pending changes made during batch editing. The exported data will reflect the changes made in the batch editing session. This is off by default.
-
-```js
-gridApi.exportDataAsExcel({ includePendingEdits: true });
-gridApi.exportDataAsCsv({ includePendingEdits: true });
-```
