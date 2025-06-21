@@ -146,6 +146,10 @@ export class FullRowEditStrategy extends BaseEditStrategy {
             return;
         }
 
+        if (this.model.getRowValidationModel().getRowValidationMap().size > 0) {
+            return;
+        }
+
         super.onCellFocusChanged(event);
 
         const previous = (event as any)['previousParams']! as CommonCellFocusParams;
@@ -161,7 +165,7 @@ export class FullRowEditStrategy extends BaseEditStrategy {
         event?: KeyboardEvent,
         source: 'api' | 'ui' = 'ui'
     ): boolean | null {
-        const preventNavigation = this.editSvc.checkNavWithValidation(prevCell, event) === 'block-stop';
+        const cellPreventNavigation = this.editSvc.checkNavWithValidation(prevCell, event) === 'block-stop';
 
         const prevPos = prevCell.cellPosition;
 
@@ -190,11 +194,7 @@ export class FullRowEditStrategy extends BaseEditStrategy {
             return null;
         }
         if (nextCell == null) {
-            if (preventNavigation) {
-                return true;
-            }
-
-            return false;
+            return cellPreventNavigation;
         }
 
         const nextPos = nextCell.cellPosition;
@@ -204,8 +204,19 @@ export class FullRowEditStrategy extends BaseEditStrategy {
 
         const rowsMatch = nextPos && prevPos.rowIndex === nextPos.rowIndex && prevPos.rowPinned === nextPos.rowPinned;
 
-        if (!rowsMatch && preventNavigation) {
-            return true;
+        if (!rowsMatch) {
+            if (this.model.getRowValidationModel().getRowValidationMap().size > 0) {
+                // if there was a previous row validation error, we need to check if that's still the case
+                if (this.editSvc.checkNavWithValidation(prevCell, event, true) === 'block-stop') {
+                    return true;
+                }
+            } else {
+                const rowPreventNavigation =
+                    this.editSvc.checkNavWithValidation(prevCell, event, true) === 'block-stop';
+                if (rowPreventNavigation) {
+                    return true;
+                }
+            }
         }
 
         if (prevEditable) {
