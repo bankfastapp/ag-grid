@@ -492,12 +492,6 @@
                 "name": "Batch Editing",
                 "url": "./cell-editing-batch"
             }
-        },
-        "setEditingCells": {
-            "more": {
-                "name": "Batch Editing",
-                "url": "./cell-editing-batch"
-            }
         }
     },
     "editing": {
