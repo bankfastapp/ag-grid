@@ -15,9 +15,10 @@ import type { EditMap, EditValidationMap, EditValue } from '../../interfaces/iEd
 import type { EditPosition } from '../../interfaces/iEditService';
 import { _getLocaleTextFunc } from '../../misc/locale/localeUtils';
 import type { CellCtrl, ICellComp } from '../../rendering/cell/cellCtrl';
+import type { RowCtrl } from '../../rendering/row/rowCtrl';
 import { _setAriaInvalid } from '../../utils/aria';
 import { EditCellValidationModel, EditRowValidationModel } from '../editModelService';
-import { _getCellCtrl, _getRowCtrl } from './controllers';
+import { _getCellCtrl } from './controllers';
 
 export const UNEDITED = Symbol('unedited');
 
@@ -438,27 +439,51 @@ export function _populateModelValidationErrors(
     // the second loop over mappedEditor below
     beans.editModelSvc?.setCellValidationModel(cellValidationModel);
 
+    const rowCtrlSet = new Set<RowCtrl>();
+
     for (const { ctrl } of mappedEditors) {
         ctrl.editorTooltipFeature?.refreshTooltip(true);
+        rowCtrlSet.add(ctrl.rowCtrl);
     }
 
     if (includeRows) {
         const rowValidations = _generateRowValidationErrors(beans);
         beans.editModelSvc?.setRowValidationModel(rowValidations);
+
+        for (const rowCtrl of rowCtrlSet.values()) {
+            rowCtrl.refreshTooltip();
+        }
     }
+
     return;
 }
 
 export const _generateRowValidationErrors = (beans: BeanCollection): EditRowValidationModel => {
     const rowValidationModel = new EditRowValidationModel();
-
     const getFullRowEditValidationErrors = beans.gos.get('getFullRowEditValidationErrors');
-
     // populate row-level errors
-    beans.editModelSvc?.getEditMap().forEach((cellValidation, rowNode) => {
+    const editMap = beans.editModelSvc?.getEditMap();
+
+    if (!editMap) {
+        return rowValidationModel;
+    }
+
+    for (const rowNode of editMap.keys()) {
+        const rowEditMap = editMap.get(rowNode);
+
+        if (!rowEditMap) {
+            continue;
+        }
+
         const editorsState: EditingCellPosition[] = [];
         const { rowIndex, rowPinned } = rowNode;
-        cellValidation.forEach((editValue, column) => {
+
+        for (const column of rowEditMap.keys()) {
+            const editValue = rowEditMap.get(column);
+            if (!editValue) {
+                continue;
+            }
+
             editorsState.push({
                 column,
                 colId: column.getColId(),
@@ -468,7 +493,7 @@ export const _generateRowValidationErrors = (beans: BeanCollection): EditRowVali
                 // don't expose this implementation detail
                 newValue: editValue.newValue === UNEDITED ? undefined : editValue.newValue,
             });
-        });
+        }
 
         const errorMessages = getFullRowEditValidationErrors?.({ editorsState }) ?? [];
 
@@ -480,12 +505,7 @@ export const _generateRowValidationErrors = (beans: BeanCollection): EditRowVali
                 { errorMessages }
             );
         }
-
-        const rowCtrl = _getRowCtrl(beans, rowNode);
-        if (rowCtrl) {
-            rowCtrl.refreshTooltip();
-        }
-    });
+    }
 
     return rowValidationModel;
 };
