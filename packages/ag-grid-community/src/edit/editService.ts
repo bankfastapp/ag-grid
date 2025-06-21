@@ -301,8 +301,6 @@ export class EditService extends BeanStub implements NamedBean, IEditService {
             if (isEnter || isEscape) {
                 if (isEnter) {
                     _syncFromEditors(beans);
-                } else if (position) {
-                    this.strategy?.clearEdits(position);
                 }
 
                 _destroyEditors(beans, model.getEditPositions());
