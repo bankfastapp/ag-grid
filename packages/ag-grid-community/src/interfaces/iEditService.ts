@@ -25,7 +25,6 @@ export type StartEditParams = {
     startedEdit?: boolean | null;
     event?: EditInputEvents;
     source?: EditSource;
-    silent?: boolean;
     ignoreEventKey?: boolean;
 };
 
