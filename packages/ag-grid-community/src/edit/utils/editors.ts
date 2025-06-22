@@ -11,7 +11,7 @@ import type {
     ICellEditorParams,
     ICellEditorValidationError,
 } from '../../interfaces/iCellEditor';
-import type { EditMap, EditValidationMap, EditValue } from '../../interfaces/iEditModelService';
+import type { EditMap, EditValue } from '../../interfaces/iEditModelService';
 import type { EditPosition } from '../../interfaces/iEditService';
 import { _getLocaleTextFunc } from '../../misc/locale/localeUtils';
 import type { CellCtrl, ICellComp } from '../../rendering/cell/cellCtrl';
@@ -390,16 +390,9 @@ export function _destroyEditor(beans: BeanCollection, position: Required<EditPos
 
 export type MappedValidationErrors = EditMap | undefined;
 
-export function _populateModelValidationErrors(
-    beans: BeanCollection,
-    includeRows: boolean = false
-): EditValidationMap | undefined {
+export function _populateModelValidationErrors(beans: BeanCollection, includeRows: boolean = false): void {
     const mappedEditors = getCellEditorInstanceMap(beans);
     const cellValidationModel = new EditCellValidationModel();
-
-    if (!mappedEditors || mappedEditors.length === 0) {
-        return new Map();
-    }
 
     const { ariaAnnounce, localeSvc } = beans;
     const translate = _getLocaleTextFunc(localeSvc);
@@ -456,13 +449,14 @@ export function _populateModelValidationErrors(
     if (includeRows) {
         const rowValidations = _generateRowValidationErrors(beans);
         beans.editModelSvc?.setRowValidationModel(rowValidations);
-
-        for (const rowCtrl of rowCtrlSet.values()) {
-            rowCtrl.refreshTooltip();
-        }
+    } else {
+        beans.editModelSvc?.setRowValidationModel(new EditRowValidationModel());
     }
 
-    return;
+    for (const rowCtrl of rowCtrlSet.values()) {
+        rowCtrl.rowEditStyleFeature?.applyRowStyles();
+        rowCtrl.refreshTooltip();
+    }
 }
 
 export const _generateRowValidationErrors = (beans: BeanCollection): EditRowValidationModel => {

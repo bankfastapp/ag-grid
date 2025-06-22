@@ -1,6 +1,7 @@
 import { KeyCode } from '../../constants/keyCode';
 import { BeanStub } from '../../context/beanStub';
 import type { BeanCollection } from '../../context/context';
+import { _populateModelValidationErrors } from '../../edit/utils/editors';
 import type { RowNode } from '../../entities/rowNode';
 import { _isCellSelectionEnabled, _isRowSelection } from '../../gridOptionsUtils';
 import type { DefaultProvidedCellEditorParams } from '../../interfaces/iCellEditor';
@@ -127,16 +128,19 @@ export class CellKeyboardListenerFeature extends BeanStub {
 
     private onEnterKeyDown(event: KeyboardEvent): void {
         const { cellCtrl, beans } = this;
-        const { editSvc, navigation } = beans;
+        const { editSvc, navigation, gos } = beans;
         const editing = editSvc?.isEditing(cellCtrl);
         if (editing) {
             if (this.isCtrlEnter(event)) {
                 // bulk edit, apply currently editing value to all selected cells
-                editSvc?.applyBulkEdit(cellCtrl, this.beans?.rangeSvc?.getCellRanges() || []);
+                editSvc?.applyBulkEdit(cellCtrl, beans?.rangeSvc?.getCellRanges() || []);
                 return;
             }
 
-            if (editSvc?.checkNavWithValidation(cellCtrl, event) === 'block-stop') {
+            // re-run ALL validations, Enter key is used to commit the edit, so we want to ensure it's valid
+            _populateModelValidationErrors(beans, true);
+
+            if (editSvc?.checkNavWithValidation(cellCtrl, event, gos.get('editType') === 'fullRow') === 'block-stop') {
                 return;
             }
 
@@ -148,6 +152,10 @@ export class CellKeyboardListenerFeature extends BeanStub {
                 const key = event.shiftKey ? KeyCode.UP : KeyCode.DOWN;
                 navigation?.navigateToNextCell(null, key, cellCtrl.cellPosition, false);
             } else {
+                if (editSvc?.hasValidationErrors()) {
+                    return;
+                }
+
                 if (editSvc?.hasValidationErrors(cellCtrl)) {
                     editSvc.revertSingleCellEdit(cellCtrl, true);
                 }
@@ -214,6 +222,10 @@ export class CellKeyboardListenerFeature extends BeanStub {
         if (key === KeyCode.SPACE) {
             this.onSpaceKeyDown(event);
         } else if (editSvc?.isCellEditable(cellCtrl, 'ui')) {
+            if (editSvc?.hasValidationErrors() && !editSvc?.hasValidationErrors(cellCtrl)) {
+                return;
+            }
+
             editSvc?.startEditing(cellCtrl, { startedEdit: true, event, source: 'api' });
             // if we don't prevent default, then the event also gets applied to the text field
             // (at least when doing the default editor), but we need to allow the editor to decide
