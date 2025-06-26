@@ -95,3 +95,72 @@ export interface PipelineSection {
   title: string
   tasks: PipelineTask[]
 }
+
+// Define types for each settings section based on your instructions
+export interface AdvanceRateSetting {
+  id: string
+  collateralType: string
+  advanceRate: number
+  methodDescribed: boolean
+  sourceDescription: string
+  comments: string
+  isInconclusive?: boolean // For the flag
+}
+
+export interface HighRiskIndustry {
+  id: string
+  naicsSicLabel: string
+}
+
+export interface ProductSetting {
+  id: string
+  loanType: string
+  term: string // e.g., "30 years", "5 years"
+  amortization: string // e.g., "25 years"
+  baseRate: string // e.g., "SOFR + 2%"
+  collateralRequirement: string // e.g., "Real Estate"
+  isPartiallyComplete?: boolean // For the flag
+}
+
+export interface RiskAnalysisMetric {
+  id: string
+  borrowerType: "Business" | "Individual"
+  metricName: string
+  weighting: number // Percentage
+}
+
+export interface RiskAnalysisSetting {
+  id: string
+  metrics: RiskAnalysisMetric[]
+  source: "Provided" | "Default"
+  auditComments: string
+}
+
+export interface ComplianceChecklistItem {
+  id: string
+  requirement: string
+  frequency: "Daily" | "Weekly" | "Monthly" | "Quarterly" | "Annually" | "Ad-hoc"
+  owner: string // Could be user ID or name
+  status: "✅ Met" | "❗ Pending" | "❌ Overdue"
+}
+
+export interface SupplementaryRequirement {
+  id: string
+  name: "Field Exams" | "Blocked Accounts" | "Intercreditor Agreements" | "Seasonality Models" | "Commodity Hedging"
+  isEnabled: boolean
+  commentary: string
+}
+
+export interface AdvancedContextualization {
+  id: string
+  portfolioConcentrations: string
+  keyFinancialMetrics: { name: string; ideal: string; minAcceptable: string }[]
+  marketDefinitions: string // "in vs. out"
+  contextValidated: boolean
+}
+
+export interface RecommendedRiskModel {
+  id: string
+  fitModelName: string
+  justification: string
+}
