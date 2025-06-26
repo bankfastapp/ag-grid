@@ -3,6 +3,7 @@
 import { RiskAnalysisSettings } from "@/components/settings/risk-analysis-settings"
 import FinancialStandardsSettings from "@/components/settings/financial-standards-settings"
 import { Separator } from "@/components/ui/separator"
+import { RiskScoreDefinitions } from "@/components/settings/risk/risk-score-definitions" // Add this import
 
 export default function RiskSettingsPage() {
   return (
@@ -16,6 +17,8 @@ export default function RiskSettingsPage() {
       <FinancialStandardsSettings />
       <Separator />
       <RiskAnalysisSettings />
+      <Separator />
+      <RiskScoreDefinitions /> {/* Add this component */}
     </div>
   )
 }

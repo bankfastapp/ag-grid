@@ -75,7 +75,6 @@ export interface RiskAnalysisSetting {
   metrics: RiskAnalysisMetric[]
   source: "Provided" | "Default"
   auditComments: string
-  referenceRatios: string[] // e.g., ["DSCR", "DTI"]
 }
 
 export interface ComplianceChecklistItem {

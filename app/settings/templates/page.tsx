@@ -1,265 +1,339 @@
 "use client"
-
-import type React from "react"
-
-import { useState } from "react"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { useState, useMemo } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import {
-  Sheet,
-  FileText,
-  FileDigit,
-  FilePenLineIcon as Signature,
-  FileWarning,
-  PlusSquare,
-  Search,
-  FileSpreadsheet,
-} from "lucide-react"
+import { FileText, FileWarning, Briefcase, FileUp, FileClock, FileBarChart } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
-interface TemplateTypeCardProps {
-  icon: LucideIcon
-  title: string
-  count?: number
-  onClick?: () => void
-}
+type DocumentStatus = "New" | "Due in 30 days" | "Due this week" | "Past Due" | "Delinquent"
 
-const TemplateTypeCard: React.FC<TemplateTypeCardProps> = ({ icon: Icon, title, count, onClick }) => {
-  return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer text-center group" onClick={onClick}>
-      <CardHeader className="pb-2">
-        <div className="p-4 bg-muted rounded-md w-24 h-24 mx-auto flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-          <Icon className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" />
-        </div>
-      </CardHeader>
-      <CardContent className="pb-2">
-        <p className="text-sm font-medium text-foreground">{title}</p>
-      </CardContent>
-      {count !== undefined && (
-        <CardFooter className="pt-0 pb-3">
-          <p className="text-xs text-muted-foreground">{count} templates</p>
-        </CardFooter>
-      )}
-    </Card>
-  )
-}
-
-interface TemplateListItem {
-  id: string
-  icon: LucideIcon
-  iconColor: string
+interface DocumentCategory {
   name: string
-  folder?: string
-  subFolders?: string
-  origin: string
-  updated: string
-  uses?: string
-  avgTime?: string
+  icon: LucideIcon
+  documents: string[]
 }
 
-const initialTemplates: TemplateListItem[] = [
+const documentCategories: DocumentCategory[] = [
   {
-    id: "tpl1",
-    icon: FileDigit, // PDF icon
-    iconColor: "text-red-500",
-    name: "Promissory%20Note_...",
-    origin: "01/04/2025",
-    updated: "01/04/2025",
+    name: "Entity",
+    icon: Briefcase,
+    documents: [
+      "Government ID",
+      "SSN verified",
+      "Loan Report",
+      "Tax Return",
+      "Financial Stmt",
+      "UCC Search",
+      "EIN on file",
+      "SOS Filings",
+      "Articles of Incorporation",
+      "Operating Agreement",
+      "Borrowing Resolution",
+      "Certificate of Good Standing",
+      "By-Laws",
+      "Non-Profit Status",
+      "Board Action to Borrow",
+      "Percentage of Ownership",
+    ],
   },
   {
-    id: "tpl2",
-    icon: FileSpreadsheet, // XLS icon
-    iconColor: "text-green-500",
-    name: "Banking-Industry-Co...",
-    origin: "01/03/2025",
-    updated: "01/03/2025",
+    name: "Product",
+    icon: FileText,
+    documents: [
+      "Loan Agreement",
+      "Promissory Note",
+      "Security Agreement",
+      "Guaranty",
+      "Right to Cancel or Rescission Notice",
+      "Initial UCC Search",
+      "UCC Filing",
+      "State Matches",
+      "Name is Exact Match",
+      "Final Search",
+      "Collateral Matches Approval",
+      "Pricing Sheet",
+      "Note Matches Approval",
+      "NADA Valuation",
+      "Bill of Sale / Purchase Agreement",
+      "VIN Matches",
+      "TItle on FIle",
+      "Lien on FIle",
+      "Statement of Account",
+      "Control Agreement",
+      "Acknowledgement",
+      "Insurance Policy",
+      "Questionnarie",
+      "Assignment",
+      "Stock Certificate",
+      "Names Match",
+      "Not Retricted or UTMA",
+      "Stock Power",
+      "Vesting Correct",
+      "Filed Copy - Bank",
+      "Appraisal",
+      "Appraisal Reviewed",
+      "Preliminary Title Opinon",
+      "Final TItle Opinoin",
+      "TItle Committment",
+      "TItle Insurance",
+      "Title Work Reviewed",
+      "Flood Certification",
+      "Flood Insurance",
+      "Zones Match",
+      "Collateral Inspection",
+      "Environmental Risk Assessment",
+      "Phase 1 Report",
+      "Phase 2 Report",
+      "Copy of Lease",
+      "Landlord Lien Waiver",
+      "Tenant Estoppel",
+      "Pre-Construction Site Inspection",
+      "Soil Tests",
+      "Plans / Specs Reviewed",
+      "Detailed Budget",
+      "Copy of Contract",
+      "Assignment of Contract",
+      "Assignment of Arch. Con.",
+      "Market Feasibility",
+      "List of Major Subs",
+      "Zoning OK",
+      "Building Permit",
+      "Builder’s Risk Insurance",
+      "Liability / Work Comp. Ins.",
+      "Pre-Construction Affidavit",
+      "Lot Release Agreement",
+      "Commitment for Permanent Financing",
+    ],
   },
   {
-    id: "tpl3",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "KCFSIDataSources20...",
-    origin: "12/18/2024",
-    updated: "12/18/2024",
+    name: "Disclosures",
+    icon: FileWarning,
+    documents: [
+      "Disclosure Statements",
+      "Loan Card Features",
+      "Interest Rates",
+      "Fees and Charges",
+      "Billing and Payment Terms",
+      "Loan Limit",
+      "Rewards Program",
+      "Balance Transfers",
+      "Fraud Protection and Security",
+      "Loan Card Use",
+      "Changes to Terms and Conditions",
+      "Dispute Resolution",
+      "Loan Reporting",
+      "Governing Law",
+      "Account information",
+      "Eligibility Requirements",
+      "Minimum Balance Requirements",
+      "Transaction Limits",
+      "Account Closure",
+      "Liability and Security",
+      "Deposit Account Agreement",
+      "Privacy Policy",
+      "Overdraft Protection Agreement",
+      "Loan Card Agreement",
+      "Cardholder Agreement or Cardholder Terms",
+      "Cardholder Disclosures",
+      "Balance Transfer Agreement",
+      "Rewards Program Agreement",
+      "Additional Cardholder Agreement",
+    ],
   },
   {
-    id: "tpl4",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Checking.Savings_Acc...",
-    origin: "10/31/2024",
-    updated: "11/03/2024",
+    name: "Applications",
+    icon: FileUp,
+    documents: ["Loan Application", "Deposit Application", "Card Application", "Referral Letter"],
   },
   {
-    id: "tpl5",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "2011_customer_centri...",
-    origin: "11/01/2024",
-    updated: "11/01/2024",
+    name: "Internal",
+    icon: FileClock,
+    documents: ["Loan Memo Form", "Loan Presentation", "Executive Loan Presentation", "Commitment Letter"],
   },
   {
-    id: "tpl6",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Electronic_Funds_Tran...",
-    origin: "10/31/2024",
-    updated: "10/31/2024",
-  },
-  {
-    id: "tpl7",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Terms_&_Conditions.pdf",
-    origin: "10/31/2024",
-    updated: "10/31/2024",
-  },
-  {
-    id: "tpl8",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Truth_in_Savings_Int_B...",
-    origin: "10/31/2024",
-    updated: "10/31/2024",
-  },
-  {
-    id: "tpl9",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Funds_Availability.pdf",
-    origin: "10/31/2024",
-    updated: "10/31/2024",
-  },
-  {
-    id: "tpl10",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "Promissory Note_Secu...",
-    origin: "10/31/2024",
-    updated: "10/31/2024",
-  },
-  {
-    id: "tpl11",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "bb7ed3be-a574-46ed-...",
-    origin: "10/29/2024",
-    updated: "10/29/2024",
-  },
-  {
-    id: "tpl12",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "AutoTagOutput-tagge...",
-    origin: "10/25/2024",
-    updated: "10/25/2024",
-  },
-  {
-    id: "tpl13",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "AutoTagOutput-tagge...",
-    origin: "10/25/2024",
-    updated: "10/25/2024",
-  },
-  {
-    id: "tpl14",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "commercial loan applic...",
-    origin: "10/25/2024",
-    updated: "10/25/2024",
-  },
-  {
-    id: "tpl15",
-    icon: FileDigit,
-    iconColor: "text-red-500",
-    name: "commercial loan applic...",
-    origin: "08/09/2024",
-    updated: "08/09/2024",
+    name: "Appraisal Worksheets",
+    icon: FileBarChart,
+    documents: [
+      "Ag Equipment",
+      "Residential. RE",
+      "Commercial RE",
+      "Farm Ground",
+      "Construction Development",
+      "Bareground",
+      "Automobile",
+      "Fleet Vehicles",
+      "Semi Truck",
+      "Business Valuation/Stock",
+      "Goodwill",
+      "Other",
+    ],
   },
 ]
 
+const mockBorrowers = [
+  { id: "b1", name: "InRoads" },
+  { id: "b2", name: "Robert J. Bauer" },
+  { id: "b3", name: "T & T Holdings" },
+  { id: "b4", name: "Timothy J. Seubert" },
+  { id: "b5", name: "Clearair" },
+]
+
+const documentStatuses: DocumentStatus[] = ["New", "Due in 30 days", "Due this week", "Past Due", "Delinquent"]
+
+// Generate random statuses for demonstration
+const mockBorrowerDocStatuses = mockBorrowers.reduce(
+  (acc, borrower) => {
+    acc[borrower.id] = documentCategories
+      .flatMap((cat) => cat.documents)
+      .reduce(
+        (docAcc, docName) => {
+          docAcc[docName] = documentStatuses[Math.floor(Math.random() * documentStatuses.length)]
+          return docAcc
+        },
+        {} as Record<string, DocumentStatus>,
+      )
+    return acc
+  },
+  {} as Record<string, Record<string, DocumentStatus>>,
+)
+
 export default function TemplatesPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [templates, setTemplates] = useState<TemplateListItem[]>(initialTemplates)
+  const [selectedCategory, setSelectedCategory] = useState<DocumentCategory>(documentCategories[0])
+  const [selectedDocument, setSelectedDocument] = useState<string | null>(null)
 
-  const filteredTemplates = templates.filter((template) =>
-    template.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  const borrowerStatusForSelectedDoc = useMemo(() => {
+    if (!selectedDocument) return []
+    return mockBorrowers.map((borrower) => ({
+      borrowerId: borrower.id,
+      borrowerName: borrower.name,
+      status: mockBorrowerDocStatuses[borrower.id]?.[selectedDocument] || "New",
+    }))
+  }, [selectedDocument])
 
-  const templateTypes = [
-    { icon: Sheet, title: "Sheets", count: 5 },
-    { icon: FileText, title: "Docs", count: 12 },
-    { icon: FileDigit, title: "PDF", count: 28 },
-    { icon: Signature, title: "Esign", count: 3 },
-    { icon: FileWarning, title: "Disclosure", count: 7 },
-    { icon: PlusSquare, title: "New" },
-  ]
+  const getStatusColor = (status: DocumentStatus) => {
+    switch (status) {
+      case "Delinquent":
+        return "bg-red-100 text-red-800"
+      case "Past Due":
+        return "bg-yellow-100 text-yellow-800"
+      case "Due this week":
+        return "bg-blue-100 text-blue-800"
+      case "Due in 30 days":
+        return "bg-green-100 text-green-800"
+      case "New":
+      default:
+        return "bg-gray-100 text-gray-800"
+    }
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-background">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-semibold text-foreground">Choose by type</h1>
-        <div className="relative w-full max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search here"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Document Requirements & Tracking</h1>
+        <p className="text-muted-foreground">
+          Select a category to view required documents, then select a document to track borrower status.
+        </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-10">
-        {templateTypes.map((type) => (
-          <TemplateTypeCard key={type.title} icon={type.icon} title={type.title} count={type.count} />
-        ))}
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Document Categories</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="w-full">
+            <div className="flex space-x-3 pb-4">
+              {documentCategories.map((category) => (
+                <Button
+                  key={category.name}
+                  variant={selectedCategory.name === category.name ? "default" : "outline"}
+                  onClick={() => {
+                    setSelectedCategory(category)
+                    setSelectedDocument(null) // Reset document selection on category change
+                  }}
+                  className="flex-shrink-0"
+                >
+                  <category.icon className="mr-2 h-4 w-4" />
+                  {category.name}
+                </Button>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </CardContent>
+      </Card>
 
-      <div className="border rounded-lg overflow-hidden">
-        <Table>
-          <TableHeader className="bg-muted/50">
-            <TableRow>
-              <TableHead className="w-[300px]">Template</TableHead>
-              <TableHead>Folder</TableHead>
-              <TableHead>Sub-Folders</TableHead>
-              <TableHead>Origin</TableHead>
-              <TableHead>Updated</TableHead>
-              <TableHead>Uses</TableHead>
-              <TableHead>Avg Time</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredTemplates.map((template) => (
-              <TableRow key={template.id} className="hover:bg-muted/30">
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <template.icon className={`h-5 w-5 ${template.iconColor}`} />
-                    <span className="font-medium truncate" title={template.name}>
-                      {template.name}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell className="text-muted-foreground">{template.folder || "—"}</TableCell>
-                <TableCell className="text-muted-foreground">{template.subFolders || "—"}</TableCell>
-                <TableCell>{template.origin}</TableCell>
-                <TableCell>{template.updated}</TableCell>
-                <TableCell className="text-muted-foreground">{template.uses || "—"}</TableCell>
-                <TableCell className="text-muted-foreground">{template.avgTime || "—"}</TableCell>
-              </TableRow>
-            ))}
-            {filteredTemplates.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={7} className="text-center text-muted-foreground py-10">
-                  No templates found.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+      <div className="grid lg:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Required Documents: {selectedCategory.name}</CardTitle>
+            <CardDescription>Select a document to see individual borrower statuses.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ScrollArea className="h-[400px]">
+              <Table>
+                <TableHeader className="sticky top-0 bg-card">
+                  <TableRow>
+                    <TableHead>Document Name</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {selectedCategory.documents.map((docName) => (
+                    <TableRow
+                      key={docName}
+                      onClick={() => setSelectedDocument(docName)}
+                      className={`cursor-pointer ${selectedDocument === docName ? "bg-primary/10" : "hover:bg-muted/50"}`}
+                    >
+                      <TableCell className="font-medium">{docName}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </ScrollArea>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Borrower Status</CardTitle>
+            <CardDescription>
+              {selectedDocument ? `Status for: ${selectedDocument}` : "Select a document to view statuses."}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ScrollArea className="h-[400px]">
+              {selectedDocument ? (
+                <Table>
+                  <TableHeader className="sticky top-0 bg-card">
+                    <TableRow>
+                      <TableHead>Borrower</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {borrowerStatusForSelectedDoc.map((item) => (
+                      <TableRow key={item.borrowerId}>
+                        <TableCell className="font-medium">{item.borrowerName}</TableCell>
+                        <TableCell>
+                          <span
+                            className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}
+                          >
+                            {item.status}
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <div className="flex items-center justify-center h-full text-muted-foreground">
+                  <p>No document selected.</p>
+                </div>
+              )}
+            </ScrollArea>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
