@@ -1,0 +1,1277 @@
+Initial Issue Date:
+	
+
+	Risk Executive: Jeff Lapke
+	Risk Owner: Ryan Van Duyn
+	Revision Date: 12/09/2024
+	Revised by: Ryan Van Duyn
+	Board Approval Date: 12/30/2024
+	Governing Committee: Loan Committee
+	
+
+General Loan Policy
+Central Bank, Storm Lake, Iowa
+
+
+Table of Contents
+Summary of Policy        3
+Determination and Administration of the Policy        4
+Loan Portfolio Guidelines        6
+Pricing        6
+Concentrations of Credit        6
+A.        Portfolio Mix        6
+B.        Loans to One Borrower        6
+C.        In-House Limit        8
+D.        Credit Actions        8
+E.        Other Concentrations        9
+F.        Commercial Real Estate        10
+Individual Lending Authorities        10
+Types of Loans        11
+A.        Desirable Loans        11
+B.        Undesirable Loans        12
+C.        Unacceptable Loans        12
+Underwriting Guidelines        12
+A.        Unsecured Loans        13
+B.        Secured Loans        13
+1.        Consumer Loans and Leasing, Residential Loans, Construction Loans and Business Credit Cards        13
+2.        Secured Lines of Credit        14
+3.        Guidance Lines of Credit (GL)        14
+4.        Commercial Loan minimum Debt Service Coverage (DSC) requirements        15
+5.        Agricultural Loan minimum Debt Service Coverage requirements        15
+C.        Collateral Coverage        15
+1.        Loans Secured by Real Estate        16
+2.        Loans not secured by real estate        18
+3.        Agricultural Carryover Debt.        20
+D.        Financial Statement Quality Guidelines        21
+E.        Guaranties        21
+F.        Renewed Loans        22
+Loan Administration and Documentation        23
+A.        Loan Grading system for Commercial and Agricultural Lending.        23
+B.        Loan Presentation Forms for analyzing loans owned by Central Bank.        23
+C.        Annual Loan Reviews        24
+D.        Loan Comments        28
+E.        Electronic Credit File        28
+F.        Letter of Counsel        29
+G.        Agricultural Loan Inspections        29
+H.        Annual Review and Renewal Process for Agricultural Credits        29
+Other Policies        31
+Problem Credit Administration        31
+A.        Problem Credit Situations        31
+B.        Review of Past Due Loans        31
+C.        Criticized Loans        32
+D.        Non-Accrual Loans        33
+E.        Bankruptcy        34
+F.        Loan Charge-Offs        34
+G.        Debtors Experiencing Financial Difficulties        34
+Overdrafts        36
+Participations        36
+Insider Transactions        36
+Employee Loans        39
+Exceptions to Loan Policy        39
+Tickler System        39
+Training and Audit Requirements        40
+A.        Staff Training        40
+B.        Audit Policy        40
+Additional Resources        40
+Revision History        41
+
+
+Summary of Policy
+   1. The Management of Central Bank (the Bank) believes that the lending function represents a desirable and profitable means of employing the Bank’s shareholder equity and depositor funds.  Bank management shall determine the allocation of resources available for making loans.  Such allocation shall be consistent with the maintenance of an adequate capital structure, adequate liquidity, and appropriate profitability standards.  Each Loan Officer is expected to initiate new credit relationships and to maintain and monitor assigned loan accounts in a manner that protects the Bank’s capital to minimize loss exposure and insure profitability.
+
+
+   2. In the allocation of resources available for loans, primary consideration shall be given to existing and potential customers with economic interest in the Bank’s market area.  The primary market area of the Bank shall consist of each county in which there is a branch location and those counties adjacent to branch counties.  Specifically, in Iowa, 
+
+
+Buena Vista (21)          Dickinson (59)          Osceola (143)        Polk (153)        
+Sioux (167)          Calhoun (25)                  Emmet (63)                Warren (181)
+Palo Alto (147)          Woodbury (193)          Cherokee (35)        Jasper (99)
+Ida (93)                  Plymouth (149)          Clay (41)                Story (169)
+Monona (133)          Pocahontas (151)          Crawford (47)        Boone (15)
+O’Brien (141)          Sac (161)                  Dallas (49)                  Madison (121)
+
+
+as well as Dakota County (43), Nebraska; Jackson County (63) Minnesota; and Union County (127), Minnehaha County (99), Brookings County (11), Moody County (101), Kingsbury (77), Lincoln County (83), and Lake County (79) in South Dakota.
+
+
+The Board recognizes that, from time to time, the Bank will make a loan outside of its market area.  An “out of market” loan shall consist of all loans where both the customer and the project, or use of funds, are located outside of the Midwest (defined as South Dakota, Iowa, Nebraska, and Minnesota).  Projects completed outside of the Midwest for both new and existing customers who reside in South Dakota, Iowa, Nebraska, and Minnesota will not be an exception to Policy.  
+
+
+Generally, “out of market” loans to new customers will only be considered for those that have been referred by reputable sources and can demonstrate financial performance that exceeds industry averages for their line of business.  All “out of market” loans shall be considered exceptions to this policy. 
+   3. All loans and other extensions of credit shall be in full conformity with applicable State and Federal law, regulations, rulings and interpretations thereof.  (See Exhibit A:  Compliance Management Program)
+
+
+   4. Discrimination on the basis of sex, marital status, race, color, religion, national origin, age, receipt of public assistance, the good faith exercise of rights under the consumer Credit Protection Act, familial status, disability, or handicap is strictly prohibited.  Employees are instructed to treat all people fairly and courteously and not to discourage anyone from applying for credit.  The Bank will accept and consider all applications for credit and will grant such credit on safe and sound banking principles.
+  
+   5. The Bank recognizes that the lending of money necessarily includes reasonable business risks and that some losses can and will occur in the lending program.  The Board has approved a policy to address the process for maintaining an adequate Allowance for Credit Losses (ACL).  (See Exhibit B:  Allowance for Credit Losses Policy)  The ACL should be consistent with the degree of risk contained in the loan portfolio as determined by management.  The policy also addresses the need for the Loan Committee to recommend loans for non-accrual, to review decisions for charge-offs and to monitor foreclosures.  The Board of Directors is ultimately responsible for approving loan charge offs or to move loans to non-accrual status.  The Board of Directors has approved a policy to address the management of real estate acquired through foreclosure.  (See Exhibit C:  Management of Other Real Estate Owned)
+
+
+Determination and Administration of the Policy 
+1. The Board of Directors is ultimately responsible for all lending activities of the Bank.  The Board of Directors delegates to Loan Committee the authority to carry out their duties with respect to the lending function and responsibilities of the Bank.  
+
+
+2. The Board of Directors shall have responsibility to regularly review the administration of the Bank’s lending activities.  As a part of its regular responsibilities, the Board of Directors shall:
+
+
+         1. Review this Loan Policy, at least annually, amending the Loan Policy as deemed necessary;
+         2. Review interpretations of and recommendations to this Loan Policy noted by the Federal Reserve, the Iowa Division of Banking, or Loan Committee;
+         3. Review any other policies that influence lending activities, at least annually, amending them as deemed necessary;
+         4. Approve the composition of Loan Committee (See Exhibit D:  Loan Committee Composition), appoint a Chief Lending Officer and approve lending limits (See Exhibit E:  Loan Approval Methods and Authorities)
+         5. Review any exceptions to this Loan Policy at least monthly;
+         6. Review all new loans, all renewed loans, and all loan extensions, at least monthly;
+         7. Review all overdrafts, at least monthly;
+         8. Review all loans to employees and insiders;
+         9. Review all loan review exceptions as may be noted in any loan review programs;
+         10. Review reports and recommendations regarding the lending function as outlined in regulatory examinations, external or internal audits or other reviews;
+         11. Review, at least monthly, all loans in excess of the supervisory loan-to-value limits and those subject to inclusion in “the basket,” per Iowa Administrative Code 187-9.2, due to lack of a final title opinion;
+         12. Review, at least monthly, all concentrations of credit of $10.0MM and greater.  A concentration of credit is defined as extensions of credit to (1) a single borrower, (2) a group of closely affiliated borrowers, (3) a group of unrelated parties of the same or similar type industry, where an adverse occurrence or trend affecting that borrower, group of related parties, or type of industry could expose the Bank to an undue amount of risk;
+         13. Perform all ACL responsibilities as directed in the Allowance for Credit Losses;  (See Exhibit B:  Allowance for Credit Losses Policy.)  
+         14. Review all loans that are 30 days delinquent, are in a non-accrual status, or have been converted to “other real estate owned;”
+         15. Approve all loans that are recommended for charged off status (Active or Inactive);
+         16. Review minutes from the Criticized Asset Report review meeting.  
+
+
+3. The Board of Directors will establish a Loan Committee.  (See Exhibit D:  Loan Committee Composition) Responsibilities of the Committee shall be to:
+
+
+1. Implement directives of the Board of Directors;
+2. Review all exceptions to this Loan Policy;
+3. Provide a forum for the determination, analysis, and examination of pricing policies and strategies applicable to the lending function;
+4. Provide direction for communication and training to Loan Officers on all subjects, including marketing, changes in laws and regulations, changes in economic conditions, review of the asset/liability policies in effect at the time and other such matters that impact the lending function;
+5. Review all credit actions to loan relationships approved outside of Loan Committee.  (See Exhibit E:  Loan Approval Methods and Authorities)
+6. Discuss and evaluate the recommendations of any Lender who requests that the Committee act as a forum for discussion of a new loan or a credit relationship of an unusual nature that may involve any interpretation of this Loan Policy or when no credit approval guidelines exist.
+
+
+4. The Board of Directors shall be responsible for appointing a Chief Lending Officer.  Responsibilities of the Chief Lending Officer shall be to:
+
+
+1. Implement and monitor compliance with this Loan Policy
+Loan Portfolio Guidelines 
+In the interest of sound and prudent banking practices and to assure adequate liquidity and appropriate profitability, the Asset/Liability Committee (ALCO) shall recommend loan portfolio guidelines to the Loan Committee.  Included in such recommendations may be such ratios as the relationship of loans to capital and total assets, loans plus unfunded commitments to capital and total assets, loans as a percentage of deposits and loans that have been rated at an examination of the Bank by the appropriate bank regulatory agency as involving more than a normal degree of risk.  The Board of Directors has outlined the ALCO’s responsibilities in an approved policy.  (See Exhibit H:  Asset/Liability Management Policy)
+
+
+Pricing
+1. Overall pricing policy shall be formulated by the Loan Committee and the Asset Liability Management Committee (ALCO).  Pricing for Residential and Consumer lending is managed by ALCO and shall be in conformity with all applicable laws and regulations.
+
+
+2. Loan Officers should recommend pricing using the Bank’s Commercial Loan Interest Rate Guide.  
+
+
+3. Changes to the Commercial Loan Interest Rate Guide shall be communicated to all Loan Officers as it will be included in the Reports section of the Metro and Rural Loan Committee Packets.
+
+
+Concentrations of Credit
+1. Portfolio Mix
+
+
+The overall contribution of the loan portfolio to the total assets of the Bank as well as the desired mix of the portfolio is defined by the Board of Directors, based on the general business strategy adopted for the Bank.  The Board has delegated monitoring and management of the portfolio mix to the Asset/Liability Committee (ALCO).  (See Exhibit H:  Asset/Liability Management Policy)
+
+
+2. Loans to One Borrower
+The Bank will abide by all State and Federal laws and regulations relating to limits on lending to any one Individual or Borrowing Group as defined below.  The Individual and Borrowing Group Limit calculations will exclude the amount of any loan participations sold and any residential mortgage loans sold.  Compliance will be the responsibility of the Loan Committee with each Loan Officer ensuring that their loan is in compliance at the time of funding.  
+            1. Individual Limit:
+* Loans and extensions of credit to one Person (and any legal entity, including but not limited to corporations, limited liability companies, partnerships, trusts and associations) will be attributed to another person and will be considered one borrower if either of the following apply:
+* The proceeds, or assets purchased with the proceeds, benefit another person, other than a bona fide arm’s length transaction where the proceeds are used to acquire property, goods, or services.
+* The expected source of repayment for each loan or extension of credit is the same for each borrower and no borrower has another source of income from which the loan may be fully repaid.
+* Loans and extensions of credit to a partnership, joint venture, or association are deemed to be loans and extensions of credit to each member of the partnership, joint venture, or association. This provision does not apply to limited partners in limited partnerships or to member or joint ventures or associations if the partners or members, by the terms of the partnership or membership agreement or other written agreement, are not to be held generally liable for the debts or actions of the partnership, joint venture, or association, and those provisions are valid under applicable law.
+* Loans and extensions of credit to members of a partnership, joint venture, or association are not attributed to the partnership, joint venture, or association unless loans and extensions of credit are made to the member to purchase an interest in the partnership, joint venture, or association, or the proceeds are used for a common purpose with the proceeds of loans and extensions of credit to the partnership, joint venture, or association.
+* Loans and extensions of credit to one borrower which are endorsed or guaranteed by another borrower will not be combined with loans and extensions of credit to the endorser or guarantor unless the endorsement or guaranty is relied upon as a basis for the loans and extensions of credit. A state bank shall not be deemed to have violated this section if the endorsement or guaranty is relied upon after inception of loans and extensions of credit, but the state bank shall, if required by the superintendent Iowa Division of Banking (IDOB), dispose of loans and extensions of credit to one borrower in the amount in excess of the limitations of this section within a reasonable time as fixed by the superintendent IDOB. 
+* When the superintendent IDOB determines the interests of a group of more than one borrower, or any combination of the members of the group, are so interrelated that they should be considered a unit for the purpose of applying the limitations of this section, some or all loans and extensions of credit to that group of borrowers existing at any time shall be combined and deemed loans and extensions of credit to one borrower. A state bank shall not be deemed to have violated this section solely by reason of the fact that loans and extensions of credit to a group of borrowers exceed the limitations of this section at the time of a determination by the superintendent IDOB that the indebtedness of that group must be combined, but the state bank shall, if required by the superintendent IDOB, dispose of loans and extensions of credit to the group in the amount in excess of the limitations of this section within a reasonable amount of time.
+
+
+
+
+            2. Borrowing Group:
+* A borrowing group includes a person and any legal entity, including but not limited to corporations, limited liability companies, partnerships, trusts, and associations where the following exist:
+* One or more persons own or control fifty percent (50%) or more of the voting securities or membership interests of the borrowing entity or a member of the group.
+* One or more persons control, in any manner, the election of a majority of the directors, managers, trustees, or other persons exercising similar functions of the borrowing entity or a member of the group.
+* One or more persons have the power to vote fifty percent or more of any class of voting securities or membership interests of the borrowing entity or a member of the group.
+
+
+3. In-House Limit
+
+
+Central Bank has established an In-House Lending Limit of $20,000,000.  The In-House Limit is defined as the maximum amount of outstandings that the Bank will lend on an individual project basis. The In-House Lending Limit is independent of and not limited by the Individual and Group Limit calculations and requirements. A loan approved in excess of this limit will be an exception to this policy. 
+
+
+4. Credit Actions
+
+
+The lender is responsible for obtaining the proper credit approval for all credit actions based on the aggregation requirements as detailed in the Loans to One Borrower section of this Policy. 
+ 
+Any proposed Credit Action on a loan risk rated 4 or worse must be presented to Loan Committee or approved by the CEO or President. 
+
+
+The following are defined as Credit Actions:
+
+
+1. Approval of a new loan or increase in the loan amount for an existing loan
+2. Renewal or extension of a loan beyond its present maturity date
+3. Extension or modification of loan payment(s) or other approved terms
+4. Waiver or amendment of any covenants, terms, or reporting requirements
+5. Release or substitution of collateral, except on loan payoffs in the ordinary course of business
+6. Release or Modification of guarantees
+7. Forgiveness of principal or interest
+8. Risk Rating changes  (Must be approved by the CEO, President, or Loan Committee)
+9. Modification to the pricing of a loan
+10. Taking title in real estate or other property as part of a loan collection
+11. Overdraft Approvals.  Overdraft approval is based on the aggregate amount of the overdrafts based on the authority of each Lender using the Unsecured column of the Individual Lending Authorities in Exhibit E. – Loan Approval Methods and Authorities.
+
+
+Short term extensions or other short term credit actions that do not materially change the structure of the loan may be verbally presented at loan committee for approval and will utilize the meeting minutes as the source document for the approval. 
+
+
+Other Credit Actions not subject to the Loans to One Borrower section. See Commercial/Ag Collateral Release Form Instructions on STORM for approval requirements:
+
+
+1. Release of Mortgage/Deed of Trust
+2. Release of UCC Filing
+3. Release of Life Insurance
+4. Release of Vehicle/Equipment Title
+5. Release of CD or DDA Account
+
+
+Additionally, if any of a note’s originally agreed upon terms are changed, a debt modification agreement must be prepared and executed by the appropriate individuals or authorized signors as dictated per the borrower’s organizational documentation. Examples of changes to note terms include but are not limited to changing the following:
+
+
+1. Interest Rate (Increase or Decrease);
+2. Maturity Date
+3. Payment Date 
+4. Payment Amount
+5. Adding Collateral
+
+
+
+
+5. Other Concentrations
+
+
+The Loan Committee, ALCO and the Board of Directors, at their discretion, may review other reports of potential concentrations in the portfolio.  For example, the Loan Committee may review lending to a particular type of business or loans secured by different types of collateral.  The Loan Committee also monitors loans with a high Loan-to-Value ratio. Loans exceeding Supervisory Loan-to-Value limits on Real Estate are reviewed by the Board of Directors monthly.
+
+
+
+
+
+
+6. Commercial Real Estate
+
+
+In conjunction with 2006 guidance from the Federal Reserve (Concentrations in Commercial Real Estate (CRE) Lending, Sound Risk Management Practice, issued December 6, 2006), the Board will review the amount of Commercial Real Estate in the portfolio at least quarterly.  The Board may decide to place limitations on further lending, to increase scrutiny on loans or to stress test the existing portfolio at their discretion.  The Bank’s Loan Committee will continue to assess the risk in the Bank’s Commercial Real Estate portfolio and make recommendations for any changes to the Board.
+
+
+Individual Lending Authorities
+A lending authority consists of the amount of primary exposure that an individual officer may extend to any one obligor (See Exhibit E: Loan Approval Methods and Authorities) and includes all direct loans, unfunded commitments, , overdrafts, credit cards (See Exhibit S: Business Credit Card Policy) and contingent or direct liabilities under letters of credit (See Exhibit F:  Letter of Credit Policy).  The approval exposure is always based on the included Person (or legal entity) with the highest Borrowing Group Exposure calculation. 
+All Secondary Exposure directly to a Borrower and any related entities will be aggregated to determine the necessary Approval Authority and includes; ACH Limits, Remote Deposit, and Wire Limits. Note that Secondary Exposure is separate and NOT combinable with Primary Exposure when calculating a Borrower’s Individual, Group or Approval Exposure.
+
+
+1. Loan Officers may approve primary or secondary exposures that are within their Individual Lending Authority if the loans are in compliance with the requirements detailed in the Individual Lending Authorities section of Exhibit E: Loan Approval Methods and Authorities.
+
+
+2. This Loan Policy shall provide a charter of responsibility under which each officer with lending authority may operate in performance of his or her duties as a lending representative of the Bank.  All loan authorities granted herein to any and all officers will be accepted as significant responsibilities to be exercised wisely.
+
+
+3. Each Loan Officer shall initial all pertinent documents evidencing loans approved and administered by such officer.
+
+
+Types of Loans
+1. Desirable Loans
+
+
+Loans of the following types are considered to be desirable by the Bank, when made in accordance with the policies and principles expressed herein.
+
+
+1. Unsecured loans to businesses and individuals on a short-term basis supported by a satisfactory balance sheet and earnings statement evidencing the capacity to repay.  
+2. Loans to businesses and individuals secured by a security interest in all business assets or machinery and equipment, accounts receivables and/or inventories. 
+3. Real Estate loans secured by mortgages on commercial, agricultural, industrial, or residential properties. 
+4. Loans secured by a pledge of marketable securities listed on a recognized stock exchange.  Any such loan over $100,000 must comply with Regulation “U” of the Board of Governors of the Federal Reserve System if the proceeds will be used to purchase securities on margin.
+5. Loans secured by securities that are readily marketable in the “over-the-counter” market.
+6. Loans secured by the cash surrender value of life insurance.
+7. Loans secured by savings accounts and certificates of deposit in our Bank.
+8. Loans to the majority ownership of community banks which may be either holding companies or individuals and are secured by the stock of the community bank.
+9. Loans to individuals for consumer purposes, which shall be made in accordance with the attached policies on Residential and Consumer Lending  (See Exhibit I:  Residential Lending and Exhibit J:  Consumer Lending)
+10. Loans guaranteed by the U.S. Government or state agencies.
+11. Loan participations from other banks when the loan meets the credit standards established by the Bank.
+12. Loans to cities, counties, schools, or other political subdivisions and established nonprofit organizations.
+13. Letters of Credit (See Exhibit F: Letter of Credit Policy)
+* Trade or documentary letters of credit.
+* Standby letters of credit – serve as a guaranty if the underlying transaction is not performed.
+14. Loans for Community Reinvestment Act (CRA) and community development purposes.
+15. Loans to finance agricultural production secured by a security interest in general farm assets, supported by appropriate cash flow or budget projections.
+16. Loans to agricultural producers or businesses secured by bonded warehouse receipts for stored commodities with a documented value.  
+17. Industrial Revenue or Development Bonds, whether rated or non-rated, that meet the established credit standards of the Bank.
+18. Credit Card Loans to businesses made in accordance with the Policy (See Exhibit S: Business Credit Card Policy)
+
+
+
+
+
+
+2. Undesirable Loans
+
+
+Loans of the following type are undesirable loans. Such loans will ordinarily be declined unless there are sufficient factors to mitigate the inherent weaknesses:
+
+
+1. Loans to parties whose integrity, honesty or character is questionable.
+2. Loans to a business enterprise when it appears that the loan cannot be repaid within a reasonable period of time except by borrowing elsewhere or by liquidating the business.
+3. Loans to be paid from the proceeds of settlement of an estate unless such loans are fully collateralized or guaranteed by the estate.
+4. Generally, loans secured solely by the stock of a closely owned corporation that has no ready market unless supported by the demonstrated repayment capacity of a financially responsible party.
+5. Loans for the purpose of enabling a Borrower to speculate on the future market value of securities, commodities or real estate. 
+6. Accommodation loans made to a poor credit risk on the strength of an unrelated third party endorser or guarantor.  If a loan will not “stand on its own”, it should be made to the endorser or guarantor, and that endorser or guarantor should make a loan to the person he or she wishes to accommodate.
+7. Loans secured by single purpose or specialized commercial real estate or by an undivided interest in real estate.
+8. Loans to political parties or to candidates for campaign financing.
+9. Subordinated loans, except when secured by second mortgages on residential real estate, unless an acceptable margin exists.
+10. Loans to new borrowers located outside of the Bank’s market area.
+11. Real estate construction loans in which the Bank is not providing the end loan or which lack known or reliable sources of permanent financing.  
+
+
+3. Unacceptable Loans 
+
+
+The following types of loans will not be permitted under any circumstances:
+
+
+1. Loans to employees or Directors that are not consistent with Regulation O;
+2. Loans in violation of State or Federal laws;
+Underwriting Guidelines
+The following should be used as underwriting guidelines for extensions of credit.  
+1. Unsecured Loans
+It is expected that in certain situations, loans will be made by the Bank on an unsecured basis.  In those instances, it is also required that sufficient analysis is completed on the Borrower’s financial condition to demonstrate the ability tofully support the extension of credit.  
+* Unsecured loans to  business customers should be supported by sufficient analysis showing consistently profitable and cash flowing operations over a period of at least three years.  The note  must be fully guaranteed by the owners with documented liquidity and/or cash flow that is commensurate to the request.  Finally, the Borrower and/or Guarantor should show the capacity to service the note within Policy standards based on a 5-year amortization period using market rates.
+* Unsecured loans to individual borrowers should be supported by analysis that demonstrates sufficient liquidity and/or cash flow to service the note based on a 5-year amortization period using market rates.  Additional requirements to qualify for individual unsecured credit consist of the following:
+
+
+1. A credit or beacon score of at least 725
+
+
+2. The maximum amount of the unsecured facility should be limited to 10% of the borrower’s reported net worth . This may be exceeded when there are other factors (such as a liquid financial statement, third-party guarantee, etc.) which offset this deficiency.  In such cases, the mitigating factor should be thoroughly explained in the approval document.
+
+
+3. Unsecured credit facilities will have a maximum maturity of two (2) years with a minimum requirement of monthly interest only payments.
+
+
+4. Unsecured credit facilities with proposed maximum credit of greater than $25,000 require the approval of a SVP.
+Unsecured loans do not result in a policy exception due to collateral coverage (or LTV).   
+Unsecured single payment loans should generally be for short-term purposes and structured to be repaid within one year from identifiable sources.
+
+
+2. Secured Loans
+1. Consumer Loans and Leasing, Residential Loans, Construction Loans and Business Credit Cards
+
+
+Lending guidelines for consumer loans, residential loans, consumer leasing, construction loans and business credit cards are addressed in further detail in attached, Board-approved polices.  
+See         Exhibit I:        Residential Lending
+                Exhibit J:        Consumer Lending
+                Exhibit L:        Policy on Lease Financing
+Exhibit M:        Construction Lending (See Exhibit for guidance on Master Guidance Lines of Credit for new residential construction)
+Exhibit S:         Business Credit Card Policy
+
+
+2. Secured Lines of Credit
+Secured Lines of Credit should have a maximum term of two (2) years.  Secured Lines of Credit should include one of the following monitoring requirements: (1) to pay the line of credit balance to zero ($0) for a minimum of thirty (30) consecutive days annually, (2)  to have the availability on the line of credit monitored by a monthly borrowing base certificate (BBC), or (3) to demonstrate that the borrower has sufficient liquidating assets to pay the line of credit to a zero ($0) balance during the normal course of business on an annual basis.  The support of a guarantor(s) that has demonstrated or have the documented capacity to support the note through liquidity and/or cash flow, can mitigate the lack of a monitoring requirements as listed above. 
+Secured Lines of Credit monitored by a borrowing base certificate (BBC) where the BBC is out of compliance will require approval from a SLO or Market President to complete any further advances until it is back in compliance.  The Lender’s and SLO,  Market President’s or higher approval will be documented either in writing on the BBC or attached to the BBC prior to being uploaded into ASPI.  The loan officer is then responsible for completing a ASPI comment summarizing the BBC deficiency, the reason for the non-compliance, the plan and timeframe to cure, and the approval from the SLO or Market President.
+3.  Guidance Lines of Credit (GL)
+
+
+A Guidance Line of Credit (GL) is either an advised or unadvised credit limit for commercial or agricultural borrowers that is extended to efficiently provide financing for interim borrowing needs such as equipment purchases, inventory financing or additional operating capital.  Separate, individual notes will be originated under the GL based on the terms established at the time of approval. The Approval should include the following terms for the individual notes: advance rate, maturity, amortization period, interest rate, fees, security, guarantors, and payment frequency.  
+The GL limit for commercial borrowers will be set up on precision as a Master Plan Agreement (MPA) with the individual notes originating under it.  GL limits should have a maximum term of one (1) year. Lenders are required to continually monitor that each note is recognized under the MPA on Precision and complies with the approved terms and credit limit(s).  
+4. Commercial Loan minimum Debt Service Coverage (DSC) requirements
+
+
+* 1.2:1.0 or better before distributions.
+   * Based on the most recent Fiscal Year End for existing Borrowers, a stabilized Projection for new Borrows, or the Projected or Pro Forma financials when there are material changes to the Borrower due to new debt, rising operating expenses, expanding into a new market, etc.
+   * 1.0:1.0 or better before distributions for Owner-Occupied Real Estate Holding Companies, non-profits and similar entities.
+   * Not applicable for Borrowers that are engaged in land development and similar industries where cash flow is generated through the liquidation of assets.
+   * The Global Debt Service Coverage ratio may be used for Borrowers that are approved based on Global Cash Flow.
+* 1.0:1.0 or better after distributions (also referred to as Fixed Charges Coverage).
+   * Based on the most recent Fiscal Year End for existing Borrowers, a stabilized Projection for new Borrowers, or the Projected or Pro Forma financials when there are material changes to the Borrower due to adding new debt, acquiring a business, rising operating expenses, expanding into a new market, etc.
+   * Not applicable for Borrowers reporting only through the Schedule C of their tax return.
+5. Agricultural Loan minimum Debt Service Coverage requirements
+
+
+* 1.0:1.0 or better after distributions.
+
+
+   * Based on the most recent Fiscal Year End for existing Borrowers, a stabilized Projection for new Borrowers, or the Projected or Pro Forma financials when there are material changes to the Borrower due to adding new debt, operating expenses, expansion, etc.
+3. Collateral Coverage
+Unless the Bank’s collateral position is legally perfected, the loan cannot be considered secured.  Secured lending is predicated on an appropriate loan to collateral value ratio.  The collateral must be susceptible to reasonable valuation at the time that any advances are made and as often thereafter as may be required to properly administer the loan.  
+1. Loans Secured by Real Estate  
+* Collateral Coverage of 1.0:1.0  after appropriate discount:
+Type of Collateral
+	Supervisory Loan-to-Value Limits 1,2
+	Recommended 
+Loan-to-Value 2
+	Recommended Maximum Amortization
+	Recommended Maximum Maturity
+	Raw Land
+	65%
+	65%
+	20 years
+	2 years
+	Agricultural Land
+	85%
+	75%
+	25 years
+	5 years
+	Land Development
+	75%
+	75%
+	20 years
+	3 years
+	Developed Land/Lots
+	75%
+	75%
+	20 years
+	2 years
+	Construction: Commercial, multi-family and other nonresidential
+	80%
+	80%
+	N/A
+	2 years
+	Construction: 1-4 family, residential 3
+	85%
+	80%
+	N/A
+	1 year
+	Improved property – Non-residential and multi-family (5+)
+	85%
+	80%
+	25 years
+	5 years
+	Non-owner occupied 1-4 family
+	85%
+	80%
+	25 years
+	5 years
+	Owner-occupied 1-4 family and Home Equity Loans
+	None 4
+	90%
+	30 years
+	5 years
+	Footnotes:
+      1. The Supervisory Loan-to-Value (SLTV) ratio for construction loans is calculated using the appraisal/evaluation value for the securing property.  The LTV for loans to purchase existing property is the lesser of the actual acquisition cost or the appraisal/evaluation value for the securing property.  Other acceptable collateral that the lender has a perfected security interest in to secure the loan may be included in the SLTV ratio calculation after applying a discount to the other collateral that is consistent with the lender’s usual practices when making loans secured by such collateral.  
+      2. The calculation for both SLTV and Policy LTVs must include any senior lien debt with other lenders.
+      3. The Policy LTV limit of 80% for the construction of 1-4 family residential property is calculated using the appraisal/ internal evaluation value for securing property.  Lenders may also finance the lesser of 80% of the appraisal/internal evaluation value or 100% of hard costs  for strong, established residential contractors to complete spec and custom single-family homes.  Hard costs are defined as all costs directly related to the financed construction project and excludes all realtor costs, profit/general contracting fees and contingency funds.  See the Construction Lending Policy for more information.
+      4. A Supervisory loan-to-value limit has not been established for permanent mortgage or home equity loans on owner-occupied 1- to 4-family residential property. However, for any such loan with a loan-to-value ratio that equals or exceeds 90 percent at origination, an institution should require appropriate credit enhancement in the form of either mortgage insurance or readily marketable collateral.
+
+
+Raw land is land in its natural state with no immediate plans for development.  Raw land has not been cleared and lacks the necessary infrastructure for the completion of new structures on the property.  Recreation and hunting land are both considered raw land.
+Land development involves the improvement of raw land prior to the erection of new structures.  This improvement may include laying sewers, water pipes, utility cables, streets, and other necessary infrastructure for future development.  
+When a loan is made on unimproved real property with no immediate plans for development or construction, it is not considered land development and is instead the financing of raw or agricultural land depending on the zoning and use.
+The Recommended loan to collateral value (LTV) for real estate loans on existing property (s) will be based on the lesser of the cost or appraised/internal evaluation value at origination. However, if the financing  is a ‘non-arm’s length transaction’ where the buyer and seller have a personal relationship resulting in a non-market acquisition cost, then the appraisal or internal evaluation value will be used, and this should be noted in the analysis.  
+
+
+Personal property (moveable property such as furniture, fixtures and equipment) that is valued separately within the appraisal or internal evaluation of securing real estate will be discounted by 50% at origination and by an additional 10%  for each subsequent year after the date of the report for calculating the collateral coverage ratio and discounted LTV.
+Real estate loans will be subject to the appraisal guidelines approved by the Board of Directors.  (See Exhibit K:  Real Estate Appraisal and Evaluation Policy)
+Collateral for real estate loans should normally be secured through a first lien; however, it should be recognized that in certain cases, a subordinate lien may be appropriate.  In such case, the subordinate debt, along with all senior debt, should not exceed the loan to value ratios designated above. The loan to value for such loans shall be calculated by discounting the real estate by the appropriate discount percentage prior to deducting the first lien debt.
+For loans that fund multiple phases of the same real estate project (e.g., a loan for both land development and construction of an office building), the appropriate loan-to-value limit is the limit applicable to the final phase of the project funded by the loan; however, loan disbursements should not exceed actual development or construction outlays. 
+For loans originated in conjunction with the SBA 504 Loan Program, there will not be a policy exception for exceeding LTV limits due to the inherent structure that includes additional short-term exposure that will be repaid through the origination of the SBA’s junior position note. However, these loans will still be considered a Supervisory Loan to Value (SLTV) exception until the SBA’s junior position note is funded and the LTV falls below the SLTV Limits.
+2. Loans not secured by real estate 
+* Collateral Coverage of 1.20:1.0 after discounting pursuant to the following:
+
+
+1. Securities of the United States Government and any agency thereof backed by the full faith and credit of the United States Government at 90% of market value.
+2. Marketable stocks or convertible bonds subject to the provisions of Regulation U of any stock included on the list of “margin stocks” approved by the Board of Governors of the Federal Reserve System may be used as collateral to secure a loan(s) for the purpose which qualifies under Regulation “U” of the Board of Governors of the Federal Reserve System.  The maximum loan shall be 50% of the current market value.  An individual designated by the Loan Committee will be contacted prior to funding to determine the authenticity of the collateral.  
+3. Stocks which are actively traded on the regional “over-the-counter” market, not subject to the provisions of Regulation “U,” at 50% of market value based on the “bid” price where determinable.  For stocks of this nature which are not heavily traded, the Loan Officer needs to factor into the collateral analysis the potential impact on the stock price if the stock was liquidated to repay the loan.  An individual designated by the Loan Committee will be contacted prior to funding to determine the authenticity of the collateral.
+4. Marketable stocks and Mutual Funds listed on public exchanges when not subject to the provision of Regulation “U” at 75% of the market value based on the “bid” price.
+5. Stocks of closely-owned corporations at 75% of the lower of market value or cost. Lender must thoroughly analyze the historic and projected repayment capacity of the business and/or guarantor(s) to repay the proposed note. Term and/or amortization will generally not exceed 10 years.
+6. Bonds rated BAA or better by Moody’s at 70% of market value.  An individual designated by the Loan Committee will be contacted prior to funding to determine the authenticity of the collateral.  
+7. Bank stock at not greater than 100% of book value.  Term and/or amortization will generally not exceed 10 years.  
+8. Cash surrender value of life insurance at the full cash surrender value less any outstanding policy loans, including accrued dividends less an amount equal to the amount of interest due in one year on the amount borrowed.
+9. Savings accounts or certificates of deposit with Central Bank at 100% of the principal amount and savings accounts or certificates of deposit at another Bank at 90% of the principal amount.  
+   * An enforceable control agreement must be in place on savings accounts (including a hold on funds at the principal amount) or certificates of deposit held by another Bank.
+   * Loans that are cash secured by perfected first position lien on deposit accounts (including a hold on funds at the principal amount) or certificates of deposit that comply with the advance rates above will carry risk ratings of 1 with no other possible exceptions.
+10. Accounts receivable at 80% of “eligible” accounts.
+“Eligible” accounts receivable are generally defined as those receivables less than 90 days past due, not subject to dispute, not from a related entity or insider and that exclude any bonded or government accounts receivable.  A higher advance rate is permissible but will be identified as a Policy Exception when financing specific receivables and a reserve is established or the receivables are subject to regular monitoring.
+11. Generally finished goods inventories at no more than 75% of the lower of cost or market when the inventories can be accurately valued and are readily marketable. The Loan Officer can value inventories up to 75%; however, standard policy will be 50%.
+12. Commodities inventories supported by acceptable warehouse receipts up to 85% of value.  Commodity inventories at 75% of the market value from the financial statement.  The market value must be  reasonable at loan closing.
+13. Machinery and equipment at 50% of net book value, 75% of the appraised Market or Sales approach value or wholesale value, 90% of the appraised Orderly Liquidation Value (OLV), or 100% of cost if new or recently purchased from a third party or a lease buyout.  
+   * The cost or an Equipment Appraisal Report may be used as a valuation source for up to three years after the date of the report or acquisition. However, this value must be reduced by: (1) the value of any sold equipment included in the report and (2) a minimum of 10% per year for heavy equipment or 15% per year for titled equipment from the date of the purchase or the Appraisal Report. Additionally, new and used equipment that is acquired after the date of the report may be included at cost as long there is sufficient information in the file to support the value used and any subsequent deductions follow the methodology above . 
+   * Loans secured by equipment shall have an amortization schedule equal to or less than the depreciable life of the collateral.
+14. Aircraft at the lesser of 70% of appraised value or cost if recently purchased from a third party. A 3rd party valuation must be completed on the aircraft.
+15. New and used automobile inventories up to 100% of dealer’s cost OR new and used automobiles up to 80% of the NADA Clean Retail Value. 
+16. Loans secured by leases at 90% of total eligible leases.
+17. Loans secured by Agricultural Personal Property, known as agricultural chattel (machinery, equipment, breeding livestock, etc.), will be at or below 75% of market value.
+   * The valuations of Agricultural Personal Property should be tested based on current market data for livestock and comparable equipment from machinery websites.  This analysis should be completed on the significant assets and provide a conclusion to the reasonableness of the values reported on the statement.
+   * Loans secured by agricultural chattel and equipment shall have an amortized repayment schedule equal to or less than the marketing period or depreciable life of the collateral.
+18. Agricultural Feeder Livestock loans should be completed using individual notes or a Guidance Line that establishes individual notes for each group of livestock.  Agricultural Feeder Livestock loans will advance:
+   * 100% of the purchase price when the Borrower is contributing the feed as equity.
+   * 75% of the purchase price of Feeder Livestock where Central Bank (or another creditor) is also funding the feed for the Feeder Livestock.  
+      * A monthly Borrowing Base Certificate (BBC) will be required when Central Bank is financing both the purchase of the livestock and the feed for the livestock using a revolving loan.  The BBC will apply Policy advance rates to the Borrower’s securing assets and collateral and deduct all direct liabilities of the enterprise to ensure a minimum 25% equity position is maintained.
+19. Agricultural production loans for row crop input expenses should not exceed the lesser of 100% of cost or crop insurance level.  
+20. Loans secured by Personal property (moveable property such as furniture, fixtures and equipment) that is valued separately within an appraisal on commercial real estate will be at 50%.
+21. Loans secured by a Tax Increment Financing (TIF) Note will be at 90% of the net present value of the projected captured tax capacity of the TIF discounted at the note rate over the note term.  See the Construction Lending Policy for more information.
+
+
+3. Agricultural Carryover Debt. 
+
+
+        Agricultural carryover debt is the remaining debt held on an operating line after all the inventory on hand has been sold.  Carryover debt must be properly structured with sufficient supporting analysis to evidence the operation’s ability to service all existing and carryover debt through the historical and future cash flows. It is important to clearly identify the dollar amount and root cause of any carryover debt such as: adverse weather conditions, declining crop prices, poor marketing plans, etc.  Note there are various reasons for not paying off an operating line that does not result in carryover debt such as: prepaid expenses, unsold inventory, equipment purchases, etc. 
+Properly identified carryover debt should be restructured using a separate/new amortizing term note, with clearly identified collateral.  Carryover notes are expected to be structured with amortizations that are reasonable based on the securing collateral, with a preference for seven (7) years or less.  Termed out carryover notes should not contain any exceptions to Central Bank’s Lending Policy.
+Borrowers with carryover debt may or may not be adversely classified.  An adverse classification may not be warranted if the carryover debt is adequately collateralized, appropriately amortized, and if the Borrower’s financial condition is sound and complies with Central Bank’s Loan Policies. However, the borrower may warrant adverse classification (minimally on the amount of the carryover debt) if they do not have the financial capacity to service the carryover and other existing debt in accordance with Central Bank’s Lending Policies, or if the borrower lacks sufficient lendable equity to adequately collateralize the carryover loan.
+
+
+4. Financial Statement Quality Guidelines
+All loans of $10,000 or greater to individuals for commercial purposes, or $25,000 to businesses must be supported by a complete and current financial statement of the Borrower. The borrower and/or guarantor not providing financial statements where all the resulting data used to support a new request is greater than 24 months old will be an exception to this policy. All statements should be signed by the Borrower or an authorized officer thereof certifying that the statements are, to the best of his or her knowledge and belief, true and correct.
+The following table reviews the recommended annual financial statement quality guidelines based upon the size of exposure and can be of lesser quality with approval of majority of Loan Committee:
+When the size of exposure (less term real estate) is:
+	The financial statements at a minimum, should be . . .
+	$0 to $500,000
+	* internally prepared
+* supported by tax returns
+	$500,000.01 to $1,500,000
+	* compiled by a CPA
+* supported by tax returns
+	$1,500,000.01 to $3,000,000
+	* reviewed by a CPA
+* supported by tax returns
+	$3,000,000.01+ or Sales are > $10,000,000
+	* audited by a CPA
+	
+
+5. Guaranties
+In some instances, prudent banking will cause the Loan Officer to request that the Borrower secure the signature of a co-signor or guarantor in further support of the loan.  As a matter of general practice, loans to closely held corporations shall be personally co-signed or guaranteed joint and severally by the principal owners of such corporations and, if deemed necessary, by such other additional co-signors or guarantors that are acceptable to the Bank.  
+All owners with 20% or more ownership in the Borrower should, at a minimum, provide a pro-rata personal guarantee on all notes.  Additionally, the total personal guarantees of the owners must, at a minimum, equal 100% of Central Bank’s total exposure to the borrower.  Guarantors that hold assets through a Trust, with the Trust providing a guarantee, will be considered personal guarantees for meeting the 100% personal guarantee requirement.  Guarantors that hold assets through a Revocable Trust should minimally provide a mirroring guarantee from the Revocable Trust.  The guarantees do not have to be unlimited.
+Loans that are not guaranteed by individuals should have enhanced supervision by the lender and monitoring through loan covenants.  The covenants for loans that are not 100% personally guaranteed should include the following: (1) a minimum tangible net worth, (2) a minimum working capital or current ratio, (3) fixed charges coverage of ≥ 1.00x, (4) debt service coverage of ≥ 1.20x and (5) a monthly BBC (if applicable).
+The lack of personal guarantees for Borrowers that do not have individual owners and are organized as a nonprofit, ESOP (Employee Stock Ownership Program) or similar entity type will not be identified as an exception to the General Loan Policy.
+The additional support provided by a personal guarantee(s) may enhance a credit’s risk rating if the guarantor(s) display the capacity and willingness to support the debt.  A presumption of willingness is appropriate until financial support becomes necessary and at that point it must be demonstrated, or the beneficial effect must be eliminated.  Credits with a U.S. Government Agency guarantee are usually accorded a Pass rating for the guaranteed portion.
+Guaranties will be updated as needed.  if a credit facility has only term debt, the guaranty should be updated at each renewal unless the present guaranty is still considered valid.  
+The Bank shall not require the signature of an applicant’s spouse or other person, other than a joint applicant, on any credit instrument if the applicant qualifies under the creditor’s standards of creditworthiness for the amount and terms of the credit requested.  However, the Bank may require the signature of the applicant’s spouse or other person on any instrument necessary, or reasonably believed by the Bank to be necessary, under State law to create a valid lien.
+6. Renewed Loans
+Any customer whose loan is going to be renewed or extended must pay interest current.  Secured single payment loans should generally be for short-term purposes and structured to be repaid within one year from identifiable sources.  
+
+
+Loan Administration and Documentation
+1. Loan Grading system for Commercial and Agricultural Lending.
+See: Exhibit R – Loan Review and Grading, for further detail on the classification of loan risk ratings. 
+2. Loan Presentation Forms for analyzing loans owned by Central Bank.
+For each loan authorization approved, or loan made, the responsible Loan Officer will document the loan as appropriate before any funds are disbursed utilizing the Long Form Loan Presentation, Short Form Loan Presentation, Performing Term Loan Presentation, Performing C&I Loan Presentation, Loan Setup Sheet or Memo Template downloaded from the SharePoint intranet site.  
+In general, loans shall have memorandums / Loan presentations prepared.  Memorandums of these loans shall recite the circumstances under which the authorization or loan was made and shall include (1) identification of the Borrower, (2) amount of the loan and the Individual and Group Exposure calculations, (3) the basis on which the authorization or the loan was made (e.g., unsecured, description of collateral, LTV, etc.), (4) use of the proceeds, (5) plan of repayment, (6) all covenants, terms and reporting requirements, (7) statement as to the price to be charged (interest rate and fees),  (8) appropriate financial comments and (9) assign a risk rating.
+The following sections detail the general guidelines for using Central Bank’s loan presentation forms based on the risk rating of the loan relationship.  Additionally, new and modified versions of the Loan Presentation templates may be utilized from time to time by Bank staff.  Deviations from these guidelines are allowed based on factors such as overall relationship risk, historical and projected performance, collateral position, and support provided by guarantors.  All deviations should be supported in the loan presentation or through approval by one of the following: Loan Committee, CEO, President, Chief Loan Officer, Chief Credit Officer or Credit Analyst Supervisor.       
+1. Loans Risk Rated – (1) Excellent; (2) Good
+* In general, an Annual Analysis shall be required on these credits, if not otherwise waived by the conditions set forth in section C. Annual loan Reviews, under “Waiving Annual Reviews”
+* A Memo, Short Form, Performing Loan or C&I Loan Presentation shall generally be considered adequate for these credits. 
+   1. Loans 100% secured by cash collateral may use the Memo Template, regardless of the dollar amount of exposure.
+* Annual Reviews for relationships consisting entirely of performing term debt(s) that are risk rated 1 or 2 may be completed using the  Memo Template regardless of the aggregate exposure.  Note that the Memo must address the nine (9) requirements listed in the section above (Loan Administration and Documentation. Section B.) 
+
+
+2. Loans Risk Rated – (3) Satisfactory; (4) Monitored ($500,000 and under)
+* In general, an Annual Analysis shall be required on these credits, if not otherwise waived by conditions set forth in section C. Annual loan Reviews, under “Waiving Annual Reviews” 
+* The Annual Analysis shall be completed using the Long Form, Short Form, Performing Term Loan, C&I Loan or Memo templates shall generally be considered adequate for these credits.
+
+
+3. Criticized Loans  – (4) Monitored over $500,000; (5) OAEM; (6) Substandard; (7) Doubtful; (8) Loss
+* Loans with these risk ratings require a Criticized Asset Report (CAR) to be completed quarterly or bi-annually.  See Problem Loan Administration, Section C. Criticized Loans for further detail on the handling of these loan types. 
+
+
+In addition to the guidelines above covering the recommended analysis based on the relationships risk rating, loan officers may utilize the Loan Setup Sheet Template for new and interim requests if one of the below approval methods are utilized:
+* To complete credit actions using the Executive Approval Method (See Exhibit E: Loan Approval Methods and Authorities).
+* To complete credit actions using the SLO Approval Method (See Exhibit E: Loan Approval Methods and Authorities).
+
+
+3. Annual Loan Reviews
+In general, loan officers will complete annual loan reviews for revolving credit commitments of $25,000 or greater and performing term commitments of $1,000,000 or greater.  It is important to note that the limits for Annual Reviews are based on the Borrowing Group exposure of the relationship. Annual Reviews for relationships with revolving credit commitments of less than $1 million in Borrowing Group exposure will minimally be reviewed by loan committee as pre-approvals.  Credits below these exposure thresholds will be monitored by payment status.  
+Waiving Annual Reviews
+Annual reviews for performing term credit relationships with Borrowing Group exposure greater than $1,000,000 may be waived provided all the following conditions are met: 
+* All debt with the Borrower is seasoned, performing term debt.
+* The waiver of annual reviews has been approved by Loan Committee, CEO, President or CLO and is documented in ASPI.
+* Payments are current with no greater than 30 day past due payments. 
+* Borrower’s DDA accounts with the Bank are not consistently overdrawn.
+* The loan to value is below 70%.
+* The Risk Rating of the credit relationship is “3” or better.
+
+
+After approval of the waiver of annual reviews for a Borrower, the Lender will continue to obtain updated financial information and complete comments consistent with Section D. Loan Comments until the exposure is $250,000 or less.  Any deviations from this must be expressly approved as part of the annual review waiver. Additionally, ASPI should be updated to reflect the waiver of annual reviews.
+
+
+1. Collateral Analysis:
+Personal property (moveable property such as furniture, fixtures and equipment) that is valued separately within the appraisal for commercial real estate collateral will be discounted by 50% at origination and by an additional 10%  for each subsequent full year after the date of the report when calculating the collateral coverage ratio and discounted LTV.
+Collateral analysis for commercial real estate at loan origination will be completed using the lesser of the cost (plus planned improvements) or appraised value.  For existing real estate financed at the lesser cost basis, the appraised value may be used in the collateral analysis in subsequent presentations when both of the following conditions have been met:
+* the securing real estate has been owed by the borrower for > 12 months, and
+* the actual performance of the securing real estate (based on financial statements) approaches or exceeds the income approach from the appraisal.
+The collateral analysis may use the “as complete,” “as stabilized” or similar value in subsequent analysis when there is sufficient data to demonstrate that the collateral has met or exceeded the key metrics for the subject value in the appraisal. 
+The reasonableness of the collateral value for non-owner occupied commercial real estate obligations may be analyzed as part of the annual review when the appraisal or internal evaluation is greater than 18 months old and it is deemed necessary.  This will be completed by comparing the income approach value from the appraisal to the most recent actual or adjusted fiscal year end or trailing 12 months performance. The cap rate may also be adjusted to the current market level when there is sufficient data to support the change.  When the analysis indicates that there is deterioration in the collateral value an Adjusted Advance Rate will be used in the collateral analysis. The Adjusted Advance rate will reduce the applicable advance rate proportionately to the calculated decline in value of the collateral based on the income approach analysis.
+Loans secured by new and used equipment may utilize an adjusted cost basis value that deducts a minimum of 10% per year for heavy equipment or 15% per year for titled equipment from the date of the purchase when completing the collateral analysis in subsequent annual reviews, if there is adequate information in the loan file to justify the value on an ongoing basis. If inadequate data exists on the collateral value, the net book value and a 50% advance rate will be utilized to evaluate the collateral position. 
+At origination, the collateral analysis for secured lines of credit will be completed using either: (1) a loan balance of $0 if the Borrower did not previously have an operating note, or (2) the actual outstandings on an existing operating note with another lender.  Note that the outstanding balance used should correspond to the most recent financial statement date used for valuing the securing assets.  At origination, the collateral analysis narrative should also discuss the hypothetical collateral position that assumes the proposed note is fully extended, but non-compliant collateral coverage in this case will not be identified as an exception as the additional funds would reasonably result in additional collateral available to offset the deficiency. 
+A Collateral Real Estate Mortgage (CREM) establishes a continuing lien, at the mortgage amount, against real estate in South Dakota for a period of 5 years (and 60 days).  The mortgage amount of a CREM does not fluctuate with paydowns or if the debt is fully retired.  CREMs are commonly used to secure revolving debt for commercial and agricultural Borrowers.  The collateral analysis for real estate secured by a CREM may use the mortgage amount for the gross value with a 100% advance rate if the mortgage amount is less than the net value of the securing property, after discounting the collateral by the applicable Policy advance rate.  For example, if there is a $500M 1st position CREM on 160 acres of farmland valued at $1,600M. The CREM amount of $500M is well below the net value of $1,200M ($1,600M x 75% advance rate) of the farmland, so the collateral analysis will show the $500M advanced at 100% in the collateral analysis.  If the CREM is not in 1st position, then the 100% advance may be used (as explained above) with the senior debt deducted as part of the net value calculation.  Note that the narrative should clearly demonstrate the applicability of the 100% advance rate on the CREM as explained above.     
+2. Title Coverage for Real Estate secured loans
+Lending staff must ensure that real estate taken as security for a loan has a title that is clean and free of any defects.  This requirement must be accomplished prior to closing a real estate secured loan through the completion of one of the following methods:
+
+
+Method #1. - Obtaining a written legal opinion by an Iowa attorney showing marketable title in the mortgagor, describing any existing liens, and stating that the Bank’s mortgage, deed of trust, or similar instrument is a lien for transactions in the state of Iowa.  An Iowa Title Guaranty Certificate issued by the Iowa Title Guaranty Division of the Iowa Finance Authority satisfies this requirement for loans originated in Iowa.
+
+
+Method #2. - Obtaining Title insurance written by an insurance company licensed to do business in the state in which the real property is located for transactions outside of the state of Iowa.  The Title Insurance must describe any existing liens and insure the title to the real property and the validity and enforceability of the mortgage, deed of trust, or similar instrument as a lien on the real property.
+
+
+Method #3. – Obtaining a Lien Search, Construction Commitment, or other similar document to establish lien position for short-term real estate secured loans originated outside of Iowa.  In these situations, the Borrower will be required to purchase a Title Policy when the note is no longer a short-term commitment.
+
+
+It is strongly recommended to use Method #1. or #2. above for commercial real estate transactions.  However, Central Bank and the IDOB acknowledges there are certain real estate transactions in which other factors (such as cost and competition) outweigh the need to obtain Title Insurance, thus allowing for the use of Method #3.  However, the IDOB limits the aggregate amount of loans completed using Method #3. at 100% of the Bank’s aggregate capital.  Additionally, no real estate loans to directors, officers, or principal shareholders or their related interests shall be allowed to use Method #3.
+
+
+
+
+3. Annual Reviews for Criticized Loans
+The completion of a Criticized Asset Report (CAR) will satisfy the Annual Review requirement for impacted credits that are in the workout phase where there are no further credit actions required. Additionally, a CAR can satisfy the Annual Review requirement for credits where the loan officer wants to continue the lending relationship. Reviews of these credits should contain adequate analysis of the relationship and minimally feature updated year-end financial data. 
+* If a Credit Action is subsequently required; then the CAR may be updated and utilized, or one of the other presentation templates may be completed, as the source document for the Credit Action. The presentation format used will depend on the loan size, risk level and overall complexity of the credit.   
+
+
+If a credit is upgraded, or a CAR is no longer required, then the Annual Review requirement will be reinstated.  The next annual review should be completed upon receipt of the next fiscal year-end financial information and the next annual review date will be added to ASPI that provides sufficient time to complete the annual analysis.
+4. Secondary Exposure in Annual Reviews
+As part of the annual review process the Bank will review and/or approve any secondary exposure the borrower is approved for, and the Treasury Management Dept. will complete a risk rating for the borrower’s ACH exposure. (See Exhibit G: ACH Policy, Section XIII. ACH Underwriting, Approval and Review Guidelines for further detail). If during the review the risk rating for ACH Exposure risk rates a 4, approval from a senior loan officer is required and if the Exposure risk rates a 5 or worse Loan Committee approval must be obtained to retain ACH Processing capabilities.
+4. Loan Comments
+
+
+Lending staff are expected to complete descriptive loan comments in ASPI after any meaningful events or communication with the Borrower or upon receipt of new information regardless of the exposure.  
+Additionally, performing term credit relationships with Borrowing Group exposure below $1,000,000 should have the following completed: 
+* For Borrowing Group Exposure of $250,000 to $1,000,000 
+The Lender should complete a Loan Comment upon the receipt of updated financial information.  The comment should note compliance with all loan covenants, calculate the general cashflow measures (debt service coverage and fixed-charges coverage ratios), provide the loan-to-value ratio and note any other material changes.  The comment will be reviewed by the Credit Department prior to completion.  Credits with declining trends that could impact repayment capacity, or the assigned Risk Rating, will be reviewed by Loan Committee to determine if additional action is required.
+
+
+* For Borrowing Group Exposure of less than $250,000
+These relationships will primarily be monitored by payment status.  However, the Lender should complete a loan comment when there are material changes to the Borrower or when there is pertinent new information.  Credits with declining trends that could impact repayment capacity will be reviewed by Loan Committee to determine if additional action is required
+
+
+5. Electronic Credit File 
+An electronic credit file shall be established and maintained for each commercial or agricultural borrower, which shall include the Borrower’s current financial statement and the memorandum described above if applicable.  The credit file shall reflect the Borrower’s loan and customer history with the Bank and shall include copies of such other documents and correspondence as may be related to the Borrower’s relationship with the Bank.
+
+
+6. Letter of Counsel
+A Letter of Counsel may be required by the CEO, President, Chief Loan Officer, Chief Credit Officer, VP Loan Operations or Staff Attorney for credit relationships that have complex ownership or organizational structures. The Letter of Counsel must be from the Borrower’s attorney, and it must detail the authorized signers and titles.
+
+
+7. Agricultural Loan Inspections
+The Bank recognizes that agricultural/farming operations have inherent collateral risk and therefore a collateral inspection may be required, the following are the guidelines for loan inspections based on the type of agricultural/farming operation:
+Row Crop Only Operations (Risk Rated 3 or better)
+* Lender should inspect the operation on an annual basis. 
+
+
+Row Crop Only Operations (Risk Rated 4 or worse)
+* Lender must inspect the operation on an annual basis. 
+
+
+Livestock Operations (Risk Rated 3 or better)
+* Lender must inspect the operation on an annual basis. 
+
+
+Livestock Operations (Risk Rated 4 or worse)
+* Lender must inspect the operation on a semi-annual basis. 
+
+
+Loan Committee may recommend changes to the frequency of inspections that will be documented in the approval document. Committee recommendations that conflict with the above policy will not result in in a policy exception. 
+8. Annual Review and Renewal Process for Agricultural Credits 
+Central Bank’s Agricultural Credit Annual Review and Renewal Process for existing customers begins after harvest is completed and must be finished by December 31st each year.  The process is structured to allow the Bank’s customers to know if financing will be extended for the next year as early as possible; and if it will not be to provide them with reasonable time to seek it elsewhere.  
+The process is  driven by the relationship risk rating as follows:
+* RR 3 or better credits require updated information on the borrower’s current assets and current liabilities with analysis completed using the Ag Memo template.
+   * If there is no meaningful deterioration, or other factors that increase risk for the credit, then Lender can propose to set up their operating facilities for the next year with a maturity of 12/31. 
+      * A full analysis of the credit using the Ag Template then must be completed by 6/1 of the following year including analysis of the prior year’s tax return and any missing information from the renewal. 
+   * If the Borrower has a risk rating of 2 or better with aggregated credit exposure of less than $2,000,000, then the completion and approval of the Ag Memo template will satisfy the annual review requirement for the credit.
+   * If the analysis indicates deterioration or tightening for the operating, then the Lender must assess the risk rating and can either: (1) propose to extend the current year’s LOC to 3/1 and set up next year’s LOC with 3/1 maturity or (2) to exit the credit.  
+      * Note that the availability provided should be adjusted to only cover reasonable, normal expenses that would be incurred by the 3/1, based on supporting data provided by the Borrower. 
+      * A full analysis using the Ag Template then must be completed prior to 3/1 with a suggested plan for the credit. 
+      * If the plan is to exit, then the financing would be extended for a reasonable time (60 to 90 days) to allow time for the customer to seek financing elsewhere.
+* RR 4 or worse credits require a full, updated financial statement from the borrower with analysis completed using the Ag Memo Template.  Sufficient analysis must be completed to support the decision to continue with the financing or exiting the credit.
+   * If the analysis supports continuing, then the Lender can extend existing LOC to 3/1 of the next year and set up an intermediate LOC for prepaid and upcoming year expenses with 3/1 maturity. 
+      * Note that the availability provided should be adjusted to only cover reasonable, normal expenses that would be incurred by the 3/1 based data provided by the Borrower.
+      * A full analysis using the Ag Template then must be completed prior to 3/1 with a suggested plan for the credit. 
+   * If the analysis requires the bank to exit the credit, then the financing would be extended for a reasonable time (60 to 90 days) to allow time for the customer to seek financing elsewhere.
+* As discussed in Central Bank’s General Loan Policy (see Loan Administration and Documentation, Section B.) the CEO, President, Chief Loan Officer, Chief Credit Officer, and Credit Analyst Supervisors may approve modifications to the presentation templates or  deviations from the usage guidelines based on factors such as the overall relationship risk, historical and projected performance, collateral position, and support provided by guarantors.  
+Other Policies
+
+
+The Bank recognizes the necessity to consider other risks (such as environmental concerns, flood hazards and the safeguarding of customer information) in the extension of credit and administration of existing loans.  The Bank’s policies regarding these risks, include but are not limited to the following, which are attached as exhibits: 
+
+
+See         Exhibit N        Environmental Risk Program
+                Exhibit O        Flood Policy Statement
+                Exhibit P        Information Security
+
+
+Problem Credit Administration
+
+
+1. Problem Credit Situations
+The Bank recognizes that there will be circumstances in which customers are currently experiencing financial difficulties or may be making management decisions that unknowingly may result in future financial problems.  These current or future difficulties could be short term in nature or may persist and could expose the Bank to a potential loss situation.  
+It is the responsibility of each Loan Officer to monitor the status of delinquent loans within their portfolio and aggressively pursue their collection.  Any time a portion of a loan is past due, the entire loan balance is considered delinquent for reporting purposes.  Extensions, while often times appropriate, should not replace sound collection efforts.  
+It is the responsibility of each Loan Officer to promptly report to the Loan Committee each deteriorating credit which he/she deems to be of concern.
+
+
+2. Review of Past Due Loans
+1. The Loan Committee shall review the past due and non-accrual loans, other real estate held, and loans in foreclosure and will be responsible for appropriate corrective action.  Problem loans, when identified, shall immediately be discussed with the Loan Committee.
+2. The Board of Directors shall be furnished a monthly report of the total number and dollar amount of past due loans over 30 days, non-accrual loans and other real estate owned.
+
+
+3. Criticized Loans
+The Watched Asset Report (WAR) is generated daily and serves as a monitoring device for all credits which contain above-average risk.  A credit will be placed on the WAR if characteristics are evident that warrant a Special Mention, Substandard or Doubtful risk rating.  (See Exhibit R:  Loan Review and Grading.  Each credit added to the Bank’s Watched Asset Report will have an action plan developed by the Loan Officer at the time of downgrade.  
+All risk rating changes must be approved by Loan Committee, the CEO or the President.  A Criticized Asset Report (CAR) should be completed either at the time of the downgrade or at the next quarter end that a CAR is required for credits that are moved to a risk rating of 4 or worse.  
+Criticized Asset Reports (CAR’s) will be completed on a quarterly basis for 4-rated credits with an exposure greater than 10% of the then current Legal Lending Limit (LLL) calculation and all 5, 6, 7, and 8-rated credits.  4-rated credits with greater than $500M in exposure but less than the 10% LLL calculation threshold will have a CAR completed Bi-Annually in March and September and will be monitored through the Other Criticized Credits report during the December and June quarter ends.  Credits that do not have a book balance are not required to have a CAR completed.
+The CAR will summarize:  
+1. The Borrower and the reason(s) why the credit appears to present additional credit risk to the Bank.  
+2. Strategy identifying specific time frames with target dates to rehabilitate the credit’s deficiencies and retain it as a long-term customer; rehabilitate the credit sufficiently to allow it to seek alternate refinancing or liquidate the credit.
+3. Whether a shortfall in repayment is likely based on an assessment of both primary and secondary repayment sources.
+4. The amount of a recommended specific allocation in the ACL.
+
+
+CAR’s may be utilized for Annual Loan Reviews or Credit Action’s, see ‘Loan Administration and Documentation - C. Annual loan Reviews - 4. Annual Loan Reviews’ for Criticized Loans for further detail.
+
+
+Upon the completion of quarterly CAR’s, Loan Committee shall hold a “CAR Review Meeting” to review the CAR’s and provide approval before the reports are imaged into the electronic file. 
+
+
+The file comments should augment the Watched Asset Report and provide details on the intended plan of action.  When circumstances have improved sufficiently to warrant it, the Loan Officer should recommend the credit be removed from the Bank’s Watched Asset Report. Upgrades should generally be based on fiscal year-end financial statements. The Loan Officer’s recommendation must be in writing with approval by the Loan Committee, CEO or President.
+4. Non-Accrual Loans
+It is the Bank’s policy to quickly and aggressively recognize situations where the Borrower’s repayment ability has become impaired.  In such instances, the responsible Loan Officer is expected to promptly recommend to the Loan Committee that a loan be placed on non-accrual. Loans that reach ninety (90) days past due or more will be Considered for non-accrual at Loan Committee weekly, including whether such loans are well secured and in the process of collection. However, to be on non-accrual, a note does not have to be ninety (90) or more days past due.  Exceptions to this non-accrual policy are permissible if approved by Loan Committee, CEO or President based on the loan’s security and its collection status and any such approval will be documented in the Loan Committee meeting minutes or similar source document.  Any loan risk rated as Doubtful should be carried as non-accrual.  Commercial and agricultural loans rated as Substandard may or may not be granted non-accrual status.  The Bank should not accrue interest on partially charged-off loans excluding government guaranteed loans, or on direct debt to borrowers with charged-off loans, unless the charged-off debt has been formally forgiven.  
+All accrual status changes will be ratified by the Board of Directors in the month following the change.  At the time a loan is placed on non-accrual, all interest accrued to date should be reversed off the Bank’s books.  Loan Committee, CEO or President may recommend that a loan be returned to accrual status.
+Requests to restore accrual status must be approved by the Loan Committee, CEO or President and will be ratified by the Board of Directors the month following the change.  Loans may be returned to accrual status, even if not current, provided the following two (2) criteria are met:
+* All principal and interest amounts contractually due are reasonably assured of repayment.
+* Borrowers generally should establish a six (6) month period of satisfactory payment performance in accordance with the contractual terms.
+
+
+Even if these conditions are met, previous charge-offs taken should not be recovered until the debt remaining on the books has been paid in full.
+
+
+5. Bankruptcy
+Applicants who previously filed bankruptcy, personally or by a company they had 20% or greater ownership in or control of, should be analyzed more carefully and will be approved as an exception to the Loan Policy.  If mitigating factors exist, such as an adequate number of years have passed since bankruptcy was filed, the bankruptcy was caused by an extreme medical crisis, or other extenuating circumstance. Then a SVP/SLO or higher may approve the submission of the application to the appropriate approval process. 
+Loans to Borrower in bankruptcy with no collateral should be classified as loss and charged-off unless the bank can demonstrate and document that repayment is likely to occur.  Loans to Borrowers in bankruptcy with collateral may be written down to the value of the securing collateral, less any estimated holding and selling costs.  Any loan balance for borrowers in bankruptcy that is not charged-off should be classified as Substandard until the borrower re-establishes the ability and willingness to repay for a period of at least six (6) months.
+6. Loan Charge-Offs
+
+
+A loan charge-off occurs when the bank considers the loan balance to be uncollectible. Analysis for charge-offs will be completed on all available sources of repayment such as projected future income, guarantor capacity, and collateral (including reasonable holding and selling costs).  For smaller, more homogeneous loan pools the determination can be made solely based on delinquency.  
+
+
+The bank will assign a status of active or inactive as part of the charge-off processing.  The bank will continue its efforts to recover all principal and interest on loans designated as active charge-offs.  However, the recovery efforts for loans identified as inactive charge offs will cease.  Inactive charge-offs will generally result from the loan being part of a bankruptcy filing by the borrower or other similar circumstances.   
+
+
+7. Debtors Experiencing Financial Difficulties
+Borrowers will be evaluated to determine if they are experiencing financial difficulties when completing a modification on a loan that is rated Special Mention or worse.  This evaluation is necessary as additional disclosures to Central Bank’s financial statements are required for modifications to loans where the Debtor is experiencing financial difficulties regardless of whether the loan is new or a continuation of an existing loan.  
+The following indicators will be considered to determine if a borrower is experiencing financial difficulties:
+* The borrower is currently in payment default on any of its debt. In addition, the lender shall evaluate whether it is probable that the debtor would be in payment default on any of its debt in the foreseeable future without the modification. That is, a creditor may conclude that a debtor is experiencing financial difficulties, even though the debtor is not currently in payment default.
+* The borrower has declared or is in the process of declaring bankruptcy.
+* There is substantial doubt as to whether the borrower will continue to be a going concern.
+* The borrower has securities that have been delisted, are in the process of being delisted, or are under threat of being delisted from an exchange.
+* On the basis of estimates and projections that only encompass the borrower’s current capabilities, the bank forecasts that the debtor's entity-specific cash flows will be insufficient to service any of its debt (both interest and principal) in accordance with the contractual terms of the existing agreement for the foreseeable future.
+* Without the current modification, the borrower cannot obtain funds from sources other than the existing creditors at an effective interest rate equal to the current market interest rate for similar debt for a nontroubled debtor.
+When the bank determines that a borrower is experiencing financial difficulty, if the restructuring results in only insignificant payment delays, inclusion in the Bank’s additional disclosures are not required. If the loan was previously restructured, the bank will consider the cumulative effect of past restructurings made within the last 12-months prior to the current restructuring when determining whether a delay in payment resulting from the current restructuring is insignificant.  The following factors may indicate that a restructuring results in a delay in payment that is insignificant:
+
+
+* The amount of the restructured payments subject to the delay is insignificant relative to the unpaid principal or collateral value of the debt and will result in an insignificant shortfall in the contractual amount due.
+* The delay in timing of the restructured payment period is insignificant relative to any one of the following:
+* The frequency of payments due under the debt
+* The debt’s original contractual maturity
+* The debt’s original expected duration.
+
+
+If it is determined that the borrower is experiencing financial difficulties and the modification results in a delay in payment that is significant, then the bank will identify on the system of record each of the following that are applicable.  
+* Interest rate reductions, 
+* Principal forgiveness, 
+* Other than insignificant payment delay, or 
+* Term extension. 
+For the purpose of these Bank disclosures, covenant waivers and modifications of contingent acceleration clauses would not be considered term extensions.
+
+
+Overdrafts
+
+
+It is the policy of the Bank to discourage overdrafts not covered by participation in the established Overdraft Reserve Program.  Based upon the information at hand, some overdrafts will be honored.  Overdrafts represent an unauthorized, unsecured extension of credit and subsequently may only be approved within appropriate loan authorities.  If the Borrower has several accounts, all overdrafts for that day must be combined.  The level of approval necessary will be based on the amount of the combined overdrafts only, using the unsecured credit limits from the Individual Lending Authorities table of Exhibit E.  (See Exhibit E:  Loan Approval Methods and Authorities).  In those situations in which Loan Officers have authorized the payment of an overdraft, an acceptable deposit sufficient to cover the overdraft should be made the day after the presentment of the items overdrawing the account.  
+
+
+Participations
+
+
+1. The Bank will periodically be requested to purchase loans from other financial institutions.  Documentation requirements for loans purchased will be the same as if made by the Bank.  The purchase of loans is also subject to the requirements of the approval process for direct lending.  
+
+
+2. An independent credit assessment will be made to determine if the loan the Bank is considering to purchase meets the credit standards and requirements set forth by this Loan Policy for loans made directly by the Bank.
+
+
+3. The Bank may find it necessary to sell a portion of a loan to an affiliate or correspondent bank to meet the needs of the customer and remain in compliance with the Loan Policy and the Bank's legal lending limit. In such cases, the participant bank will have access to all information available to the Bank.
+
+
+4. Loan Participations purchased or sold involving more than one participating bank will be approved as an exception to Loan Policy.
+Insider Transactions
+
+
+1. The following parties are considered Insiders for purposes of this Loan Policy:  directors, executive officers (as determined by Board of Directors resolution), principal shareholders (an individual or company that directly or indirectly owns, controls, or has the power to vote more than 10% of any class of voting stock of the Bank), and any of the above related interest(s) (any entity) that the Insider controls or from which the Insider receives funds, uncompensated services, or other benefits.  Control is defined as having the power to exercise a controlling influence over the management or policies of a company and is further outlined in Section 215 of Regulation O.
+
+
+2. All Insiders shall conduct their business affairs with such standards of integrity that no conflict of interest exists or could reasonably be construed to exist.  They are to be alert to potential conflicts of interest in which personal benefit or gain may be the result of relationships with Bank customers and in interference with the exercise of independent judgment in the handling of Bank business.
+
+
+3. All Insiders’ direct and indirect liabilities to the Bank must be extended on terms and conditions, including interest rates and collateral, consistent with those prevailing at the time in comparable transactions with other persons or entities.  Any such advances of credit may not involve more than normal risk of repayment or present other unfavorable features.
+
+
+4. All extensions of credit to an Insider, including all direct and indirect liabilities to the Bank, must be approved in advance by a majority of the entire Board of Directors and the interested party shall not only abstain from participating, directly or indirectly, in the voting, but shall also leave the room during discussion and voting on the advance.  
+
+
+5. Prior approval of the Board of Directors is required on all extensions of credit to any Insider of the Bank or Insider of its affiliates in an amount that, when aggregated with all other extensions of credit to that person or his/her related interests, exceeds $500,000.
+
+
+6. Board of Directors’ approval of all Insider credit extensions does not constitute a binding commitment to extend credit.  The Board of Directors’ approval gives the Loan Officer the authority to grant credit, issue commitments, negotiate the terms and conditions of the credit and manage the credit in a prudent manner within the dollar limits set forth in the Board of Directors’ approval.  The Loan Committee has the ability to decline credit even in the event the Board of Directors previously approved the credit.  
+
+
+7. The Bank does not pay overdrafts of Directors, Executive Officers, and Directors or Executive Officers of Bank Affiliates unless the payment of funds is made in accordance with either of the following:
+1. A written, pre-authorized, interest-bearing extension of credit plan that specifies a method of payment.
+2. A written, pre-authorized transfer of collected funds from another account of the account holder at the state bank.
+
+
+8. Credit extensions to executive officers will be preceded by the submission of a 
+detailed, current financial statement.  Such obligations will, at the Bank’s option, become due and payable at such time as the executive officer may become indebted to any other bank or banks in an aggregate amount greater than the amount specified for a category of credit described in this section.  Credit extension to executive officers must meet the following standards:
+
+
+1. A loan in any amount to finance or refinance the purchase, construction, maintenance, or improvement of one residence (does not have to be primary residence).  
+2. A loan in any amount to finance the education of a child or children of the executive officer.
+3. Loans which in the aggregate do not at any one time exceed the higher of $25,000 or 2.5% of the Bank’s aggregate capital, but in no event more than $100,000.
+4. Loans which do not, in the aggregate, exceed the principal amounts of segregated deposit accounts which the Bank may lawfully set off.  An interest in or portion of a segregated deposit account does not satisfy the requirements of this subparagraph if that interest or portion is also pledged to secure the payment of a debt or obligation of any person other than the executive officer.  If the deposit is eligible for withdrawal before the secured loan matures, a Senior Vice-President of the Bank must approve the release of any collateral. 
+5. Loans secured by bonds, notes, certificates of indebtedness, or treasury bills of the United States or by other such obligations fully guaranteed by the United States as to principal and interest.
+6. Loans secured by unconditional takeout commitments or guaranties of any department, agency, bureau, board, commission, or establishment of the United States or any corporation wholly owned directly or indirectly by the United States.
+Such loans and extensions of credit shall not exceed an amount totaling more than 15% of the aggregate capital of the Bank, except for loans and extensions of credit identified in subparagraphs (4), (5), and (6).  A majority of the Board of Directors, voting in the absence of the applying executive officer, shall give its prior approval to any obligation of an executive officer and this approval shall be recorded in the minutes of the Board of Directors.  Such approval may be in the form of a pre-approved line of credit.  Advances outside of the pre-approved line of credit will require specific prior approval.
+
+
+9. All officers designated as executive officers must report any and all borrowings from correspondent banks to the President who shall, in turn, report all such borrowings, including any and all borrowings by himself or herself from all sources, to the Board of Directors.  The report shall state the officer’s name, date and amount of such extensions of credit, security and the purposes for which the proceeds have been or are to be used.
+
+
+10. A list of the insider transactions as described in this section shall be reviewed by the Board of Directors.  
+Employee Loans
+
+
+1. Loan requests for all employees not subject to Section XIV. above, shall be reviewed and approved or denied in accordance with the Employee Loan Procedures.
+Exceptions to Loan Policy
+
+
+1. In appropriately meeting the legitimate credit needs of the community, there will be many loan requests that, if granted, would represent exceptions, in all or in part to this Loan Policy.  It is recognized that some of the exceptions will be warranted.
+
+
+2. Exceptions to Loan Policy will be recognized at loan origination, identified as an exception in the corresponding presentation , specifically approved by an SVP/SLO or the Loan Committee and reviewed by the Board of Directors.
+
+
+3. It is the responsibility of each Loan Officer to recognize, justify and advocate those exceptions that he or she feels are warranted to properly meet the legitimate needs of the community within the framework of sound and prudent banking.
+Tickler System
+
+
+In order ensure proper loan administration, the Bank will use its “Tickler System” (currently referred to as ASPI) as part of activity management for the management of its loan files 
+At a minimum and for all borrowers, the following information, when applicable, should be tracked:
+1. Financial Statement Information
+2. Tax Return Information
+3. Periodic Reviews
+4. Tracking of Real Estate Tax Payments
+5. Tracking of Insurance
+6. Tracking of hazard and flood insurance, if applicable
+7. Inspections
+8. Certificate of Good Standing, Expiring Corporate/Commercial Real Estate Mortgage (CREM) dates, Expiring UCC dates, and Final Title Policy/Searches
+
+
+Information on the tickler system should be updated and reviewed as needed, but annually at a minimum.  Any item thirty (30) days and older should be discussed with the lender; items ninety (90) days and older shall be reviewed by Central’s credit department        
+  
+Training and Audit Requirements 
+
+
+      1. Staff Training
+It is the policy of the Bank to ensure that a comprehensive formal training and education program is maintained that is specifically designed for each lending staff’s primary duties. 
+It is the responsibility of the Human Resource Department with the concurrence and approval of the Board of Directors, to ensure that:
+1. All Staff receives ongoing educational and training sessions that are both general in nature and specifically tailored for their responsibilities and duties;
+2. Educational and training sessions are coordinated and scheduled in consultation with the Human Resources Director and the Bank’s legal counsel; and
+3. Employee participation is appropriately tracked and documented.
+NOTE: Staff is responsible for reporting to the Human Resource Department any educational or training programs they attend or participate in on their own initiative or on behalf of other entities with which they are affiliated that may be relevant to the bank and serve the purposes of the training program.
+
+
+      2. Audit Policy 
+The Bank has designated the Internal Auditor to conduct an independent and periodic review of the Bank’s lending functions to ensure that an adequate system of internal controls in addition to compliance with this and other policies and procedures are maintained. Results of the audit are reported to the Board of Directors Audit Committee and Senior Management. It is the responsibility of the Senior Management to take appropriate action to correct any exceptions found as a result of the audit.
+Additional Resources 
+
+
+It is recognized that certain areas related to the lending function will be subject to change from time to time as changes occur in personnel, economic conditions and regulatory policies and practices.  To avoid frequent re-adoption of the entire Loan Policy, the following exhibits are made a part of this Loan Policy and are attached hereto.  The following exhibits may be expanded, amended or altered from time to time as long as any changes are reported to the Board of Directors. 
+EXHIBIT A:                Compliance Management Program 
+EXHIBIT B:                Allowance for Credit Losses Policy  
+EXHIBIT C:                Management of Other Real Estate Owned  
+EXHIBIT D:                Loan Committee Composition 
+EXHIBIT E:                Loan Approval Methods and Authorities 
+EXHIBIT F:                Letter of Credit Policy 
+EXHIBIT G:                ACH Policy
+EXHIBIT H:                Asset/Liability Management Program  
+EXHIBIT I:                Residential Lending Policy  
+EXHIBIT J:                Consumer Lending Policy  
+EXHIBIT K:                Real Estate Appraisal and Evaluation Policy 
+EXHIBIT L:                Policy on Lease Financing 
+EXHIBIT M:                Construction Lending Policy
+EXHIBIT N:                Environmental Risk Program 
+        N-1                Environmental Questionnaire
+EXHIBIT O:                Flood Policy Statement 
+        O-1                Flood Procedures
+EXHIBIT P:                Information Security Program
+EXHIBIT R:                Loan Review and Grading
+EXHIBIT S:                Business Credit Card Policy
+EXHIBIT T:                 SBA Loan Policy
+Revision History 
+
+
+12/09/2024 – Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Pricing
+* Clarified how pricing will be recommended and communicated the loan staff. 
+
+
+Within Concentrations of Credit
+* Section D. Credit Actions
+   * Clarified that the waiver of a term or reporting requirement as a credit action. 
+   * Clarified the increase in the loan amount for an existing loan as a credit action. 
+
+
+Within Underwriting Guidelines 
+* Section A. Unsecured Loans
+   * Clarified the underwriting guidelines for completing an unsecured loan. 
+* Section B. Secured Loans. Section 2. Secured Lines of Credit
+   * Clarified how guarantor strength can mitigate the expected monitoring requirements. 
+* Section B. Secured Loans. Section 4. Commercial Loan Debt Service Requirements. 
+   * Clarified the DSCR requirements for non-profits and similar entities. 
+   * Clarified the exception for DSCR requirements for land development and similar industries. 
+* Section C. Collateral Coverage. Section 1. Loans Secured by Real Estate. 
+   * Clarified how the Bank will consider the SLTV limits when completing underwriting. 
+   * Clarified the policy LTV limit for the construction of 1-4 family residential properties and how hard costs are considered. 
+   * Clarified that recreation and hunting land are considered raw land when determining the appropriate policy advance rate. 
+* Section C. Collateral Coverage. Section. 2. Loans Not secured by Real Estate. 
+   * Clarified the Bank will utilize the lower of market value or cost for determining the value of Stocks of Closely Owned Corporations. 
+   * Clarified that advancement greater than the determined advance rate for accounts receivable will be considered a policy exception. 
+* Established Section C. Collateral Coverage. Section. 3 Agricultural Carryover Debt. 
+   * Clarified the underwriting guidelines for carryover debt notes established by the Bank. 
+* Section E. Guaranties
+   * Clarified that owners with > 25% or more ownership in the borrowing entity shall minimally provide a pro-rata guaranty on the debt. 
+
+
+Within Loan Administration and Documentation. 
+* Section C. Annual Loan Reviews. 
+   * Clarified the requirements for Waiving an Annual Review. 
+* Section C. Annual Loan Reviews Section 1. Collateral Analysis. 
+   * Clarified how the value utilized in collateral analysis for CRE will be determined. 
+* Established Section D. Loan Comments
+   * Clarified the loan comment requirements for relationships that fall below the annual review threshold. 
+
+
+Within Problem Credit Administration. 
+* Section C. Criticized Loans. 
+   * Clarified the timing of when a CAR will be completed. 
+* Section D. Non-Accrual Loans 
+   * Clarified how the bank will evaluate delinquent loans accrual status. 
+* Removed Section E. Restructured loans due to the change in ASC guidance removing the TDR Standard. New section G. Debtors Experiencing Financial Difficulties was established. 
+* Section E. Bankruptcy.
+   * Clarified how loans to borrowers in bankruptcy shall be handled based on the collateral or lack thereof.
+* Established Section F. Loan Charge-Offs
+   * Clarified how the bank will handle loan charge offs and assign a inactive or active status to the charge off. 
+* Established Section G.  Debtors Experiencing Financial Difficulties. 
+   * Clarified how the bank will evaluate modifications to borrowers experiencing financial difficulties. 
+
+
+
+
+
+
+05/09/2024 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Underwriting Guidelines
+* Section C. Collateral Coverage. Section 1. Loans Secured by Real Estate
+   * Clarified the definitions of Raw land and Land Development. 
+* Section C. Collateral Coverage. Section 2. Loans not Secured by Real Estate
+   * Clarified advance rate for Commodities inventories based on financial statements
+   * Clarified validation of values for agricultural personal property and expected amortization relative to depreciable life of the collateral
+
+
+Within Loan Administration and Documentation
+* Section C. Annual Loan Reviews
+   * Clarified annual review requirements for performing term relationships. 
+   * Clarified process for monitoring of performing term relationships below the annual review threshold. 
+   * Removed the ASPI Comment Annual Review.
+   * Clarified the requirements for waiving an Annual Review
+   * Clarified the evaluation of CREMS for collateral analysis in annual reviews. 
+
+
+
+
+
+
+11/20/2023 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Determination and Administration of the Policy        
+* Within section C. clarified the responsibilities of the Loan Committee. 
+
+
+Within Concentrations of Credit: 
+* Section D. Credit Actions. 
+   * Clarified CEO or President can approve credit actions on 4 or worse rated credits. 
+
+
+Within Individual Lending Authorities
+* Clarified the difference between primary and secondary exposure and how secondary exposure should be aggregated. 
+
+
+Within Types of Loans
+* Clarified both Desirable Loans and Undesirable Loans to the Bank
+
+
+Within Underwriting Guidelines
+* Section A. Unsecured Loans. 
+   * Clarified unsecured loans to businesses should be guaranteed by individuals.
+* Section B. Secured Loans 2. Secured Lines of Credit. 
+   * Clarified how Borrowing Base Certificates will be monitored and approved.  
+* Section B. Secured Loans 4. Commercial Loan Minimum Debt Service Coverage Requirements. 
+   * Clarified the various ways the Bank will evaluate Debt Service Coverage based on type of borrower and request type. 
+* Section B. Secured Loans 4. Agricultural Loan Minimum Debt Service Coverage Requirements 
+   * Clarified the various ways the Bank will evaluate Debt Service Coverage for Ag. Borrowers. 
+*  Section C. Collateral Coverage. Section 1. Loans Secured by Real Estate
+   * Clarified the basis for determining LTV for non-arms length transactions and recently purchased properties. 
+* Section C. Collateral Coverage. Section 2. Loans not Secured by Real Estate
+   * Minor language enhancements to various collateral types. 
+* Section E. Guaranties
+   * Clarified recommended covenants for loans not guaranteed by individuals. 
+
+
+Within Loan Administration and Documentation
+* Section C. Annual Loan Reviews
+   * Clarified limits for when an annual review is required and how credits under the limit should be handled. 
+   * Section. 3. Collateral analysis: clarified how commercial real estate will be evaluated and the real estates value will be tested
+   * Established Section 4. Title Coverage for Real Estate Secured Loans. 
+      * Clarified how the bank will obtain title on real estate taken as collateral and steps to be taken if a title opinion or insurance will not be obtained. 
+   *  Established Section 6. Secondary Exposure in Annual Reviews
+      * Clarified how secondary exposure will be reviewed/approved and risk rated in the annual review process. 
+
+
+Within Problem Credit Administration: 
+* Section C. Criticized Loans: Clarified that loans that hold no book balance will not require a CAR report quarterly. 
+* Section D. Non-Accrual Loans: Clarified how the bank will handle loans that have a change to their ‘Accrual Status’. 
+
+
+07/10/2023 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Concentrations of Credit: 
+* Section D. Credit Actions. Clarified modifying pricing of a loan as a credit action and that any modification to an approved term is a credit action. 
+
+
+Within Underwriting Guidelines:  
+* Within Section C. Collateral Coverage
+   * Clarified advance rate for Ag Land Secured loans and the amortization of Raw Land loans.  
+   * Clarified what values will be utilized in SLTV determination. 
+   * Clarified definition of hard costs. 
+   * Clarified Term/Amortization for loans secured by stocks of closely held corporations and loans secured by Bank Stock 
+   * Clarified advance rate for Tax Increment Financings Loans. 
+* Within Section E. Guaranties
+   * Clarified guidelines for guarantors that hold assets in a trust. 
+
+
+Within Loan Administration and documentation:
+* Within Section C. Annual Loan Reviews
+   * Clarified dollar thresholds for when annual reviews are required. 
+* Established Section G. Annual Review and Renewal Process for Agricultural Credits. 
+   * Describes the process for renewing an Ag. Relationship by Risk Rating. 
+
+
+
+
+01/09/2023 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Throughout the policy all references to Allowance for Loan and Lease Losses (ALLL) were updated to reflect the adoption of CECL and was changed to Allowance for Credit Losses(ACL). 
+Within Determination and Administration of the Policy        
+* Within section B. clarified the responsibilities of the Board of Directors. 
+
+
+Within Underwriting Guidelines:  
+* Within Section B. Secured loans
+   * Clarified guidance on secured lines of credit, including monitoring requirements and approval requirements for non-compliant borrowing bases. 
+   * Clarified guidance for ‘Guidance Lines of Credits’ and expanded guidance to cover lines for agricultural borrowers. 
+   * Clarified guidance on the financial information utilized in the measurement of DSCR’s. 
+* Within Section C. Collateral Coverage
+   * Clarified advance rates for machinery and equipment based on the value type provided. 
+   * Clarified advance rates for new and used vehicles based on the value type utilized. 
+* Within Section D. Financial Statement Quality Guidelines
+   * Clarified financial statement time requirements 
+
+
+Within Loan Administration and documentation:
+* Within Section B. Loan Presentation Forms for analyzing loans by Central Bank 
+   * Clarified Annual Review guidance for 1 & 2 rated credits. 
+
+
+Within Problem Credit Administration
+* Within Section C. Criticized Loans
+   * Clarified the frequency of which loan committee reviews CAR’s. 
+
+
+Within Exceptions to Loan Policy
+* Section B. Clarified Exceptions will be recognized at loan origination and parties with authority to approve exceptions. 
+
+
+07/11/2022 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Summary of Policy, Section C. 
+* Clarified definition of an “out of market” loan. 
+
+
+ Within Determination and Administration of the Policy, Section C.
+* Clarified the responsibilities of the loan committee
+
+
+Within Concentrations of Credit: 
+* Section B. Loans to One Borrower. Clarified the definition of a “Person” 
+* Section D. Credit Actions. Clarified that short term credit actions may be presented verbally at loan committee. 
+
+
+Within Individual Lending Authorities, Section A. 
+* Clarified approval methods for loan officers and references to the Loan Approval Methods and Authorities exhibit. 
+
+
+Within Types of Loans, Section A Desirable Loans.
+* Clarified Business Credit Cards as a desirable loan. 
+
+
+Within Underwriting Guidelines:  
+* Within Section B. Secured loans
+   * Added reference to the Business Credit Card Policy. 
+   * Added reference to Master Guidance Lines of Credit in Exhibit M Construction Lending Policy. 
+   * Added guidance for Guidance Lines of Credit. 
+   * Clarified DSCR for Agricultural loans. 
+* Within Section C. Collateral Coverage.  
+   * clarified guidance on SBA 504 loans. 
+   * clarified guidance for advance rates for loans secured by stocks fo closely owned corporations. 
+   * Clarified guidance for loans secured by savings accounts or certificates of deposit
+   * Clarified guidance for loans secured by machinery and equipment. 
+   * Clarified guidance for loans secured by aircrafts.
+   * Added guidance for loans secured by personal property. 
+* Within Section D. Financial Statement Quality Guidelines.
+   * Clarified what is considered a current financial statement. 
+
+
+Within Loan Administration and documentation:
+* Within Section B. Loan Presentation Forms for analyzing loans by Central Bank 
+   * Clarified the presentations available for use. 
+   * Clarified what the loan presentation should contain.
+   * Revised guidance on when different forms may be used based on Risk Rating. 
+   * Added guidance on when the loan setup sheet template can be utilized. 
+* Established Section C. Annual Loan Reviews
+   * Clarified the $ exposure and type of credits that need an annual review. 
+   * Clarified guidance for the completion of an ASPI Comment Annual Review
+   * Clarified guidance for waiving the annual review of a Credit. 
+   * Added guidance for completed collateral analysis for certain collateral types in annual reviews. 
+   * Clarified guidance for Annual Reviews & Credit Actions for Criticized Loans. 
+
+
+Within Problem Credit Administration
+* Within Section C. Criticized Loans
+   * Clarified the frequency of which loan committee reviews CAR’s. 
+
+
+Within Overdrafts
+* Clarified the approval process for Overdrafts
+
+
+
+
+02/18/2022 - - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Updated Policy to new Policy Template. 
+
+
+Within Section V. Concentrations of Credit.
+* Established an In House Lending Limit of $20.0MM. 
+* Clarified requirements for Credit Action on Risk Rated 4 or worse credits. 
+* Clarified requirements for collateral releases.  
+
+
+Within Section VII. Underwriting Guidelines.
+* Clarified guidelines for underwriting unsecured loans. 
+* Clarified exception to DSCR of 1.0.1 for Schedule C Borrowers.
+* Established advance rate, amortization, terms limits for Developed lots/land
+* Clarified exception for loans originated in conjunction of SBA 504 program 
+* Clarified High LTV SBA 504 loans are still SLTV. 
+* Clarified guidelines for advance rates on loans secured by closely held company stock. 
+* Clarified guidelines for discounting valuations of Machinery and Equipment and the analysis that should occur on the valuation.
+* Clarified advance rates and valuation methods for new and used vehicles. 
+* Clarified exception to guarantee requirements or non-profit borrowers. 
+
+
+Within Section IX. Loan Administration and Documentation. 
+* Added reference to Exhibit R Loan Review and Grading. 
+* Clarified the guidelines for an ASPI Comment Annual Review. 
+* Clarified the guidelines for using a CAR as an Annual Review. 
+* Clarified the guidelines for waiving an Annual Review. 
+* Clarified the guidelines for the timing of an Agricultural Loan Inspection.
+
+
+Within Section XI. Problem Credit Administration
+* Clarified process of moving a loan to non-Accrual. 
+
+
+In addition to the above revisions all sections related to the servicing of loans for MetaBank were removed. Servicing of these loans ended 12/2021. The below sections were removed in there entirety:
+MetaBank Risk Rating Definitions (to be utilized on only those loans Central Bank services for MetaBank.)
+Loan Presentation Forms utilized for loans owned by MetaBank and Serviced by Central Bank.  (See Exhibits Q-1, Q-2, Q-3, Q-4, Q-5 & Other Approved Templates)
+
+
+03/31/2021 - Minor edits to enhance and clarify language were completed, in addition the following significant revisions occurred:
+
+
+Within Section V. Concentrations of Credit.
+* Lending limit calculations were clarified to exclude any participated loan amounts or loans sold to the secondary market and serviced by the Bank. 
+* In-House lending limit section was removed. 
+* Clarified requirements for releasing a mortgage greater than $1.0MM in value. 
+Within Section VI. Lending Authorities.
+* Removed references to the 10% Rule for loan approvals and created reference to Exhibit E where the Rule will be formally defined. 
+Within Section VII. Underwriting Guidelines.
+* Clarified underwriting terms for secured Lines of Credit.
+* Added Collateral Coverage recommendation for Agricultural Land.
+* Added Recommended Amortization for different Collateral Types and clarified corresponding recommended loan maturity.
+* Clarified Personal guarantees must minimally equal 100% of the loan exposure to the borrower. 
+* Clarified potential for Guarantor’s to impact the risk rating of a loan. 
+Within Section IX. Loan Administration and Documentation. 
+* Clarified ability to deviate from recommended lending presentations for select titles/positions. 
+* Added ability for a CAR to satisfy the Annual Review requirement for a loan and defined guidelines to complete. 
+* Clarified additional titles/positions that may require a letter of counsel to be completed. 
+* Clarified the requirements for changing the risk rating on monitored or worse rated credits. 
+
+
+12/28/2020 – The General Loan Policy was updated to reflect current standards after the acquisition of the MetaBank loan/deposits. In addition to minor edits to enhance and clarify language, the following significant revisions occurred:
+
+
+Within the Table of Contents.
+* Adjusted to utilize the table of contents feature allowing users to be directed to the section of policy they want to view. 
+* Removed the exhibits listed at the end as they are listed in section XIX Resolutions and attachments. 
+Within Section I. Bank objectives.
+* Updated definition of “Out of Market” and clarified policy exception. 
+* Clarified language in Subsection E. covering responsibility of loan charge off’s and non -accrual decisions. 
+Within Section II. Determination and Administration of Loan Policy.
+* Clarified the limit in which the Board of directions reviews concentrations of Credit from $500,000 to $10.0MM. 
+Within Section V. Concentrations of Credit. 
+* Clarified language in Subsection B. Loans to One Borrower.
+* Established definition and guidance covering Individual Lending limit in Subsection B. Loans to One Borrower.
+* Established Subsection C. In-House Limit and clarified a policy exception
+* Established Subsection D. Credit Action
+   * Clarified and defined Credit Actions and the action required for approval of a Credit Action
+   * Clarified documentation requirements when a loans term is changed. 
+Within Section VI. Lending Authorities.
+* Changed Section heading from Loan Authority to Lending Authorities
+* Clarified limits and timing in Subsection A. Covering the “10% Rule”
+Within Section VII. Types of Loans
+* Updated reference to the Letter of Credit Policy in Subsection A. Desirable Loans. 
+* Clarified language in Subsection B. Undesirable Loans
+Within Section VIII. Underwriting Guidelines
+* Clarified unsecured loans approved as such are not considered a policy exception due to lack of collateral coverage in Subsection A. Unsecured Loans
+* Established requirements for unsecured credit in Subsection A. Unsecured Loans. 
+* Clarified Debt Service Coverage limits within Subsection B. Secured Loans. 
+* Clarified recommended loan to collateral value limits for real estate loans in Subsection C. Collateral Coverage. 
+* Updated financial statement requirement limits within Subsection D. Financial Statement Quality Guidelines. 
+* Clarified Policy Exception for lack of 100% guarantee of a loan within Subsection E Guaranties. 
+Within Section IX. Loan Administration and Documentation
+* Updated references to approved loan presentation templates and their approved uses within Subsection A. Loan Presentation Forms for analyzing loans owned by Central Bank. 
+* Clarified naming and completion requirements of Criticized Asset Reports and other action required for Criticized loans within Subsection A. Loan Presentation Forms for analyzing loans owned by Central Bank.
+* Clarified requirements for periodic reviews of MetaBank Loans within Subsection B. Loan Presentation forms utilized for loans owned by MetaBank. 
+Within Section XI. Problem Credit Administration
+* Clarified naming of WAR report and requirements for CAR reports within Subsection C. Criticized Loans. 
+* Added guidance and definition of a Troubled Debt Restructure (TDR) within Subsection E. Restructured Loans
+* Added guidance and clarified policy exception regarding Bankruptcy and created Subsection F. Bankruptcy. 
+
+
+Within Section XIII. Participations
+* Clarified policy exception regarding participations in Subsection D.
