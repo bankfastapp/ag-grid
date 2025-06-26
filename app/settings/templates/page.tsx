@@ -1,10 +1,9 @@
 "use client"
-import { useState, useMemo } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { FileText, FileWarning, Briefcase, FileUp, FileClock, FileBarChart } from "lucide-react"
+import { Briefcase, FileBarChart, FileClock, FileText, FileUp, FileWarning } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 type DocumentStatus = "New" | "Due in 30 days" | "Due this week" | "Past Due" | "Delinquent"
@@ -178,6 +177,8 @@ const mockBorrowers = [
   { id: "b3", name: "T & T Holdings" },
   { id: "b4", name: "Timothy J. Seubert" },
   { id: "b5", name: "Clearair" },
+  { id: "b6", name: "Skyward Tech" },
+  { id: "b7", name: "Echo Dynamics" },
 ]
 
 const documentStatuses: DocumentStatus[] = ["New", "Due in 30 days", "Due this week", "Past Due", "Delinquent"]
@@ -199,142 +200,77 @@ const mockBorrowerDocStatuses = mockBorrowers.reduce(
   {} as Record<string, Record<string, DocumentStatus>>,
 )
 
-export default function TemplatesPage() {
-  const [selectedCategory, setSelectedCategory] = useState<DocumentCategory>(documentCategories[0])
-  const [selectedDocument, setSelectedDocument] = useState<string | null>(null)
-
-  const borrowerStatusForSelectedDoc = useMemo(() => {
-    if (!selectedDocument) return []
-    return mockBorrowers.map((borrower) => ({
-      borrowerId: borrower.id,
-      borrowerName: borrower.name,
-      status: mockBorrowerDocStatuses[borrower.id]?.[selectedDocument] || "New",
-    }))
-  }, [selectedDocument])
-
-  const getStatusColor = (status: DocumentStatus) => {
-    switch (status) {
-      case "Delinquent":
-        return "bg-red-100 text-red-800"
-      case "Past Due":
-        return "bg-yellow-100 text-yellow-800"
-      case "Due this week":
-        return "bg-blue-100 text-blue-800"
-      case "Due in 30 days":
-        return "bg-green-100 text-green-800"
-      case "New":
-      default:
-        return "bg-gray-100 text-gray-800"
-    }
+const getStatusColor = (status: DocumentStatus) => {
+  switch (status) {
+    case "Delinquent":
+      return "bg-red-100 text-red-800 border-red-200"
+    case "Past Due":
+      return "bg-yellow-100 text-yellow-800 border-yellow-200"
+    case "Due this week":
+      return "bg-blue-100 text-blue-800 border-blue-200"
+    case "Due in 30 days":
+      return "bg-green-100 text-green-800 border-green-200"
+    case "New":
+    default:
+      return "bg-gray-100 text-gray-800 border-gray-200"
   }
+}
 
+export default function TemplatesPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-foreground mb-1">Document Requirements & Tracking</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Document Requirements Status</h1>
         <p className="text-muted-foreground">
-          Select a category to view required documents, then select a document to track borrower status.
+          At-a-glance overview of document statuses for all borrowers across different categories.
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Document Categories</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ScrollArea className="w-full">
-            <div className="flex space-x-3 pb-4">
-              {documentCategories.map((category) => (
-                <Button
-                  key={category.name}
-                  variant={selectedCategory.name === category.name ? "default" : "outline"}
-                  onClick={() => {
-                    setSelectedCategory(category)
-                    setSelectedDocument(null) // Reset document selection on category change
-                  }}
-                  className="flex-shrink-0"
-                >
-                  <category.icon className="mr-2 h-4 w-4" />
-                  {category.name}
-                </Button>
-              ))}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-        </CardContent>
-      </Card>
-
-      <div className="grid lg:grid-cols-2 gap-6">
-        <Card>
+      {documentCategories.map((category) => (
+        <Card key={category.name}>
           <CardHeader>
-            <CardTitle>Required Documents: {selectedCategory.name}</CardTitle>
-            <CardDescription>Select a document to see individual borrower statuses.</CardDescription>
+            <CardTitle className="flex items-center">
+              <category.icon className="mr-3 h-6 w-6 text-primary" />
+              {category.name}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <ScrollArea className="h-[400px]">
-              <Table>
-                <TableHeader className="sticky top-0 bg-card">
+            <ScrollArea className="w-full">
+              <Table className="min-w-full border-collapse">
+                <TableHeader>
                   <TableRow>
-                    <TableHead>Document Name</TableHead>
+                    <TableHead className="sticky left-0 bg-card z-10 w-64 min-w-64 font-semibold">Document</TableHead>
+                    {mockBorrowers.map((borrower) => (
+                      <TableHead key={borrower.id} className="text-center">
+                        {borrower.name}
+                      </TableHead>
+                    ))}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {selectedCategory.documents.map((docName) => (
-                    <TableRow
-                      key={docName}
-                      onClick={() => setSelectedDocument(docName)}
-                      className={`cursor-pointer ${selectedDocument === docName ? "bg-primary/10" : "hover:bg-muted/50"}`}
-                    >
-                      <TableCell className="font-medium">{docName}</TableCell>
+                  {category.documents.map((docName) => (
+                    <TableRow key={docName}>
+                      <TableCell className="sticky left-0 bg-card z-10 font-medium w-64 min-w-64">{docName}</TableCell>
+                      {mockBorrowers.map((borrower) => (
+                        <TableCell key={borrower.id} className="text-center">
+                          <span
+                            className={`px-2.5 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
+                              mockBorrowerDocStatuses[borrower.id]?.[docName] || "New",
+                            )}`}
+                          >
+                            {mockBorrowerDocStatuses[borrower.id]?.[docName] || "New"}
+                          </span>
+                        </TableCell>
+                      ))}
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
+              <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </CardContent>
         </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Borrower Status</CardTitle>
-            <CardDescription>
-              {selectedDocument ? `Status for: ${selectedDocument}` : "Select a document to view statuses."}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ScrollArea className="h-[400px]">
-              {selectedDocument ? (
-                <Table>
-                  <TableHeader className="sticky top-0 bg-card">
-                    <TableRow>
-                      <TableHead>Borrower</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {borrowerStatusForSelectedDoc.map((item) => (
-                      <TableRow key={item.borrowerId}>
-                        <TableCell className="font-medium">{item.borrowerName}</TableCell>
-                        <TableCell>
-                          <span
-                            className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}
-                          >
-                            {item.status}
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              ) : (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  <p>No document selected.</p>
-                </div>
-              )}
-            </ScrollArea>
-          </CardContent>
-        </Card>
-      </div>
+      ))}
     </div>
   )
 }
