@@ -26,7 +26,7 @@ const initialContextData: AdvancedContextualization = {
   contextValidated: true,
 }
 
-export default function AdvancedContextualizationSettings() {
+export function AdvancedContextualizationSettings() {
   const [context, setContext] = useState<AdvancedContextualization>(initialContextData)
 
   const handleMetricChange = (index: number, field: "name" | "ideal" | "minAcceptable", value: string) => {
