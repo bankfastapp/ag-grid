@@ -29,7 +29,7 @@
   },
   "homepage": "https://www.ag-grid.com/react-grid/",
   "devDependencies": {
-    "@babel/runtime": "^7.16.3",
+    "@babel/runtime": "^7.26.10",
     "prop-types": "^15.6.2",
     "ag-grid-community": "33.3.0",
     "@babel/plugin-proposal-throw-expressions": "7.14.5",
