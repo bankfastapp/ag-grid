@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* White */
+    --foreground: 224 71.4% 4.1%; /* Dark Blue-Gray */
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    --primary: 217 91.2% 59.8%; /* Sky Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 220 13% 91%; /* Light Gray */
+    --secondary-foreground: 224 71.4% 4.1%; /* Dark Blue-Gray */
+
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 8.9% 46.1%; /* Medium Gray */
+
+    --accent: 220 13% 91%;
+    --accent-foreground: 224 71.4% 4.1%;
+
+    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 220 13% 85%; /* Slightly darker gray for borders */
+    --input: 220 13% 85%;
+    --ring: 217 91.2% 59.8%; /* Sky Blue for focus rings */
+
+    --radius: 0.5rem;
+    --header-height: 60px; /* Adjust as needed */
+  }
+
+  .dark {
+    /* Define dark mode colors if needed, for now, keeping it light */
+    --background: 224 71.4% 4.1%;
+    --foreground: 0 0% 100%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 91.2% 59.8%;
+    --primary-foreground: 224 71.4% 4.1%;
+
+    --secondary: 220 14.3% 11.8%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14.3% 11.8%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 220 14.3% 11.8%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14.3% 11.8%;
+    --input: 220 14.3% 11.8%;
+    --ring: 217 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Ensure html, body, and next root take full height for layout */
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+/* Set header height for calc in page.tsx */
+:root {
+  --header-height: 65px; /* Or whatever your actual header height is */
+}
+
+/* Custom scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.5);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.7);
+}

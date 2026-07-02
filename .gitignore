@@ -1,71 +1,27 @@
-.idea
-.vscode
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-vite.config.ts.timestamp-*.mjs
-vite.config.mts.timestamp-*.mjs
+# dependencies
+/node_modules
 
-*.tar.gz
+# next.js
+/.next/
+/out/
 
-.DS_Store
-lerna-debug.log
-npm-debug.log
-node_modules
-.scannerwork
-package-lock.json
-release*.zip
-archive*.zip
-*.tgz
-.nx
-.angular
-tmp
-vitest.config.*.timestamp*
+# production
+/build
 
-plugins/ag-grid-generate-example-files/src/executors/generate/generator/_copiedFromCore/modules.ts
-plugins/ag-grid-generate-example-files/src/executors/generate/generator/_copiedFromCore/eventTypes.ts
-plugins/ag-grid-generate-example-files/src/executors/generate/generator/_copiedFromCore/eventKeys.ts
-plugins/ag-grid-generate-example-files/src/executors/generate/generator/_copiedFromCore/propertyKeys.ts
-plugins/ag-grid-generate-code-reference-files/src/executors/generate/_copiedFromCore/eventTypes.ts
-plugins/ag-grid-generate-code-reference-files/src/executors/generate/_copiedFromCore/eventKeys.ts
-plugins/ag-grid-generate-code-reference-files/dist/
-plugins/ag-grid-task-autogen/dist/
-plugins/ag-grid-generate-code-reference-files/dist
-plugins/ag-grid-generate-example-files/dist
-plugins/ag-grid-task-autogen/dist
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-testing/accessibility/all-examples.json
-testing/accessibility/e2e
+# env files
+.env*
 
-# latest only
-dist
+# vercel
+.vercel
 
-packages/ag-grid-community/styles
-packages/ag-grid-enterprise/styles
-
-
-# compiled CSS files
-community-modules/styles/*.css
-packages/ag-grid-community/**/GENERATED-*
-packages/**/*.css-GENERATED.ts
-
-# compiled css files as SCSS
-community-modules/styles/_css-content.scss
-
-# Astro generated file
-src/env.d.ts
-
-# test results file
-testing/module-size/module-size-results.json
-testing/module-size/src/App_AUTO.tsx
-packages/ag-grid-community/coverage
-packages/ag-grid-enterprise/coverage
-plugins/ag-grid-generate-example-files/coverage/
-coverage
-reports
-
-vite.config.*.timestamp*
-
-/test-results/
-/playwright-report/
-
-# Snyk
-.dccache
+# typescript
+*.tsbuildinfo
+next-env.d.ts
